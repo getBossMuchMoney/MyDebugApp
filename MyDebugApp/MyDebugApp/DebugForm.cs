@@ -28,13 +28,22 @@ namespace MyDebugApp
         BlockingCollection<byte[]> RxQueue = new BlockingCollection<byte[]>(new ConcurrentQueue<byte[]>());
         int UartRcvTimeMsCnt = 0;
         List<byte> UartRcvData = new List<byte>();
+        private HighPrecisionTimer TimerOneMs;
+        
+
         public DebugForm()
         {
             InitializeComponent();
+            TimerOneMs = new HighPrecisionTimer();
+            TimerOneMs.Callback = Timer1ms_CallBack;
+
+            // 启动1ms定时器
+            TimerOneMs.Start(1);
         }
 
         private void DebugForm_Load(object sender, EventArgs e)
         {
+            var TimerOneMs = new HighPrecisionTimer();
             string[] ports = System.IO.Ports.SerialPort.GetPortNames();
             SerialListBox.Items.AddRange(ports);
             SerialListBox.SelectedIndex = SerialListBox.Items.Count > 0 ? 0 : -1;
@@ -466,7 +475,6 @@ namespace MyDebugApp
         }
 
 
-
         private void Update_Process()
         {
             byte UpdateState = 0;
@@ -763,7 +771,7 @@ namespace MyDebugApp
             catch (Exception) { }
         }
 
-        private void timer1ms_Tick(object sender, EventArgs e)
+        private void Timer1ms_CallBack()
         {
             if (UartRcvTimeMsCnt > 0)
             {
