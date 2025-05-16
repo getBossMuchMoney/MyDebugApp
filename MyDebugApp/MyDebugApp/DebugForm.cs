@@ -20,6 +20,7 @@ namespace MyDebugApp
         String serialPortName;
         ModbusCrc CrcInter = new ModbusCrc();
         Thread updatethread;
+        Thread uartRcvThread;
         byte[] FileDataBuffer;
         byte[] FileCrc = new byte[2];
         UInt32 FileSize = 0;
@@ -29,16 +30,11 @@ namespace MyDebugApp
         int UartRcvTimeMsCnt = 0;
         List<byte> UartRcvData = new List<byte>();
         private HighPrecisionTimer TimerOneMs;
-        
+        private object _lock = new object();
 
         public DebugForm()
         {
             InitializeComponent();
-            TimerOneMs = new HighPrecisionTimer();
-            TimerOneMs.Callback = Timer1ms_CallBack;
-
-            // 启动1ms定时器
-            TimerOneMs.Start(1);
         }
 
         private void DebugForm_Load(object sender, EventArgs e)
@@ -56,6 +52,10 @@ namespace MyDebugApp
             ChoseUpdateDeviceBox.SelectedIndex = 0;
             DeviceBandListBox.SelectedIndex = 0;
             timer1000ms.Start();
+            TimerOneMs = new HighPrecisionTimer();
+            TimerOneMs.Callback = Timer1ms_CallBack;
+            // 启动1ms定时器
+            TimerOneMs.Start(1);
         }
 
         public void OpenSerialButton_Click(object sender, EventArgs e)
@@ -75,6 +75,8 @@ namespace MyDebugApp
                     SerialListBox.Enabled = false;
                     BandListBox.Enabled = false;
                     CheckSerialButton.Enabled = false;
+                    uartRcvThread = new Thread(UartData_Recieve);
+                    uartRcvThread.Start();
                 }
                 catch (Exception err)
                 {
@@ -85,6 +87,7 @@ namespace MyDebugApp
             {
                 try
                 {
+                    uartRcvThread.Abort();
                     serialPort1.Close();//关闭串口
                 }
                 catch (Exception) { }
@@ -220,26 +223,50 @@ namespace MyDebugApp
 
         }
 
-        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void UartData_Recieve()
+        {
+            while (true)
         {
             int len = serialPort1.BytesToRead;//获取可以读取的字节数
+                if (len > 0)
+                {
             byte[] buff = new byte[len];//创建缓存数据数组
             serialPort1.Read(buff, 0, len);//把数据读取到buff数组
+                    UartRcvData.AddRange(buff);
             if (UartRcvTimeMsCnt == 0)
             {
                 UartRcvTimeMsCnt = 1;
-                UartRcvData.AddRange(buff);
+
             }
             else
             {
                 if (UartRcvTimeMsCnt < 21)
                 {
                     UartRcvTimeMsCnt = 1;
-                    UartRcvData.AddRange(buff);
+                        }
+                    }
+                }
+                else
+                {
+                    if (UartRcvTimeMsCnt > 20)
+                    {
+                        UartRcvTimeMsCnt = 0;
+                        byte[] Data = UartRcvData.ToArray();
+                        UartRcvData = new List<byte>();
+                        if (updatethread != null && updatethread.IsAlive)
+                        {
+                            RxQueue.Add(Data);
+                        }
+                        Invoke((Action)(() =>
+                        {
+                            UartDataShow(Data, 0);
+                        }));
+                    }
+                    
+                }
+                Thread.Sleep(1);
                 }
             }
-        }
-
         private void ChoseFileButton_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -773,23 +800,19 @@ namespace MyDebugApp
 
         private void Timer1ms_CallBack()
         {
+            lock (_lock)
+            {
             if (UartRcvTimeMsCnt > 0)
             {
                 UartRcvTimeMsCnt++;
-                if (UartRcvTimeMsCnt > 20)
-                {
-                    UartRcvTimeMsCnt = 0;
-                    byte[] Data = UartRcvData.ToArray();
-                    UartRcvData = new List<byte>();
-                    if (updatethread != null && updatethread.IsAlive)
-                    {
-                        RxQueue.Add(Data);
-                    }
-                    UartDataShow(Data, 0);
-
                 }
+            }
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+                    {
 
             }
         }
     }
-}

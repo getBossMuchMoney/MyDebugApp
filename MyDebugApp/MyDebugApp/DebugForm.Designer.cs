@@ -39,6 +39,7 @@ namespace MyDebugApp
             this.FilePathShowBox = new System.Windows.Forms.TextBox();
             this.ChoseFileButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.BootButton = new System.Windows.Forms.Button();
             this.UpdateProgressBar = new System.Windows.Forms.ProgressBar();
             this.StartUpdateButton = new System.Windows.Forms.Button();
             this.BandConfigButton = new System.Windows.Forms.Button();
@@ -61,7 +62,7 @@ namespace MyDebugApp
             this.timer1000ms = new System.Windows.Forms.Timer(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.openBinFile = new System.Windows.Forms.OpenFileDialog();
-            this.BootButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.DebugTab.SuspendLayout();
             this.tabUart.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -169,6 +170,16 @@ namespace MyDebugApp
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "设置功能";
+            // 
+            // BootButton
+            // 
+            this.BootButton.Location = new System.Drawing.Point(93, 36);
+            this.BootButton.Name = "BootButton";
+            this.BootButton.Size = new System.Drawing.Size(75, 23);
+            this.BootButton.TabIndex = 9;
+            this.BootButton.Text = "boot";
+            this.BootButton.UseVisualStyleBackColor = true;
+            this.BootButton.Click += new System.EventHandler(this.BootButton_Click);
             // 
             // UpdateProgressBar
             // 
@@ -368,23 +379,15 @@ namespace MyDebugApp
             this.timer1000ms.Interval = 1000;
             this.timer1000ms.Tick += new System.EventHandler(this.timer1000ms_Tick);
             // 
-            // serialPort1
-            // 
-            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
-            // 
             // openBinFile
             // 
             this.openBinFile.FileName = "openFileDialog1";
             // 
-            // BootButton
+            // timer1
             // 
-            this.BootButton.Location = new System.Drawing.Point(93, 36);
-            this.BootButton.Name = "BootButton";
-            this.BootButton.Size = new System.Drawing.Size(75, 23);
-            this.BootButton.TabIndex = 9;
-            this.BootButton.Text = "boot";
-            this.BootButton.UseVisualStyleBackColor = true;
-            this.BootButton.Click += new System.EventHandler(this.BootButton_Click);
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // DebugForm
             // 
@@ -445,6 +448,7 @@ namespace MyDebugApp
         private System.Windows.Forms.Button ClearUartDataShowButton;
         private System.Windows.Forms.ProgressBar UpdateProgressBar;
         private System.Windows.Forms.Button BootButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
