@@ -7,52 +7,73 @@ using System.Runtime.InteropServices;
 
 namespace MyDebugApp
 {
-    public class HighPrecisionTimer
+    class HighPrecisionTimer
     {
-        public delegate void TimerCallback(uint id, uint msg, uint user, uint param1, uint param2);
+        // 定义 TimerProc 委托签名（Win32 多媒体定时器需要）
+        private delegate void TimerProc(uint id, uint msg, IntPtr user, uint dw1, uint dw2);
 
         [DllImport("winmm.dll")]
-        private static extern uint timeSetEvent(uint delay, uint resolution, TimerCallback callback, uint user, uint mode);
+        private static extern uint timeSetEvent(uint delay, uint resolution, TimerProc callback, IntPtr user, uint mode);
 
         [DllImport("winmm.dll")]
         private static extern uint timeKillEvent(uint timerId);
 
         private uint _timerId;
-        private GCHandle _callbackHandle;
+        private GCHandle _gcHandle; // 用于保护 this 不被回收
+        private Action _callback;
+        private TimerProc _timerProc; // ⚠️ 关键：保存委托为类成员
 
-        public Action<uint, uint, uint, uint, uint> Callback { get; set; }
+        public Action Callback
+        {
+            get => _callback;
+            set => _callback = value;
+        }
 
         public void Start(int interval)
         {
-            if (_timerId != 0) return;
+            if (_timerId != 0)
+                Stop();
 
-            // 将委托包装为 TimerCallback，并固定内存
-            TimerCallback nativeCallback = (id, msg, user, param1, param2) =>
-            {
-                Callback?.Invoke(id, msg, user, param1, param2);
-            };
+            // 保持对 this 的引用，防止被 GC 回收
+            _gcHandle = GCHandle.Alloc(this, GCHandleType.Normal);
 
-            _callbackHandle = GCHandle.Alloc(nativeCallback, GCHandleType.Normal);
-            _timerId = timeSetEvent((uint)interval, 0, nativeCallback, 0, 1);
+            // ⚠️ 将委托保存为成员变量，防止被 GC 回收
+            _timerProc = OnTimer;
+
+            // 注册非托管定时器
+            _timerId = timeSetEvent((uint)interval, 0, _timerProc, GCHandle.ToIntPtr(_gcHandle), 1);
+        }
+
+        private static void OnTimer(uint id, uint msg, IntPtr user, uint dw1, uint dw2)
+        {
+            // 恢复对象实例
+            GCHandle handle = GCHandle.FromIntPtr(user);
+            HighPrecisionTimer timer = (HighPrecisionTimer)handle.Target;
+
+            // 调用外部回调
+            timer._callback?.Invoke();
         }
 
         public void Stop()
         {
             if (_timerId != 0)
             {
-            timeKillEvent(_timerId);
+                timeKillEvent(_timerId);
                 _timerId = 0;
-        }
+            }
 
-            if (_callbackHandle.IsAllocated)
-        {
-                _callbackHandle.Free();
-        }
+            if (_gcHandle.IsAllocated)
+            {
+                _gcHandle.Free();
+            }
+
+            // 显式置空委托，帮助调试并避免误用
+            _timerProc = null;
         }
 
         ~HighPrecisionTimer()
-            {
-                Stop();
-            }
+        {
+            Stop();
         }
+    }
 }

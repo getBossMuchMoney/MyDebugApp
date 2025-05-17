@@ -62,7 +62,6 @@ namespace MyDebugApp
             this.timer1000ms = new System.Windows.Forms.Timer(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.openBinFile = new System.Windows.Forms.OpenFileDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.DebugTab.SuspendLayout();
             this.tabUart.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -383,12 +382,6 @@ namespace MyDebugApp
             // 
             this.openBinFile.FileName = "openFileDialog1";
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // DebugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -448,7 +441,6 @@ namespace MyDebugApp
         private System.Windows.Forms.Button ClearUartDataShowButton;
         private System.Windows.Forms.ProgressBar UpdateProgressBar;
         private System.Windows.Forms.Button BootButton;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 
