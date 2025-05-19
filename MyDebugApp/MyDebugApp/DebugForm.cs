@@ -27,8 +27,8 @@ namespace MyDebugApp
         byte BinDataIndex = 0;
         byte ChoseUpdateID = 0;
         BlockingCollection<byte[]> RxQueue = new BlockingCollection<byte[]>(new ConcurrentQueue<byte[]>());
-        int UartRcvTimeMsCnt = 0;
-        int StartUartTimer = 0;
+        volatile int UartRcvTimeMsCnt = 0;
+        volatile int StartUartTimer = 0;
         List<byte> UartRcvData = new List<byte>();
         private object _lock = new object();
         private HighPrecisionTimer TimerOneMs;
