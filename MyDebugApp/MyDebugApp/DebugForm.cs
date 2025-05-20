@@ -225,8 +225,50 @@ namespace MyDebugApp
 
         }
 
+        private void UartDataShow(byte[] byteData, byte MsgType,string timestamp)
+        {
+            if (CheckDataShowStyleBox.Checked)
+            {
+                Encoding gb2312 = Encoding.GetEncoding("GB2312", new EncoderExceptionFallback(), new DecoderExceptionFallback());
+                string data;
+                try
+                {
+                    data = gb2312.GetString(byteData);
+                }
+                catch
+                {
+                    // 如果有异常，替换所有不可解码字符为 ?
+                    data = new string(
+                        byteData.Select(b => (b >= 0x20 && b <= 0x7E) ? (char)b : '?').ToArray()
+                    );
+                }
+                if (MsgType == 0)
+                {
+                    UartDataBox.AppendText('[' + timestamp + ']' + "收←◆" + data + Environment.NewLine);//对话框追加显示数据
+                }
+                else
+                {
+                    UartDataBox.AppendText('[' + timestamp + ']' + "发→◇" + data + Environment.NewLine);
+                }
+            }
+            else
+            {
+                if (MsgType == 0)
+                {
+                    //16进制显示
+                    UartDataBox.AppendText('[' + timestamp + ']' + "收←◆" + byteToHexStr(byteData) + Environment.NewLine);
+                }
+                else
+                {
+                    UartDataBox.AppendText('[' + timestamp + ']' + "发→◇" + byteToHexStr(byteData) + Environment.NewLine);
+                }
+            }
+
+        }
+
         private void UartData_Recieve()
         {
+            string timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
             while (true)
             {
                 int len = serialPort1.BytesToRead;//获取可以读取的字节数
@@ -237,6 +279,7 @@ namespace MyDebugApp
                     UartRcvData.AddRange(buff);
                     if (UartRcvTimeMsCnt == 0)
                     {
+                        timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
                         StartUartTimer = 1;
                     }
                     else
@@ -263,7 +306,7 @@ namespace MyDebugApp
                         }
                         Invoke((Action)(() =>
                         {
-                            UartDataShow(Data, 0);
+                            UartDataShow(Data, 0, timestamp);
                         }));
                     }
                     Thread.Sleep(1);
