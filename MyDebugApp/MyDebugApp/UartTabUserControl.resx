@@ -117,21 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAGBgAAAAAIACSAgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAYAAAAGAgGAAAA4Hc9+AAAAARn
-        QU1BAACxjwv8YQUAAAABc1JHQgCuzhzpAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqY
-        AAAXcJy6UTwAAAIQSURBVEiJ3VU9aFNRFP7OS0xSTXBwUZMmNJqHBhQHEbdC1KQt4q5Ogo4ixUWKiiA4
-        6Kg4CoKTmwXb1IhQ4x90cBJ/FkHBJUstbZqfd8/nkPaFQm5+kCB4pnfP973vu+/ce84TksQQwxmm+H9u
-        QAC1+kpPgabRrnjQBky6owAAVcHsx08I7YhBHEAAQD3cmL6CpbnZjQRQ/PbTslNL5PfHef/WjA1u89Jx
-        FjJ7rLjV4ISb7inuc48csmJC/oM+KLjJ4RqY4PaBhcazqUEMBm+PmIb6Nwit10CjWHv3aks+f+AgtP7b
-        X5MEF8sAgWU2+jeIGIH3oYQRbWL99YKff/HlM5zwTn/dfF8GA1Xo2wVEbf3W6WqpKitLb8jFYvf7aao0
-        5SKrnlop1j5QkuPpBE+NJdlorFBVaYzxN/D0ySPm3b18/OBeizyoAUkabb+phixkEixkElv0cplUNwla
-        Z5ES0LVVONEYAEAcYO7rD0Ba44fwIAiittq0SdgPuaUInDl6GCfT8TZZBM7GdBMEce3iBRzPHetqYC3R
-        aXcXN8/OeHXevX7Vx6b27faf85kkJ1IJa4k6ziLP8xD49RBeM4qpydsQDePZ/Awi4WVAFOfO3kGlMgIV
-        B6WX0whQgNHLnQvRycBoHRPZMTyfv4ltgXYDicjmV0NEQBLF0neEI1nkzl/q36BHSSFi0OVf9XcGg8Yf
-        tgagOTNHDWUAAAAASUVORK5CYII=
-</value>
-  </data>
+  <metadata name="timer1000ms.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="serialPort1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>170, 17</value>
+  </metadata>
+  <metadata name="openBinFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>305, 17</value>
+  </metadata>
 </root>
