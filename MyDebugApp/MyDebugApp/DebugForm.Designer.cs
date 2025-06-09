@@ -76,6 +76,7 @@ namespace MyDebugApp
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DebugForm";
             this.Text = "在线升级助手";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DebugForm_FormClosed);
             this.DebugTab.ResumeLayout(false);
             this.ResumeLayout(false);
 

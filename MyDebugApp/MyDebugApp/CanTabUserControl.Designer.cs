@@ -29,6 +29,7 @@ namespace MyDebugApp
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openBinFile = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,6 +54,7 @@ namespace MyDebugApp
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ClearRcvDataShowButton = new System.Windows.Forms.Button();
             this.ShowRcvDataBox = new System.Windows.Forms.TextBox();
+            this.showDataTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -312,6 +314,11 @@ namespace MyDebugApp
             this.ShowRcvDataBox.Size = new System.Drawing.Size(705, 486);
             this.ShowRcvDataBox.TabIndex = 0;
             // 
+            // showDataTimer
+            // 
+            this.showDataTimer.Enabled = true;
+            this.showDataTimer.Tick += new System.EventHandler(this.showDataTimer_Tick);
+            // 
             // CanTabUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -357,5 +364,6 @@ namespace MyDebugApp
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button ClearRcvDataShowButton;
         private System.Windows.Forms.TextBox ShowRcvDataBox;
+        private System.Windows.Forms.Timer showDataTimer;
     }
 }

@@ -328,6 +328,7 @@ namespace MyDebugApp
             // 
             // timer1000ms
             // 
+            this.timer1000ms.Interval = 1000;
             this.timer1000ms.Tick += new System.EventHandler(this.timer1000ms_Tick);
             // 
             // openBinFile

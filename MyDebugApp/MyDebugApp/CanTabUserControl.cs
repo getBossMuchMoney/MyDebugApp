@@ -175,8 +175,6 @@ namespace MyDebugApp
         public CanTabUserControl()
         {
             InitializeComponent();
-            Thread showDataThread = new Thread(() => DataShowProcess(showDataCts.Token));
-            showDataThread.Start();
             UInt32 CanDevNum = VCI_FindUsbDevice2(ref boardInfos[0]);
             for (int i = 0; i < CanDevNum; i++)
             {
@@ -290,35 +288,6 @@ namespace MyDebugApp
             }
         }
 
-        private void DataShowProcess(CancellationToken token)
-        {
-            string str = null;
-            string showstr = null;
-            while (!token.IsCancellationRequested)
-            {
-                Thread.Sleep(200);
-                while (ShowStrRxQueue.TryTake(out str))
-                {
-                    showstr += str;                    
-                }
-                // 更新 UI
-                if (showstr != null)
-                {
-                    if (ShowRcvDataBox.InvokeRequired)
-                    {
-                        ShowRcvDataBox.Invoke(new Action(() =>
-                        {
-                            ShowRcvDataBox.AppendText(showstr);
-                        }));
-                    }
-                    else
-                    {
-                        ShowRcvDataBox.AppendText(showstr);
-                    }
-                    showstr = null;
-                }
-            }
-        }
         private unsafe void CanData_Recieve()
         {
             uint ret = 0, id = 0;
@@ -421,17 +390,8 @@ namespace MyDebugApp
             {
                 StartUpdateButton.Enabled = false;
                 updateThread = new Thread(() => Update_Process(updateCts.Token));
-                if (ChoseDevListBox.SelectedIndex == 0)
-                {
-                    ChoseUpdateID = 1;
-                }
-                else
-                {
-                    ChoseUpdateID = (byte)(0x10 + ChoseDevListBox.SelectedIndex - 1);
-
-                }
+                ChoseUpdateID = (byte)ChoseDevListBox.SelectedIndex;
                 updateThread.Start();
-
             }
         }
 
@@ -556,6 +516,33 @@ namespace MyDebugApp
 
         }
 
+        private void showDataTimer_Tick(object sender, EventArgs e)
+        {
+            string str = null;
+            string showstr = null;
+
+            while (ShowStrRxQueue.TryTake(out str))
+            {
+                showstr += str;
+            }
+            // 更新 UI
+            if (showstr != null)
+            {
+                if (ShowRcvDataBox.InvokeRequired)
+                {
+                    ShowRcvDataBox.Invoke(new Action(() =>
+                    {
+                        ShowRcvDataBox.AppendText(showstr);
+                    }));
+                }
+                else
+                {
+                    ShowRcvDataBox.AppendText(showstr);
+                }
+                showstr = null;
+            }
+
+        }
 
         private void Update_Process(CancellationToken token)
         {
