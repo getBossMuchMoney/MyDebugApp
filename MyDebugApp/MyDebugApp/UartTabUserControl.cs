@@ -28,11 +28,10 @@ namespace MyDebugApp
         byte ChoseUpdateID = 0;
         BlockingCollection<byte[]> RxQueue = new BlockingCollection<byte[]>(new ConcurrentQueue<byte[]>());
         BlockingCollection<string> ShowStrRxQueue = new BlockingCollection<string>(new ConcurrentQueue<string>());
-        volatile int UartRcvTimeMsCnt = 0;
-        volatile int StartUartTimer = 0;
+        int UartRcvFlag = 0;
         List<byte> UartRcvData = new List<byte>();
         private object _lock = new object();
-        private HighPrecisionTimer TimerOneMs;
+        string[] getPorts = null;
         public UartTabUserControl()
         {
             InitializeComponent();
@@ -41,6 +40,7 @@ namespace MyDebugApp
         private void UartTabUserControl_Load(object sender, EventArgs e)
         {
             string[] ports = System.IO.Ports.SerialPort.GetPortNames();
+            getPorts = ports;
             SerialListBox.Items.AddRange(ports);
             SerialListBox.SelectedIndex = SerialListBox.Items.Count > 0 ? 0 : -1;
             BandListBox.Items.Add("9600");
@@ -52,10 +52,10 @@ namespace MyDebugApp
             ChoseUpdateDeviceBox.SelectedIndex = 0;
             DeviceBandListBox.SelectedIndex = 0;
             timer1000ms.Start();
-            TimerOneMs = new HighPrecisionTimer();
+            /*            TimerOneMs = new HighPrecisionTimer();
             TimerOneMs.Callback = Timer1ms_CallBack;
             // 启动1ms定时器
-            TimerOneMs.Start(1);
+                        TimerOneMs.Start(1);*/
         }
 
         private void OpenSerialButton_Click(object sender, EventArgs e)
@@ -103,6 +103,7 @@ namespace MyDebugApp
             string[] ports = System.IO.Ports.SerialPort.GetPortNames();
             SerialListBox.Items.Clear();
             SerialListBox.Items.AddRange(ports);
+            SerialListBox.SelectedIndex = SerialListBox.Items.Count > 0 ? 0 : -1;
         }
 
 
@@ -143,6 +144,9 @@ namespace MyDebugApp
                             SerialListBox.Enabled = true;
                             BandListBox.Enabled = true;
                             CheckSerialButton.Enabled = true;
+                            SerialListBox.Items.Clear();
+                            SerialListBox.Items.AddRange(ports);
+                            SerialListBox.SelectedIndex = SerialListBox.Items.Count > 0 ? 0 : -1;
                         }
                     }
 
@@ -150,8 +154,28 @@ namespace MyDebugApp
             }
             else
             {
+                if (getPorts.Length != ports.Length)
+                {
+                    getPorts = ports;
                 SerialListBox.Items.Clear();
                 SerialListBox.Items.AddRange(ports);
+                    SerialListBox.SelectedIndex = SerialListBox.Items.Count > 0 ? 0 : -1;
+                }
+                else
+                {
+                    for (int i = 0; i < ports.Length; i++)
+                    {
+                        if (getPorts[i] != ports[i])
+                        {
+                            getPorts = ports;
+                            SerialListBox.Items.Clear();
+                            SerialListBox.Items.AddRange(ports);
+                            SerialListBox.SelectedIndex = SerialListBox.Items.Count > 0 ? 0 : -1;
+                            break;
+                        }
+
+                    }
+                }
             }
 
         }
@@ -268,35 +292,30 @@ namespace MyDebugApp
         private void UartData_Recieve()
         {
             string timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
+            int len = 0;
             while (true)
             {
-                int len = serialPort1.BytesToRead;//获取可以读取的字节数
+                try
+                {
+                    len = serialPort1.BytesToRead;//获取可以读取的字节数
+                }
+                catch (Exception) { }
                 if (len > 0)
                 {
                     byte[] buff = new byte[len];//创建缓存数据数组
                     serialPort1.Read(buff, 0, len);//把数据读取到buff数组
                     UartRcvData.AddRange(buff);
-                    if (UartRcvTimeMsCnt == 0)
+                    if (UartRcvFlag == 0)
                     {
+                        UartRcvFlag = 1;
                         timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
-                        StartUartTimer = 1;
-                    }
-                    else
-                    {
-                        if (UartRcvTimeMsCnt < 20)
-                        {
-                            StartUartTimer = 0;
-                            UartRcvTimeMsCnt = 0;
-                            StartUartTimer = 1;
-                        }
                     }
                 }
                 else
                 {
-                    if (UartRcvTimeMsCnt > 19)
+                    if (UartRcvFlag == 1)
                     {
-                        StartUartTimer = 0;
-                        UartRcvTimeMsCnt = 0;
+                        UartRcvFlag = 0;
                         byte[] Data = UartRcvData.ToArray();
                         UartRcvData = new List<byte>();
                         if (updatethread != null && updatethread.IsAlive)
@@ -308,8 +327,8 @@ namespace MyDebugApp
                             UartDataShow(Data, 0, timestamp);
                         }));
                     }
-                    Thread.Sleep(1);
                 }
+                Thread.Sleep(20);
             }
         }
 
@@ -841,16 +860,6 @@ namespace MyDebugApp
             }
             catch (Exception) { }
         }
-
-        private void Timer1ms_CallBack()
-        {
-            if (StartUartTimer == 1)
-            {
-                UartRcvTimeMsCnt++;
-            }
-
-        }
-
 
     }
 }
