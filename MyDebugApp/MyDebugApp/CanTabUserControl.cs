@@ -181,10 +181,6 @@ public struct CMD_WD
     private struct BitFields { }
 }
 
-
-
-
-
 public struct MOD_SET
 {
     public ushort u16_MaxIout;
