@@ -43,7 +43,7 @@ namespace MyDebugApp
             this.tabCan.Padding = new System.Windows.Forms.Padding(3);
             this.tabCan.Size = new System.Drawing.Size(1272, 821);
             this.tabCan.TabIndex = 1;
-            this.tabCan.Text = "CAN升级";
+            this.tabCan.Text = "CAN调试";
             this.tabCan.UseVisualStyleBackColor = true;
             // 
             // tabUart
@@ -76,7 +76,7 @@ namespace MyDebugApp
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "DebugForm";
-            this.Text = "在线升级助手";
+            this.Text = "调试助手";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DebugForm_FormClosed);
             this.DebugTab.ResumeLayout(false);
             this.ResumeLayout(false);
