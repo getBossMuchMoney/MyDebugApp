@@ -339,7 +339,7 @@ namespace MyDebugApp
             // 
             // BinFilePathBox
             // 
-            this.BinFilePathBox.Location = new System.Drawing.Point(111, 83);
+            this.BinFilePathBox.Location = new System.Drawing.Point(111, 77);
             this.BinFilePathBox.Name = "BinFilePathBox";
             this.BinFilePathBox.Size = new System.Drawing.Size(184, 25);
             this.BinFilePathBox.TabIndex = 4;
@@ -1552,8 +1552,7 @@ namespace MyDebugApp
             // 
             // CanTabUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.CheckSlaverStaBox);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);

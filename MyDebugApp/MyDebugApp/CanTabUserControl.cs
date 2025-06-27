@@ -450,7 +450,7 @@ namespace MyDebugApp
                     for (int i = 0; i < 12; i++)
                     {
                         DevOfflineCheckCnt[i]++;
-                        if (DevOfflineCheckCnt[i] > 500)
+                        if (DevOfflineCheckCnt[i] > 100)
                         {
                             DevOfflineCheckCnt[i] = 0;
                             SlaverConnectSta[i] = 0;
@@ -611,7 +611,7 @@ namespace MyDebugApp
                         if (updateThread != null && updateThread.IsAlive)
                         {
                             msgID.IdFrame = id;
-                            if ((msgID.DesId == 0x3F) && ((msgID.FuncCode & 0x0F) == 0x09))
+                            if ((msgID.DesId == 0x3F) && (msgID.FuncCode != 0x09))
                             {
                                 uint[] msbuffer = new uint[CanRcvBuff[i].DataLen + 1];
                                 msbuffer[0] = id;
@@ -707,6 +707,7 @@ namespace MyDebugApp
         {
             if ((FileSize > 0) && (OpenCanDevButton.Text == "关闭分析仪"))
             {
+                while (UpdateRxQueue.TryTake(out uint[] _)) ;
                 while (AppTxQueue.TryTake(out uint[] _)) ;
                 if (canAppSendThread != null && canAppSendThread.IsAlive)
                 {
@@ -1224,6 +1225,10 @@ namespace MyDebugApp
 
             u16value = modstadata[deviceid - 1].REG.u16_Idcout;
             fvalue = 0.1f * u16value;
+            if (fvalue == 6553.5)
+            {
+                fvalue = 0;
+            }
             IoutBox.Text = fvalue.ToString("F1");
 
             switch (modstadata[deviceid - 1].REG.u16_WorkMode)
@@ -1290,6 +1295,11 @@ namespace MyDebugApp
 
             u16value = modstadata[deviceid - 1].REG.u16_Pout;
             fvalue = 0.1f * u16value;
+            if (fvalue == 6553.5)
+            {
+                fvalue = 0;
+
+            }
             PoutBox.Text = fvalue.ToString("F1");
 
             i16value = modstadata[deviceid - 1].REG.i16_Temp1;

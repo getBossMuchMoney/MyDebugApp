@@ -398,7 +398,7 @@ namespace MyDebugApp
             byte[] crc = new byte[2];
             data[0] = 0xAA;
             data[1] = 0xAA;
-            data[2] = (byte)(ChoseUpdateDeviceBox.SelectedIndex + 1);
+            data[2] = (byte)ChoseUpdateDeviceBox.SelectedIndex;
             crc = CrcInter.Crc16(data, 3);
             data[3] = crc[0];
             data[4] = crc[1];
@@ -422,8 +422,9 @@ namespace MyDebugApp
         {
             if ((updatethread == null || !updatethread.IsAlive) && (FileSize != 0))
             {
+                while (RxQueue.TryTake(out byte[] _)) ;
                 updatethread = new Thread(Update_Process);
-                ChoseUpdateID = (byte)(ChoseUpdateDeviceBox.SelectedIndex + 1);
+                ChoseUpdateID = (byte)ChoseUpdateDeviceBox.SelectedIndex;
                 updatethread.Start();
             }
         }

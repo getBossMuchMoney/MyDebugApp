@@ -117,7 +117,9 @@ namespace MyDebugApp
             "从机7",
             "从机8",
             "从机9",
-            "从机10"});
+            "从机10",
+            "从机11",
+            "从机12"});
             this.ChoseUpdateDeviceBox.Location = new System.Drawing.Point(94, 76);
             this.ChoseUpdateDeviceBox.Name = "ChoseUpdateDeviceBox";
             this.ChoseUpdateDeviceBox.Size = new System.Drawing.Size(121, 23);
