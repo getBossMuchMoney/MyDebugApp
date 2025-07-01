@@ -382,13 +382,13 @@ namespace MyDebugApp
             UartDataBox.Clear();
         }
 
-        private void BandConfigButton_Click(object sender, EventArgs e)
+        private void BandConfig(byte cmd)
         {
             byte[] data = new byte[5];
             byte[] crc = new byte[2];
             data[0] = 0x55;
             data[1] = 0x55;
-            data[2] = (byte)DeviceBandListBox.SelectedIndex;
+            data[2] = cmd;
             crc = CrcInter.Crc16(data, 3);
             data[3] = crc[0];
             data[4] = crc[1];
@@ -405,6 +405,11 @@ namespace MyDebugApp
                 }
             }
             catch (Exception) { }
+        }
+
+        private void BandConfigButton_Click(object sender, EventArgs e)
+        {
+            BandConfig((byte)DeviceBandListBox.SelectedIndex);
         }
 
         private void CheckDeviceButton_Click(object sender, EventArgs e)
@@ -606,12 +611,16 @@ namespace MyDebugApp
 
             if (UpdateMultiBox.Checked == true)
             {
+                BandConfig(4);
+                Thread.Sleep(50);
+                serialPort1.BaudRate = 115200;
                 UpdateNum = 12;
             }
             else
             {
                 UpdateNum = 1;
             }
+
 
             for (int num = 0; num < UpdateNum; num++)
             {
@@ -1027,6 +1036,10 @@ namespace MyDebugApp
                 Thread.Sleep(1);
 
             }
+            }
+            if (UpdateMultiBox.Checked == true)
+            {
+                serialPort1.BaudRate = 19200;
             }
             Invoke((Action)(() =>
             {

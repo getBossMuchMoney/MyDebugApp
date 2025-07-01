@@ -60,8 +60,8 @@ namespace MyDebugApp
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.openBinFile = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.UpdateLogBox = new System.Windows.Forms.TextBox();
             this.ClearUpdateLogButton = new System.Windows.Forms.Button();
+            this.UpdateLogBox = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -104,7 +104,7 @@ namespace MyDebugApp
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 295);
+            this.label6.Location = new System.Drawing.Point(10, 248);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 15);
             this.label6.TabIndex = 16;
@@ -113,7 +113,7 @@ namespace MyDebugApp
             // UpdateMultiBox
             // 
             this.UpdateMultiBox.AutoSize = true;
-            this.UpdateMultiBox.Location = new System.Drawing.Point(113, 375);
+            this.UpdateMultiBox.Location = new System.Drawing.Point(113, 318);
             this.UpdateMultiBox.Name = "UpdateMultiBox";
             this.UpdateMultiBox.Size = new System.Drawing.Size(89, 19);
             this.UpdateMultiBox.TabIndex = 15;
@@ -123,7 +123,7 @@ namespace MyDebugApp
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 68);
+            this.label5.Location = new System.Drawing.Point(20, 44);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 15);
             this.label5.TabIndex = 14;
@@ -147,7 +147,7 @@ namespace MyDebugApp
             "从机10",
             "从机11",
             "从机12"});
-            this.ChoseUpdateDeviceBox.Location = new System.Drawing.Point(94, 133);
+            this.ChoseUpdateDeviceBox.Location = new System.Drawing.Point(94, 111);
             this.ChoseUpdateDeviceBox.Name = "ChoseUpdateDeviceBox";
             this.ChoseUpdateDeviceBox.Size = new System.Drawing.Size(121, 23);
             this.ChoseUpdateDeviceBox.TabIndex = 13;
@@ -155,7 +155,7 @@ namespace MyDebugApp
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 141);
+            this.label3.Location = new System.Drawing.Point(21, 114);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 15);
             this.label3.TabIndex = 12;
@@ -163,14 +163,14 @@ namespace MyDebugApp
             // 
             // FilePathShowBox
             // 
-            this.FilePathShowBox.Location = new System.Drawing.Point(94, 246);
+            this.FilePathShowBox.Location = new System.Drawing.Point(94, 211);
             this.FilePathShowBox.Name = "FilePathShowBox";
             this.FilePathShowBox.Size = new System.Drawing.Size(169, 25);
             this.FilePathShowBox.TabIndex = 11;
             // 
             // ChoseFileButton
             // 
-            this.ChoseFileButton.Location = new System.Drawing.Point(13, 248);
+            this.ChoseFileButton.Location = new System.Drawing.Point(13, 213);
             this.ChoseFileButton.Name = "ChoseFileButton";
             this.ChoseFileButton.Size = new System.Drawing.Size(75, 23);
             this.ChoseFileButton.TabIndex = 10;
@@ -180,7 +180,7 @@ namespace MyDebugApp
             // 
             // BootButton
             // 
-            this.BootButton.Location = new System.Drawing.Point(93, 63);
+            this.BootButton.Location = new System.Drawing.Point(93, 40);
             this.BootButton.Name = "BootButton";
             this.BootButton.Size = new System.Drawing.Size(75, 23);
             this.BootButton.TabIndex = 9;
@@ -190,14 +190,14 @@ namespace MyDebugApp
             // 
             // UpdateProgressBar
             // 
-            this.UpdateProgressBar.Location = new System.Drawing.Point(13, 313);
+            this.UpdateProgressBar.Location = new System.Drawing.Point(13, 266);
             this.UpdateProgressBar.Name = "UpdateProgressBar";
             this.UpdateProgressBar.Size = new System.Drawing.Size(250, 23);
             this.UpdateProgressBar.TabIndex = 6;
             // 
             // StartUpdateButton
             // 
-            this.StartUpdateButton.Location = new System.Drawing.Point(12, 371);
+            this.StartUpdateButton.Location = new System.Drawing.Point(12, 314);
             this.StartUpdateButton.Name = "StartUpdateButton";
             this.StartUpdateButton.Size = new System.Drawing.Size(75, 23);
             this.StartUpdateButton.TabIndex = 8;
@@ -207,7 +207,7 @@ namespace MyDebugApp
             // 
             // BandConfigButton
             // 
-            this.BandConfigButton.Location = new System.Drawing.Point(108, 488);
+            this.BandConfigButton.Location = new System.Drawing.Point(108, 465);
             this.BandConfigButton.Name = "BandConfigButton";
             this.BandConfigButton.Size = new System.Drawing.Size(90, 23);
             this.BandConfigButton.TabIndex = 5;
@@ -225,7 +225,7 @@ namespace MyDebugApp
             "38400",
             "57600",
             "115200"});
-            this.DeviceBandListBox.Location = new System.Drawing.Point(108, 438);
+            this.DeviceBandListBox.Location = new System.Drawing.Point(108, 415);
             this.DeviceBandListBox.Name = "DeviceBandListBox";
             this.DeviceBandListBox.Size = new System.Drawing.Size(121, 23);
             this.DeviceBandListBox.TabIndex = 4;
@@ -233,7 +233,7 @@ namespace MyDebugApp
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 445);
+            this.label4.Location = new System.Drawing.Point(20, 419);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 15);
             this.label4.TabIndex = 3;
@@ -241,7 +241,7 @@ namespace MyDebugApp
             // 
             // CheckDeviceButton
             // 
-            this.CheckDeviceButton.Location = new System.Drawing.Point(140, 180);
+            this.CheckDeviceButton.Location = new System.Drawing.Point(140, 149);
             this.CheckDeviceButton.Name = "CheckDeviceButton";
             this.CheckDeviceButton.Size = new System.Drawing.Size(75, 23);
             this.CheckDeviceButton.TabIndex = 2;
@@ -375,15 +375,6 @@ namespace MyDebugApp
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "升级记录";
             // 
-            // UpdateLogBox
-            // 
-            this.UpdateLogBox.Location = new System.Drawing.Point(14, 25);
-            this.UpdateLogBox.Multiline = true;
-            this.UpdateLogBox.Name = "UpdateLogBox";
-            this.UpdateLogBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.UpdateLogBox.Size = new System.Drawing.Size(670, 173);
-            this.UpdateLogBox.TabIndex = 0;
-            // 
             // ClearUpdateLogButton
             // 
             this.ClearUpdateLogButton.Location = new System.Drawing.Point(14, 204);
@@ -393,6 +384,15 @@ namespace MyDebugApp
             this.ClearUpdateLogButton.Text = "清除记录";
             this.ClearUpdateLogButton.UseVisualStyleBackColor = true;
             this.ClearUpdateLogButton.Click += new System.EventHandler(this.ClearUpdateLogButton_Click);
+            // 
+            // UpdateLogBox
+            // 
+            this.UpdateLogBox.Location = new System.Drawing.Point(14, 25);
+            this.UpdateLogBox.Multiline = true;
+            this.UpdateLogBox.Name = "UpdateLogBox";
+            this.UpdateLogBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.UpdateLogBox.Size = new System.Drawing.Size(670, 173);
+            this.UpdateLogBox.TabIndex = 0;
             // 
             // UartTabUserControl
             // 

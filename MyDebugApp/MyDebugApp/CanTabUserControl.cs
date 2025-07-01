@@ -390,7 +390,7 @@ namespace MyDebugApp
             }
 
             CanDevPassNumBox.SelectedIndex = 0;
-            CanBandListBox.SelectedIndex = 1;
+            CanBandListBox.SelectedIndex = 0;
             ChoseDevListBox.SelectedIndex = 1;
             Thread dealModDataThread = new Thread(() => DealModAnsw(DealModCts.Token)); 
             dealModDataThread.Start();
@@ -954,6 +954,9 @@ namespace MyDebugApp
             ushort u16value = 0;
             short i16value = 0;
             uint u32value = 0;
+            uint OnlineNum = 0;
+            uint ErrNum = 0;
+
             int deviceid = ChoseDevListBox.SelectedIndex;
             if (deviceid == 0)
             {
@@ -962,123 +965,258 @@ namespace MyDebugApp
 
             if (SlaverConnectSta[0] == 1)
             {
+                OnlineNum++;
                 Slave1Box.Checked = true;
+                if (modstadata[0].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver1ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver1ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave1Box.Checked = false;
+                Slaver1ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[1] == 1)
             {
+                OnlineNum++;
                 Slave2Box.Checked = true;
+                if (modstadata[1].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver2ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver2ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave2Box.Checked = false;
+                Slaver2ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[2] == 1)
             {
+                OnlineNum++;
                 Slave3Box.Checked = true;
+                if (modstadata[2].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver3ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver3ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave3Box.Checked = false;
+                Slaver3ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[3] == 1)
             {
+                OnlineNum++;
                 Slave4Box.Checked = true;
+                if (modstadata[3].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver4ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver4ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave4Box.Checked = false;
+                Slaver4ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[4] == 1)
             {
+                OnlineNum++;
                 Slave5Box.Checked = true;
+                if (modstadata[4].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver5ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver5ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave5Box.Checked = false;
+                Slaver5ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[5] == 1)
             {
+                OnlineNum++;
                 Slave6Box.Checked = true;
+                if (modstadata[5].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver6ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver6ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave6Box.Checked = false;
+                Slaver6ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[6] == 1)
             {
+                OnlineNum++;
                 Slave7Box.Checked = true;
+                if (modstadata[6].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver7ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver7ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave7Box.Checked = false;
+                Slaver7ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[7] == 1)
             {
+                OnlineNum++;
                 Slave8Box.Checked = true;
+                if (modstadata[7].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver8ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver8ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave8Box.Checked = false;
+                Slaver8ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[8] == 1)
             {
+                OnlineNum++;
                 Slave9Box.Checked = true;
+                if (modstadata[8].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver9ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver9ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave9Box.Checked = false;
+                Slaver9ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[9] == 1)
             {
+                OnlineNum++;
                 Slave10Box.Checked = true;
+                if (modstadata[9].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver10ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver10ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave10Box.Checked = false;
+                Slaver10ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[10] == 1)
             {
+                OnlineNum++;
                 Slave11Box.Checked = true;
+                if (modstadata[10].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver11ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver11ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave11Box.Checked = false;
+                Slaver11ErrBox.Checked = false;
 
             }
 
             if (SlaverConnectSta[11] == 1)
             {
+                OnlineNum++;
                 Slave12Box.Checked = true;
+                if (modstadata[11].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver12ErrBox.Checked = true;
+                }
+                else
+                {
+                    Slaver12ErrBox.Checked = false;
+                }
             }
             else
             {
                 Slave12Box.Checked = false;
+                Slaver12ErrBox.Checked = false;
 
             }
+
+            OnlinerNumBox.Text = OnlineNum.ToString();
+            ErrNumBox.Text = ErrNum.ToString();
 
             if (ReadSettingFinish == 1)
             {
@@ -1213,6 +1351,10 @@ namespace MyDebugApp
 
             u16value = modstadata[deviceid - 1].REG.u16_Iout1;
             fvalue = 0.1f * u16value;
+            if (fvalue >= 6553.0)
+            {
+                fvalue = 0;
+            }
             Iout1Box.Text = fvalue.ToString("F1");
 
             u16value = modstadata[deviceid - 1].REG.u16_Vout2;
@@ -1225,7 +1367,7 @@ namespace MyDebugApp
 
             u16value = modstadata[deviceid - 1].REG.u16_Idcout;
             fvalue = 0.1f * u16value;
-            if (fvalue == 6553.5)
+            if (fvalue >= 6553.0)
             {
                 fvalue = 0;
             }
@@ -1295,7 +1437,7 @@ namespace MyDebugApp
 
             u16value = modstadata[deviceid - 1].REG.u16_Pout;
             fvalue = 0.1f * u16value;
-            if (fvalue == 6553.5)
+            if (fvalue >= 6553.0)
             {
                 fvalue = 0;
 
