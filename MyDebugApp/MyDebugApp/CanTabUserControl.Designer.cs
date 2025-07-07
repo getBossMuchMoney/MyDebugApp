@@ -201,6 +201,33 @@ namespace MyDebugApp
             this.ErrNumBox = new System.Windows.Forms.TextBox();
             this.label66 = new System.Windows.Forms.Label();
             this.label67 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.Slaver1CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver4CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver7CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver10CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver11CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver8CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver5CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver2CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver12CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver9CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver6CurrBox = new System.Windows.Forms.TextBox();
+            this.Slaver3CurrBox = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.SysCurrBox = new System.Windows.Forms.TextBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label73 = new System.Windows.Forms.Label();
+            this.label74 = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -435,16 +462,16 @@ namespace MyDebugApp
             // 
             this.groupBox3.Controls.Add(this.ClearRcvDataShowButton);
             this.groupBox3.Controls.Add(this.ShowRcvDataBox);
-            this.groupBox3.Location = new System.Drawing.Point(15, 407);
+            this.groupBox3.Location = new System.Drawing.Point(15, 573);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(561, 397);
+            this.groupBox3.Size = new System.Drawing.Size(561, 231);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "数据显示";
             // 
             // ClearRcvDataShowButton
             // 
-            this.ClearRcvDataShowButton.Location = new System.Drawing.Point(14, 356);
+            this.ClearRcvDataShowButton.Location = new System.Drawing.Point(14, 199);
             this.ClearRcvDataShowButton.Name = "ClearRcvDataShowButton";
             this.ClearRcvDataShowButton.Size = new System.Drawing.Size(75, 26);
             this.ClearRcvDataShowButton.TabIndex = 1;
@@ -458,7 +485,7 @@ namespace MyDebugApp
             this.ShowRcvDataBox.Multiline = true;
             this.ShowRcvDataBox.Name = "ShowRcvDataBox";
             this.ShowRcvDataBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ShowRcvDataBox.Size = new System.Drawing.Size(533, 325);
+            this.ShowRcvDataBox.Size = new System.Drawing.Size(533, 169);
             this.ShowRcvDataBox.TabIndex = 0;
             // 
             // showDataTimer
@@ -1437,6 +1464,33 @@ namespace MyDebugApp
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.label81);
+            this.groupBox6.Controls.Add(this.label80);
+            this.groupBox6.Controls.Add(this.label79);
+            this.groupBox6.Controls.Add(this.label78);
+            this.groupBox6.Controls.Add(this.label77);
+            this.groupBox6.Controls.Add(this.label76);
+            this.groupBox6.Controls.Add(this.label75);
+            this.groupBox6.Controls.Add(this.label74);
+            this.groupBox6.Controls.Add(this.label73);
+            this.groupBox6.Controls.Add(this.label72);
+            this.groupBox6.Controls.Add(this.label71);
+            this.groupBox6.Controls.Add(this.label70);
+            this.groupBox6.Controls.Add(this.SysCurrBox);
+            this.groupBox6.Controls.Add(this.label69);
+            this.groupBox6.Controls.Add(this.Slaver12CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver9CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver6CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver3CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver11CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver8CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver5CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver2CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver10CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver7CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver4CurrBox);
+            this.groupBox6.Controls.Add(this.Slaver1CurrBox);
+            this.groupBox6.Controls.Add(this.label68);
             this.groupBox6.Controls.Add(this.label67);
             this.groupBox6.Controls.Add(this.label66);
             this.groupBox6.Controls.Add(this.ErrNumBox);
@@ -1487,7 +1541,7 @@ namespace MyDebugApp
             this.groupBox6.Controls.Add(this.Slave1Box);
             this.groupBox6.Location = new System.Drawing.Point(15, 240);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(561, 161);
+            this.groupBox6.Size = new System.Drawing.Size(561, 327);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "系统状态";
@@ -1936,6 +1990,249 @@ namespace MyDebugApp
             this.label67.TabIndex = 47;
             this.label67.Text = "故障数量";
             // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(20, 174);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(67, 15);
+            this.label68.TabIndex = 48;
+            this.label68.Text = "各机电流";
+            // 
+            // Slaver1CurrBox
+            // 
+            this.Slaver1CurrBox.Location = new System.Drawing.Point(64, 192);
+            this.Slaver1CurrBox.Name = "Slaver1CurrBox";
+            this.Slaver1CurrBox.ReadOnly = true;
+            this.Slaver1CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver1CurrBox.TabIndex = 49;
+            this.Slaver1CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver4CurrBox
+            // 
+            this.Slaver4CurrBox.Location = new System.Drawing.Point(193, 192);
+            this.Slaver4CurrBox.Name = "Slaver4CurrBox";
+            this.Slaver4CurrBox.ReadOnly = true;
+            this.Slaver4CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver4CurrBox.TabIndex = 50;
+            this.Slaver4CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver7CurrBox
+            // 
+            this.Slaver7CurrBox.Location = new System.Drawing.Point(328, 192);
+            this.Slaver7CurrBox.Name = "Slaver7CurrBox";
+            this.Slaver7CurrBox.ReadOnly = true;
+            this.Slaver7CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver7CurrBox.TabIndex = 51;
+            this.Slaver7CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver10CurrBox
+            // 
+            this.Slaver10CurrBox.Location = new System.Drawing.Point(462, 192);
+            this.Slaver10CurrBox.Name = "Slaver10CurrBox";
+            this.Slaver10CurrBox.ReadOnly = true;
+            this.Slaver10CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver10CurrBox.TabIndex = 52;
+            this.Slaver10CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver11CurrBox
+            // 
+            this.Slaver11CurrBox.Location = new System.Drawing.Point(462, 223);
+            this.Slaver11CurrBox.Name = "Slaver11CurrBox";
+            this.Slaver11CurrBox.ReadOnly = true;
+            this.Slaver11CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver11CurrBox.TabIndex = 56;
+            this.Slaver11CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver8CurrBox
+            // 
+            this.Slaver8CurrBox.Location = new System.Drawing.Point(328, 223);
+            this.Slaver8CurrBox.Name = "Slaver8CurrBox";
+            this.Slaver8CurrBox.ReadOnly = true;
+            this.Slaver8CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver8CurrBox.TabIndex = 55;
+            this.Slaver8CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver5CurrBox
+            // 
+            this.Slaver5CurrBox.Location = new System.Drawing.Point(193, 223);
+            this.Slaver5CurrBox.Name = "Slaver5CurrBox";
+            this.Slaver5CurrBox.ReadOnly = true;
+            this.Slaver5CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver5CurrBox.TabIndex = 54;
+            this.Slaver5CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver2CurrBox
+            // 
+            this.Slaver2CurrBox.Location = new System.Drawing.Point(64, 223);
+            this.Slaver2CurrBox.Name = "Slaver2CurrBox";
+            this.Slaver2CurrBox.ReadOnly = true;
+            this.Slaver2CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver2CurrBox.TabIndex = 53;
+            this.Slaver2CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver12CurrBox
+            // 
+            this.Slaver12CurrBox.Location = new System.Drawing.Point(462, 254);
+            this.Slaver12CurrBox.Name = "Slaver12CurrBox";
+            this.Slaver12CurrBox.ReadOnly = true;
+            this.Slaver12CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver12CurrBox.TabIndex = 60;
+            this.Slaver12CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver9CurrBox
+            // 
+            this.Slaver9CurrBox.Location = new System.Drawing.Point(328, 254);
+            this.Slaver9CurrBox.Name = "Slaver9CurrBox";
+            this.Slaver9CurrBox.ReadOnly = true;
+            this.Slaver9CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver9CurrBox.TabIndex = 59;
+            this.Slaver9CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver6CurrBox
+            // 
+            this.Slaver6CurrBox.Location = new System.Drawing.Point(193, 254);
+            this.Slaver6CurrBox.Name = "Slaver6CurrBox";
+            this.Slaver6CurrBox.ReadOnly = true;
+            this.Slaver6CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver6CurrBox.TabIndex = 58;
+            this.Slaver6CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Slaver3CurrBox
+            // 
+            this.Slaver3CurrBox.Location = new System.Drawing.Point(64, 254);
+            this.Slaver3CurrBox.Name = "Slaver3CurrBox";
+            this.Slaver3CurrBox.ReadOnly = true;
+            this.Slaver3CurrBox.Size = new System.Drawing.Size(61, 25);
+            this.Slaver3CurrBox.TabIndex = 57;
+            this.Slaver3CurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(26, 297);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(82, 15);
+            this.label69.TabIndex = 61;
+            this.label69.Text = "系统总电流";
+            // 
+            // SysCurrBox
+            // 
+            this.SysCurrBox.Location = new System.Drawing.Point(114, 294);
+            this.SysCurrBox.Name = "SysCurrBox";
+            this.SysCurrBox.ReadOnly = true;
+            this.SysCurrBox.Size = new System.Drawing.Size(61, 25);
+            this.SysCurrBox.TabIndex = 62;
+            this.SysCurrBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(13, 196);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(45, 15);
+            this.label70.TabIndex = 63;
+            this.label70.Text = "从机1";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(13, 226);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(45, 15);
+            this.label71.TabIndex = 64;
+            this.label71.Text = "从机2";
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(13, 257);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(45, 15);
+            this.label72.TabIndex = 65;
+            this.label72.Text = "从机3";
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(142, 196);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(45, 15);
+            this.label73.TabIndex = 66;
+            this.label73.Text = "从机4";
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(142, 226);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(45, 15);
+            this.label74.TabIndex = 67;
+            this.label74.Text = "从机5";
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(142, 257);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(45, 15);
+            this.label75.TabIndex = 68;
+            this.label75.Text = "从机6";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(277, 196);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(45, 15);
+            this.label76.TabIndex = 69;
+            this.label76.Text = "从机7";
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(277, 226);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(45, 15);
+            this.label77.TabIndex = 70;
+            this.label77.Text = "从机8";
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(277, 257);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(45, 15);
+            this.label78.TabIndex = 71;
+            this.label78.Text = "从机9";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(403, 196);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(53, 15);
+            this.label79.TabIndex = 72;
+            this.label79.Text = "从机10";
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Location = new System.Drawing.Point(403, 226);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(53, 15);
+            this.label80.TabIndex = 73;
+            this.label80.Text = "从机11";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(403, 257);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(53, 15);
+            this.label81.TabIndex = 74;
+            this.label81.Text = "从机12";
+            // 
             // CanTabUserControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2140,5 +2437,32 @@ namespace MyDebugApp
         private System.Windows.Forms.Label label66;
         private System.Windows.Forms.TextBox ErrNumBox;
         private System.Windows.Forms.TextBox OnlinerNumBox;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.TextBox SysCurrBox;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.TextBox Slaver12CurrBox;
+        private System.Windows.Forms.TextBox Slaver9CurrBox;
+        private System.Windows.Forms.TextBox Slaver6CurrBox;
+        private System.Windows.Forms.TextBox Slaver3CurrBox;
+        private System.Windows.Forms.TextBox Slaver11CurrBox;
+        private System.Windows.Forms.TextBox Slaver8CurrBox;
+        private System.Windows.Forms.TextBox Slaver5CurrBox;
+        private System.Windows.Forms.TextBox Slaver2CurrBox;
+        private System.Windows.Forms.TextBox Slaver10CurrBox;
+        private System.Windows.Forms.TextBox Slaver7CurrBox;
+        private System.Windows.Forms.TextBox Slaver4CurrBox;
+        private System.Windows.Forms.TextBox Slaver1CurrBox;
+        private System.Windows.Forms.Label label68;
     }
 }

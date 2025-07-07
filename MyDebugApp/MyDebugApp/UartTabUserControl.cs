@@ -265,6 +265,7 @@ namespace MyDebugApp
                         byteData.Select(b => (b >= 0x20 && b <= 0x7E) ? (char)b : '?').ToArray()
                     );
                 }
+                data = data.Replace('/', ' ');
                 if (MsgType == 0)
                 {
                     UartDataBox.AppendText('[' + timestamp + ']' + "收←◆" + data + Environment.NewLine);//对话框追加显示数据
