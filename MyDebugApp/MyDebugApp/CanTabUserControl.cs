@@ -850,7 +850,7 @@ namespace MyDebugApp
             string str = null;
             string showstr = null;
 
-            if (updateThread != null && updateThread.IsAlive == false)
+            if (updateThread != null && updateThread.IsAlive == false && OpenCanDevButton.Text == "关闭分析仪")
             {
                 if ((canAppSendThread == null) || (canAppSendThread.IsAlive == false))
                 {
