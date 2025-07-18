@@ -362,7 +362,6 @@ namespace MyDebugApp
         BlockingCollection<uint[]> AppTxQueue = new BlockingCollection<uint[]>(new ConcurrentQueue<uint[]>());
         BlockingCollection<string> ShowStrRxQueue = new BlockingCollection<string>(new ConcurrentQueue<string>());
         byte ChoseUpdateID = 0;
-        CancellationTokenSource updateCts = new CancellationTokenSource();
         CancellationTokenSource CanDataRecieveCts = new CancellationTokenSource();
         CancellationTokenSource CanSendCts = new CancellationTokenSource();
         CancellationTokenSource DealModCts = new CancellationTokenSource();
@@ -401,7 +400,7 @@ namespace MyDebugApp
         {
             uint[] data = new uint[9];
             CanAppId id = new CanAppId();
-            Array.Clear(DevOfflineCheckCnt,0, DevOfflineCheckCnt.Length);
+            Array.Clear(DevOfflineCheckCnt, 0, DevOfflineCheckCnt.Length);
             Array.Clear(SlaverConnectSta, 0, SlaverConnectSta.Length);
             while (!token.IsCancellationRequested)
             {
@@ -543,8 +542,12 @@ namespace MyDebugApp
                 
                 if (updateThread != null && updateThread.IsAlive)
                 {
-                    updateCts.Cancel();
-                    updateThread.Join();
+                    try
+                    {
+                        updateThread.Abort();
+                    }
+                    catch (Exception) { };
+                    StartUpdateButton.Enabled = true;
                 }
 
                 for (int i = 0; i < 12; i++)
@@ -717,8 +720,7 @@ namespace MyDebugApp
                 }
                 SendFunccode = 0;
                 StartUpdateButton.Enabled = false;
-                updateCts = new CancellationTokenSource();
-                updateThread = new Thread(() => Update_Process(updateCts.Token));
+                updateThread = new Thread(Update_Process);
                 ChoseUpdateID = (byte)ChoseDevListBox.SelectedIndex;
                 updateThread.Start();
             }
@@ -850,7 +852,7 @@ namespace MyDebugApp
             string str = null;
             string showstr = null;
 
-            if (updateThread != null && updateThread.IsAlive == false)
+            if (updateThread != null && updateThread.IsAlive == false && OpenCanDevButton.Text == "关闭分析仪")
             {
                 if ((canAppSendThread == null) || (canAppSendThread.IsAlive == false))
                 {
@@ -908,7 +910,6 @@ namespace MyDebugApp
                 }
                 else
                 {
-                    Thread.Sleep(1);
                     if (CheckSlaverStaBox.Checked == true)
                     {
                         id.ActFlag = 0;
@@ -942,6 +943,7 @@ namespace MyDebugApp
                     {
                         SetFlag = 0;
                     }
+                    Thread.Sleep(1);
                 }
 
             }
@@ -2342,7 +2344,7 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4+ i] >> 8);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4 + i] >> 8);
                     Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
                 }
 
@@ -2592,14 +2594,51 @@ namespace MyDebugApp
 
         }
 
-        private void Update_Process(CancellationToken token)
+        private void UpdateResaultLog(byte devID, bool resault)
+        {
+            if (resault)
+            {
+                //UpdateLogBox.AppendText("从机" + devID.ToString() + "升级成功!" + Environment.NewLine);
+            }
+            else
+            {
+                //UpdateLogBox.AppendText("从机" + devID.ToString() + "升级失败!!!!!!!!!!!!!!!!!!!!!!!!" + Environment.NewLine);
+
+            }
+
+        }
+
+        private void Update_Process()
         {
             byte UpdateState = 0;
+            bool process = false;
+            int UpdateNum = 0;
             CANID_UNION id = new CANID_UNION();
             uint[] frame = null;
-            while (!token.IsCancellationRequested)
-            {
 
+            if (UpdateMultiBox.Checked == true)
+            {
+                UpdateNum = 10;
+            }
+            else
+            {
+                UpdateNum = 1;
+            }
+
+
+            for (int num = 0; num < UpdateNum; num++)
+            {
+                if (UpdateMultiBox.Checked == true)
+                {
+                    ChoseUpdateID = (byte)(num + 1);
+                }
+
+                process = true;
+
+                while (UpdateRxQueue.TryTake(out uint[] _)) ;
+
+                while (process)
+            {
                 switch (UpdateState)
                 {
                     case 0:
@@ -2617,13 +2656,20 @@ namespace MyDebugApp
 
                                 if (i == 2)
                                 {
+                                        if (UpdateMultiBox.Checked == false)
+                                        {
                                     Invoke((Action)(() =>
                                     {
-                                        
                                         MessageBox.Show("未找到目标设备", "错误!");
                                         StartUpdateButton.Enabled = true;
                                     }));
                                     return;
+                                        }
+                                        else
+                                        {
+                                            process = false;
+                                            UpdateResaultLog(ChoseUpdateID, false);
+                                        }
                                 }
                             }
 
@@ -2911,7 +2957,14 @@ namespace MyDebugApp
 
                 Thread.Sleep(1);
             }
+            }
+
+            Invoke((Action)(() =>
+            {
+                StartUpdateButton.Enabled = true;
+            }));
 
         }
+
     }
 }

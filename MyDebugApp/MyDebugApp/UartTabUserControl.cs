@@ -88,6 +88,7 @@ namespace MyDebugApp
                 try
                 {
                     uartRcvThread.Abort();
+                    updatethread.Abort();
                     serialPort1.Close();//关闭串口
                 }
                 catch (Exception) { }
