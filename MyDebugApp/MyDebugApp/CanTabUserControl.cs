@@ -80,20 +80,20 @@ public struct MOD_STA
     public ushort u16_Vab;
     public ushort u16_Vbc;
     public ushort u16_Vca;
-    public ushort u16_Ia;
-    public ushort u16_Ib;
-    public ushort u16_Ic;
+    public ushort u16_VLab;
+    public ushort u16_VLbc;
+    public ushort u16_VLca;
     public ushort u16_Iai1;
     public ushort u16_Ibi1;
     public ushort u16_Ici1;
     public ushort u16_Iai2;
     public ushort u16_Ibi2;
     public ushort u16_Ici2;
+    public ushort u16_VPwmbus;
     public ushort u16_Vbus;
-    public ushort u16_Resv13;
-    public ushort u16_Resv14;
-    public ushort u16_Iout1;
-    public ushort u16_Vout2;
+    public short i16_Idci1;
+    public short i16_Idci2;
+    public short i16_Idci3;
     public ushort u16_Freq;
     public ushort u16_Idcout;
     public ushort u16_Vout;
@@ -110,7 +110,7 @@ public struct MOD_STA
 
     public uint u32_ErrCode;
     public uint u32_Version;
-    public uint u32_Resv;
+    public short i16_Temp5;
 
 }
 
@@ -121,7 +121,7 @@ unsafe public struct U_MOD_STA
     public MOD_STA REG;           // 结构体部分
 
     [FieldOffset(0)]
-    public fixed ushort buff[36]; // 固定大小的 uint16_t 数组
+    public fixed ushort buff[35]; // 固定大小的 uint16_t 数组
 }
 
 
@@ -908,6 +908,7 @@ namespace MyDebugApp
                 }
                 else
                 {
+                    Thread.Sleep(1);
                     if (CheckSlaverStaBox.Checked == true)
                     {
                         id.ActFlag = 0;
@@ -952,6 +953,11 @@ namespace MyDebugApp
         {
             float fvalue = 0;
             float syscurr = 0;
+            float sysAcurr = 0; 
+            float sysBcurr = 0;
+            float sysCcurr = 0; 
+            float sysPout = 0; 
+            float sysPinact = 0;
             ushort u16value = 0;
             short i16value = 0;
             uint u32value = 0;
@@ -978,9 +984,30 @@ namespace MyDebugApp
                     Slaver1ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[0].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver1CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver1CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[0].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[0].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[0].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[0].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[0].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
+
             }
             else
             {
@@ -1003,9 +1030,29 @@ namespace MyDebugApp
                     Slaver2ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[1].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver2CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver2CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[1].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[1].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[1].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[1].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[1].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1030,9 +1077,29 @@ namespace MyDebugApp
                     Slaver3ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[2].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver3CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver3CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[2].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[2].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[2].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[2].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[2].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1057,9 +1124,29 @@ namespace MyDebugApp
                     Slaver4ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[3].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver4CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver4CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[3].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[3].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[3].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[3].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[3].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1084,9 +1171,29 @@ namespace MyDebugApp
                     Slaver5ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[4].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver5CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver5CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[4].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[4].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[4].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[4].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[4].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1111,9 +1218,29 @@ namespace MyDebugApp
                     Slaver6ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[5].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver6CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver6CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[5].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[5].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[5].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[5].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[5].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1137,9 +1264,29 @@ namespace MyDebugApp
                     Slaver7ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[6].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver7CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver7CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[6].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[6].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[6].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[6].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[6].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1163,9 +1310,29 @@ namespace MyDebugApp
                     Slaver8ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[7].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver8CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver8CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[7].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[7].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[7].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[7].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[7].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1189,9 +1356,29 @@ namespace MyDebugApp
                     Slaver9ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[8].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver9CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver9CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[8].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[8].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[8].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[8].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[8].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1215,9 +1402,29 @@ namespace MyDebugApp
                     Slaver10ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[9].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver10CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver10CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[9].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[9].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[9].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[9].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[9].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1241,9 +1448,29 @@ namespace MyDebugApp
                     Slaver11ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[10].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver11CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver11CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[10].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[10].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[10].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[10].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[10].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1267,9 +1494,29 @@ namespace MyDebugApp
                     Slaver12ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[11].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver12CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 0.1f;
+                Slaver12CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
+
+                i16value = (short)modstadata[11].REG.u16_Iai1;
+                fvalue = i16value * 0.1f;
+                sysAcurr += fvalue;
+
+                i16value = (short)modstadata[11].REG.u16_Ibi1;
+                fvalue = i16value * 0.1f;
+                sysBcurr += fvalue;
+
+                i16value = (short)modstadata[11].REG.u16_Ici1;
+                fvalue = i16value * 0.1f;
+                sysCcurr += fvalue;
+
+                i16value = (short)modstadata[11].REG.u16_Pout;
+                fvalue = i16value * 0.1f;
+                sysPout += fvalue;
+
+                i16value = (short)modstadata[11].REG.u16_Pinact;
+                fvalue = i16value * 0.1f;
+                sysPinact += fvalue;
             }
             else
             {
@@ -1278,7 +1525,13 @@ namespace MyDebugApp
                 Slaver12CurrBox.Text = "0";
             }
 
-            SysCurrBox.Text = syscurr.ToString("F2");
+            SysCurrBox.Text = syscurr.ToString("F1");
+            SysIaBox.Text = sysAcurr.ToString("F1");
+            SysIbBox.Text = sysBcurr.ToString("F1");
+            SysIcBox.Text = sysCcurr.ToString("F1");
+            SysPoutBox.Text = sysPout.ToString("F1");
+            SysPinactBox.Text = sysPinact.ToString("F1");
+
             OnlinerNumBox.Text = OnlineNum.ToString();
             ErrNumBox.Text = ErrNum.ToString();
 
@@ -1286,14 +1539,14 @@ namespace MyDebugApp
             {
                 ReadSettingFinish = 0;
                 CMD_WD cmd = new CMD_WD() { all = 0 };
-                fvalue = (float)(modsetdata[deviceid - 1].REG.u16_MaxIout * 0.01f);
-                MaxCurrBox.Text = fvalue.ToString("F2");
+                fvalue = (float)(modsetdata[deviceid - 1].REG.u16_MaxIout * 0.1f);
+                MaxCurrBox.Text = fvalue.ToString("F1");
 
-                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_MaxVout * 0.1);
-                MaxVoltBox.Text = u16value.ToString();
+                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_MaxVout * 0.1f);
+                MaxVoltBox.Text = u16value.ToString("F1");
 
-                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_MaxPout * 0.1);
-                MaxPowerBox.Text = u16value.ToString();
+                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_MaxPout * 0.1f);
+                MaxPowerBox.Text = u16value.ToString("F1");
 
                 switch (modsetdata[deviceid - 1].REG.u16_OutputMode)
                 {
@@ -1319,14 +1572,14 @@ namespace MyDebugApp
 
                 }
 
-                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_SlopeIcc * 0.1);
-                CurrStepBox.Text = u16value.ToString();
+                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_SlopeIcc * 0.1f);
+                CurrStepBox.Text = u16value.ToString("F1");
 
-                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_SlopeVcv * 0.1);
-                VoltStepBox.Text = u16value.ToString();
+                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_SlopeVcv * 0.1f);
+                VoltStepBox.Text = u16value.ToString("F1");
 
-                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_SlopePcp * 0.1);
-                PowerStepBox.Text = u16value.ToString();
+                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_SlopePcp * 0.1f);
+                PowerStepBox.Text = u16value.ToString("F1");
 
                 cmd.all = modsetdata[deviceid - 1].REG.u16_CmdWd.all;
 
@@ -1367,18 +1620,6 @@ namespace MyDebugApp
             fvalue = 0.1f * u16value;
             FgBox.Text = fvalue.ToString("F1");
 
-            i16value = (short)modstadata[deviceid - 1].REG.u16_Ia;
-            fvalue = 0.1f * i16value;
-            IaBox.Text = fvalue.ToString("F1");
-
-            i16value = (short)modstadata[deviceid - 1].REG.u16_Ib;
-            fvalue = 0.1f * i16value;
-            IbBox.Text = fvalue.ToString("F1");
-
-            i16value = (short)modstadata[deviceid - 1].REG.u16_Ic;
-            fvalue = 0.1f * i16value;
-            IcBox.Text = fvalue.ToString("F1");
-
             i16value = (short)modstadata[deviceid - 1].REG.u16_Iai1;
             fvalue = 0.1f * i16value;
             Ia1Box.Text = fvalue.ToString("F1");
@@ -1407,27 +1648,29 @@ namespace MyDebugApp
             fvalue = 0.1f * u16value;
             VbusBox.Text = fvalue.ToString("F1");
 
-            fvalue = 0;
-            PVbusBox.Text = fvalue.ToString("F1");
-
-            fvalue = 0;
-            NVbusBox.Text = fvalue.ToString("F1");
-
-            i16value = (short)modstadata[deviceid - 1].REG.u16_Iout1;
-            fvalue = 0.1f * i16value;
-            Iout1Box.Text = fvalue.ToString("F1");
-
-            u16value = modstadata[deviceid - 1].REG.u16_Vout2;
+            u16value = modstadata[deviceid - 1].REG.u16_VPwmbus;
             fvalue = 0.1f * u16value;
-            Vout2Box.Text = fvalue.ToString("F1");
+            VPwmBusBox.Text = fvalue.ToString("F1");
+
+            i16value = (short)modstadata[deviceid - 1].REG.i16_Idci1;
+            fvalue = 0.1f * i16value;
+            Idcout1Box.Text = fvalue.ToString("F1");
+
+            i16value = (short)modstadata[deviceid - 1].REG.i16_Idci2;
+            fvalue = 0.1f * i16value;
+            Idcout2Box.Text = fvalue.ToString("F1");
+
+            i16value = modstadata[deviceid - 1].REG.i16_Idci3;
+            fvalue = 0.1f * i16value;
+            Idcout3Box.Text = fvalue.ToString("F1");
 
             u16value = modstadata[deviceid - 1].REG.u16_Vout;
             fvalue = 0.1f * u16value;
             VoutBox.Text = fvalue.ToString("F1");
 
             i16value = (short)modstadata[deviceid - 1].REG.u16_Idcout;
-            fvalue = 0.01f * i16value;
-            IoutBox.Text = fvalue.ToString("F2");
+            fvalue = 0.1f * i16value;
+            IoutBox.Text = fvalue.ToString("F1");
 
             switch (modstadata[deviceid - 1].REG.u16_WorkMode)
             {
@@ -1453,21 +1696,21 @@ namespace MyDebugApp
 
                 case 3:
                     {
-                        WorkModeBox.Text = "工作模式";
+                        WorkModeBox.Text = "CC模式";
 
                     }
                     break;
 
                 case 4:
                     {
-                        WorkModeBox.Text = "工作模式";
+                        WorkModeBox.Text = "CV模式";
 
                     }
                     break;
 
                 case 5:
                     {
-                        WorkModeBox.Text = "工作模式";
+                        WorkModeBox.Text = "CP模式";
 
                     }
                     break;
@@ -1483,12 +1726,12 @@ namespace MyDebugApp
                 default: { } break;
             }
 
-            u16value = modstadata[deviceid - 1].REG.u16_Pin;
-            fvalue = 0.1f * u16value;
+            i16value = (short)modstadata[deviceid - 1].REG.u16_Pin;
+            fvalue = 0.1f * i16value;
             PinBox.Text = fvalue.ToString("F1");
 
-            u16value = modstadata[deviceid - 1].REG.u16_Pinact;
-            fvalue = 0.1f * u16value;
+            i16value = (short)modstadata[deviceid - 1].REG.u16_Pinact;
+            fvalue = 0.1f * i16value;
             PinactBox.Text = fvalue.ToString("F1");
 
             i16value = (short)modstadata[deviceid - 1].REG.u16_Pout;
@@ -1510,6 +1753,10 @@ namespace MyDebugApp
             i16value = modstadata[deviceid - 1].REG.i16_Temp4;
             fvalue = 0.1f * i16value;
             Temp4Box.Text = fvalue.ToString("F1");
+
+            i16value = modstadata[deviceid - 1].REG.i16_Temp5;
+            fvalue = 0.1f * i16value;
+            Temp5Box.Text = fvalue.ToString("F1");
 
             u16value = modstadata[deviceid - 1].REG.u16_Addr;
             AddrBox.Text = u16value.ToString();
@@ -1883,7 +2130,7 @@ namespace MyDebugApp
 
             if (float.TryParse(MaxCurrBox.Text, out value))
             {
-                value = value * 100;
+                value = value * 10;
             }
             else
             {

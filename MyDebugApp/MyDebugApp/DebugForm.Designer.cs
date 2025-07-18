@@ -41,7 +41,7 @@ namespace MyDebugApp
             this.tabCan.Location = new System.Drawing.Point(4, 25);
             this.tabCan.Name = "tabCan";
             this.tabCan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCan.Size = new System.Drawing.Size(1272, 821);
+            this.tabCan.Size = new System.Drawing.Size(1272, 912);
             this.tabCan.TabIndex = 1;
             this.tabCan.Text = "CAN调试";
             this.tabCan.UseVisualStyleBackColor = true;
@@ -51,7 +51,7 @@ namespace MyDebugApp
             this.tabUart.Location = new System.Drawing.Point(4, 25);
             this.tabUart.Name = "tabUart";
             this.tabUart.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUart.Size = new System.Drawing.Size(1272, 821);
+            this.tabUart.Size = new System.Drawing.Size(1272, 912);
             this.tabUart.TabIndex = 0;
             this.tabUart.Text = "串口升级";
             this.tabUart.UseVisualStyleBackColor = true;
@@ -63,7 +63,7 @@ namespace MyDebugApp
             this.DebugTab.Location = new System.Drawing.Point(-2, 0);
             this.DebugTab.Name = "DebugTab";
             this.DebugTab.SelectedIndex = 0;
-            this.DebugTab.Size = new System.Drawing.Size(1280, 850);
+            this.DebugTab.Size = new System.Drawing.Size(1280, 941);
             this.DebugTab.TabIndex = 0;
             // 
             // DebugForm
@@ -72,12 +72,12 @@ namespace MyDebugApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1282, 853);
+            this.ClientSize = new System.Drawing.Size(1282, 942);
             this.Controls.Add(this.DebugTab);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "DebugForm";
-            this.Text = "调试助手";
+            this.Text = "125KW调试助手";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DebugForm_FormClosed);
             this.DebugTab.ResumeLayout(false);
             this.ResumeLayout(false);

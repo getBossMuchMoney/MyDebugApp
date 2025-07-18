@@ -79,6 +79,8 @@ namespace MyDebugApp
             this.label18 = new System.Windows.Forms.Label();
             this.Ib2Box = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.Temp5Box = new System.Windows.Forms.TextBox();
+            this.label82 = new System.Windows.Forms.Label();
             this.VersionBox = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
             this.ErrCodeBox = new System.Windows.Forms.TextBox();
@@ -107,13 +109,13 @@ namespace MyDebugApp
             this.label27 = new System.Windows.Forms.Label();
             this.IoutBox = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.Vout2Box = new System.Windows.Forms.TextBox();
+            this.Idcout3Box = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.Iout1Box = new System.Windows.Forms.TextBox();
+            this.Idcout2Box = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.NVbusBox = new System.Windows.Forms.TextBox();
+            this.Idcout1Box = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.PVbusBox = new System.Windows.Forms.TextBox();
+            this.VPwmBusBox = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.VbusBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -228,6 +230,18 @@ namespace MyDebugApp
             this.Slave2Box = new System.Windows.Forms.CheckBox();
             this.Slave1Box = new System.Windows.Forms.CheckBox();
             this.CheckSlaverStaBox = new System.Windows.Forms.CheckBox();
+            this.SysIaBox = new System.Windows.Forms.TextBox();
+            this.SysIbBox = new System.Windows.Forms.TextBox();
+            this.SysIcBox = new System.Windows.Forms.TextBox();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.label85 = new System.Windows.Forms.Label();
+            this.SysPoutBox = new System.Windows.Forms.TextBox();
+            this.label86 = new System.Windows.Forms.Label();
+            this.SysPinactBox = new System.Windows.Forms.TextBox();
+            this.label87 = new System.Windows.Forms.Label();
+            this.UpdateMultiBox = new System.Windows.Forms.CheckBox();
+            this.label88 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -362,6 +376,7 @@ namespace MyDebugApp
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.UpdateMultiBox);
             this.groupBox2.Controls.Add(this.StartUpdateButton);
             this.groupBox2.Controls.Add(this.UpdateProgressBar);
             this.groupBox2.Controls.Add(this.ChoseBinFileButton);
@@ -484,18 +499,18 @@ namespace MyDebugApp
             // 
             this.groupBox3.Controls.Add(this.ClearRcvDataShowButton);
             this.groupBox3.Controls.Add(this.ShowRcvDataBox);
-            this.groupBox3.Location = new System.Drawing.Point(15, 572);
+            this.groupBox3.Location = new System.Drawing.Point(15, 668);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(566, 231);
+            this.groupBox3.Size = new System.Drawing.Size(566, 238);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "数据显示";
             // 
             // ClearRcvDataShowButton
             // 
-            this.ClearRcvDataShowButton.Location = new System.Drawing.Point(14, 199);
+            this.ClearRcvDataShowButton.Location = new System.Drawing.Point(11, 202);
             this.ClearRcvDataShowButton.Margin = new System.Windows.Forms.Padding(2);
             this.ClearRcvDataShowButton.Name = "ClearRcvDataShowButton";
             this.ClearRcvDataShowButton.Size = new System.Drawing.Size(76, 29);
@@ -506,12 +521,12 @@ namespace MyDebugApp
             // 
             // ShowRcvDataBox
             // 
-            this.ShowRcvDataBox.Location = new System.Drawing.Point(14, 24);
+            this.ShowRcvDataBox.Location = new System.Drawing.Point(12, 22);
             this.ShowRcvDataBox.Margin = new System.Windows.Forms.Padding(2);
             this.ShowRcvDataBox.Multiline = true;
             this.ShowRcvDataBox.Name = "ShowRcvDataBox";
             this.ShowRcvDataBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ShowRcvDataBox.Size = new System.Drawing.Size(545, 169);
+            this.ShowRcvDataBox.Size = new System.Drawing.Size(545, 176);
             this.ShowRcvDataBox.TabIndex = 0;
             // 
             // showDataTimer
@@ -750,6 +765,8 @@ namespace MyDebugApp
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.Temp5Box);
+            this.groupBox4.Controls.Add(this.label82);
             this.groupBox4.Controls.Add(this.VersionBox);
             this.groupBox4.Controls.Add(this.label39);
             this.groupBox4.Controls.Add(this.ErrCodeBox);
@@ -778,13 +795,13 @@ namespace MyDebugApp
             this.groupBox4.Controls.Add(this.label27);
             this.groupBox4.Controls.Add(this.IoutBox);
             this.groupBox4.Controls.Add(this.label26);
-            this.groupBox4.Controls.Add(this.Vout2Box);
+            this.groupBox4.Controls.Add(this.Idcout3Box);
             this.groupBox4.Controls.Add(this.label25);
-            this.groupBox4.Controls.Add(this.Iout1Box);
+            this.groupBox4.Controls.Add(this.Idcout2Box);
             this.groupBox4.Controls.Add(this.label24);
-            this.groupBox4.Controls.Add(this.NVbusBox);
+            this.groupBox4.Controls.Add(this.Idcout1Box);
             this.groupBox4.Controls.Add(this.label23);
-            this.groupBox4.Controls.Add(this.PVbusBox);
+            this.groupBox4.Controls.Add(this.VPwmBusBox);
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Controls.Add(this.VbusBox);
             this.groupBox4.Controls.Add(this.label21);
@@ -824,9 +841,29 @@ namespace MyDebugApp
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "模块状态";
             // 
+            // Temp5Box
+            // 
+            this.Temp5Box.Location = new System.Drawing.Point(531, 291);
+            this.Temp5Box.Margin = new System.Windows.Forms.Padding(2);
+            this.Temp5Box.Name = "Temp5Box";
+            this.Temp5Box.ReadOnly = true;
+            this.Temp5Box.Size = new System.Drawing.Size(100, 25);
+            this.Temp5Box.TabIndex = 68;
+            this.Temp5Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(480, 294);
+            this.label82.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(45, 15);
+            this.label82.TabIndex = 67;
+            this.label82.Text = "温度5";
+            // 
             // VersionBox
             // 
-            this.VersionBox.Location = new System.Drawing.Point(531, 422);
+            this.VersionBox.Location = new System.Drawing.Point(530, 469);
             this.VersionBox.Margin = new System.Windows.Forms.Padding(2);
             this.VersionBox.Name = "VersionBox";
             this.VersionBox.ReadOnly = true;
@@ -846,7 +883,7 @@ namespace MyDebugApp
             // 
             // ErrCodeBox
             // 
-            this.ErrCodeBox.Location = new System.Drawing.Point(531, 378);
+            this.ErrCodeBox.Location = new System.Drawing.Point(531, 426);
             this.ErrCodeBox.Margin = new System.Windows.Forms.Padding(2);
             this.ErrCodeBox.Name = "ErrCodeBox";
             this.ErrCodeBox.ReadOnly = true;
@@ -866,7 +903,7 @@ namespace MyDebugApp
             // 
             // StaCodeBox
             // 
-            this.StaCodeBox.Location = new System.Drawing.Point(531, 332);
+            this.StaCodeBox.Location = new System.Drawing.Point(530, 378);
             this.StaCodeBox.Margin = new System.Windows.Forms.Padding(2);
             this.StaCodeBox.Name = "StaCodeBox";
             this.StaCodeBox.ReadOnly = true;
@@ -877,7 +914,7 @@ namespace MyDebugApp
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(472, 429);
+            this.label37.Location = new System.Drawing.Point(471, 476);
             this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(52, 15);
@@ -886,7 +923,7 @@ namespace MyDebugApp
             // 
             // AddrBox
             // 
-            this.AddrBox.Location = new System.Drawing.Point(531, 288);
+            this.AddrBox.Location = new System.Drawing.Point(531, 334);
             this.AddrBox.Margin = new System.Windows.Forms.Padding(2);
             this.AddrBox.Name = "AddrBox";
             this.AddrBox.ReadOnly = true;
@@ -897,7 +934,7 @@ namespace MyDebugApp
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(458, 381);
+            this.label36.Location = new System.Drawing.Point(458, 429);
             this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(67, 15);
@@ -917,7 +954,7 @@ namespace MyDebugApp
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(472, 339);
+            this.label35.Location = new System.Drawing.Point(471, 385);
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(52, 15);
@@ -937,7 +974,7 @@ namespace MyDebugApp
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(458, 294);
+            this.label34.Location = new System.Drawing.Point(458, 340);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(67, 15);
@@ -1104,15 +1141,15 @@ namespace MyDebugApp
             this.label26.TabIndex = 39;
             this.label26.Text = "工作状态";
             // 
-            // Vout2Box
+            // Idcout3Box
             // 
-            this.Vout2Box.Location = new System.Drawing.Point(321, 288);
-            this.Vout2Box.Margin = new System.Windows.Forms.Padding(2);
-            this.Vout2Box.Name = "Vout2Box";
-            this.Vout2Box.ReadOnly = true;
-            this.Vout2Box.Size = new System.Drawing.Size(100, 25);
-            this.Vout2Box.TabIndex = 38;
-            this.Vout2Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Idcout3Box.Location = new System.Drawing.Point(321, 288);
+            this.Idcout3Box.Margin = new System.Windows.Forms.Padding(2);
+            this.Idcout3Box.Name = "Idcout3Box";
+            this.Idcout3Box.ReadOnly = true;
+            this.Idcout3Box.Size = new System.Drawing.Size(100, 25);
+            this.Idcout3Box.TabIndex = 38;
+            this.Idcout3Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label25
             // 
@@ -1124,15 +1161,15 @@ namespace MyDebugApp
             this.label25.TabIndex = 37;
             this.label25.Text = "输出电压Vout";
             // 
-            // Iout1Box
+            // Idcout2Box
             // 
-            this.Iout1Box.Location = new System.Drawing.Point(321, 245);
-            this.Iout1Box.Margin = new System.Windows.Forms.Padding(2);
-            this.Iout1Box.Name = "Iout1Box";
-            this.Iout1Box.ReadOnly = true;
-            this.Iout1Box.Size = new System.Drawing.Size(100, 25);
-            this.Iout1Box.TabIndex = 36;
-            this.Iout1Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Idcout2Box.Location = new System.Drawing.Point(321, 245);
+            this.Idcout2Box.Margin = new System.Windows.Forms.Padding(2);
+            this.Idcout2Box.Name = "Idcout2Box";
+            this.Idcout2Box.ReadOnly = true;
+            this.Idcout2Box.Size = new System.Drawing.Size(100, 25);
+            this.Idcout2Box.TabIndex = 36;
+            this.Idcout2Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label24
             // 
@@ -1144,45 +1181,45 @@ namespace MyDebugApp
             this.label24.TabIndex = 35;
             this.label24.Text = "输出电流Iout";
             // 
-            // NVbusBox
+            // Idcout1Box
             // 
-            this.NVbusBox.Location = new System.Drawing.Point(321, 202);
-            this.NVbusBox.Margin = new System.Windows.Forms.Padding(2);
-            this.NVbusBox.Name = "NVbusBox";
-            this.NVbusBox.ReadOnly = true;
-            this.NVbusBox.Size = new System.Drawing.Size(100, 25);
-            this.NVbusBox.TabIndex = 34;
-            this.NVbusBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Idcout1Box.Location = new System.Drawing.Point(321, 202);
+            this.Idcout1Box.Margin = new System.Windows.Forms.Padding(2);
+            this.Idcout1Box.Name = "Idcout1Box";
+            this.Idcout1Box.ReadOnly = true;
+            this.Idcout1Box.Size = new System.Drawing.Size(100, 25);
+            this.Idcout1Box.TabIndex = 34;
+            this.Idcout1Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(228, 291);
+            this.label23.Location = new System.Drawing.Point(226, 295);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(87, 15);
+            this.label23.Size = new System.Drawing.Size(91, 15);
             this.label23.TabIndex = 33;
-            this.label23.Text = "LLC2 Vout2";
+            this.label23.Text = "DC电感电流3";
             // 
-            // PVbusBox
+            // VPwmBusBox
             // 
-            this.PVbusBox.Location = new System.Drawing.Point(321, 155);
-            this.PVbusBox.Margin = new System.Windows.Forms.Padding(2);
-            this.PVbusBox.Name = "PVbusBox";
-            this.PVbusBox.ReadOnly = true;
-            this.PVbusBox.Size = new System.Drawing.Size(100, 25);
-            this.PVbusBox.TabIndex = 32;
-            this.PVbusBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.VPwmBusBox.Location = new System.Drawing.Point(321, 155);
+            this.VPwmBusBox.Margin = new System.Windows.Forms.Padding(2);
+            this.VPwmBusBox.Name = "VPwmBusBox";
+            this.VPwmBusBox.ReadOnly = true;
+            this.VPwmBusBox.Size = new System.Drawing.Size(100, 25);
+            this.VPwmBusBox.TabIndex = 32;
+            this.VPwmBusBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(222, 248);
+            this.label22.Location = new System.Drawing.Point(226, 251);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(92, 15);
+            this.label22.Size = new System.Drawing.Size(91, 15);
             this.label22.TabIndex = 31;
-            this.label22.Text = "小电流Iout1";
+            this.label22.Text = "DC电感电流2";
             // 
             // VbusBox
             // 
@@ -1197,12 +1234,12 @@ namespace MyDebugApp
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(252, 209);
+            this.label21.Location = new System.Drawing.Point(226, 209);
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(62, 15);
+            this.label21.Size = new System.Drawing.Size(91, 15);
             this.label21.TabIndex = 29;
-            this.label21.Text = "负NVbus";
+            this.label21.Text = "DC电感电流1";
             // 
             // Ic2Box
             // 
@@ -1217,12 +1254,12 @@ namespace MyDebugApp
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(251, 162);
+            this.label20.Location = new System.Drawing.Point(226, 162);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(62, 15);
+            this.label20.Size = new System.Drawing.Size(91, 15);
             this.label20.TabIndex = 27;
-            this.label20.Text = "正PVbus";
+            this.label20.Text = "PWM母线电压";
             // 
             // Ic1Box
             // 
@@ -1251,6 +1288,7 @@ namespace MyDebugApp
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label88);
             this.groupBox5.Controls.Add(this.label45);
             this.groupBox5.Controls.Add(this.label44);
             this.groupBox5.Controls.Add(this.label43);
@@ -1279,11 +1317,11 @@ namespace MyDebugApp
             this.groupBox5.Controls.Add(this.DCDcOlEnBox);
             this.groupBox5.Controls.Add(this.PfcOlEnBox);
             this.groupBox5.Controls.Add(this.BrdctSendBox);
-            this.groupBox5.Location = new System.Drawing.Point(591, 549);
+            this.groupBox5.Location = new System.Drawing.Point(591, 560);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Size = new System.Drawing.Size(666, 255);
+            this.groupBox5.Size = new System.Drawing.Size(666, 346);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "控制设定";
@@ -1291,7 +1329,7 @@ namespace MyDebugApp
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(361, 178);
+            this.label45.Location = new System.Drawing.Point(365, 206);
             this.label45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(99, 15);
@@ -1301,7 +1339,7 @@ namespace MyDebugApp
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(366, 128);
+            this.label44.Location = new System.Drawing.Point(373, 153);
             this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(91, 15);
@@ -1311,7 +1349,7 @@ namespace MyDebugApp
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(366, 78);
+            this.label43.Location = new System.Drawing.Point(373, 101);
             this.label43.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(91, 15);
@@ -1321,7 +1359,7 @@ namespace MyDebugApp
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(70, 178);
+            this.label42.Location = new System.Drawing.Point(68, 207);
             this.label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(67, 15);
@@ -1331,7 +1369,7 @@ namespace MyDebugApp
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(70, 128);
+            this.label41.Location = new System.Drawing.Point(68, 151);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(67, 15);
@@ -1341,7 +1379,7 @@ namespace MyDebugApp
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(70, 74);
+            this.label40.Location = new System.Drawing.Point(68, 103);
             this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(67, 15);
@@ -1351,7 +1389,7 @@ namespace MyDebugApp
             // CPButton
             // 
             this.CPButton.AutoSize = true;
-            this.CPButton.Location = new System.Drawing.Point(468, 216);
+            this.CPButton.Location = new System.Drawing.Point(486, 254);
             this.CPButton.Margin = new System.Windows.Forms.Padding(2);
             this.CPButton.Name = "CPButton";
             this.CPButton.Size = new System.Drawing.Size(74, 19);
@@ -1363,7 +1401,7 @@ namespace MyDebugApp
             // CVButton
             // 
             this.CVButton.AutoSize = true;
-            this.CVButton.Location = new System.Drawing.Point(308, 218);
+            this.CVButton.Location = new System.Drawing.Point(310, 254);
             this.CVButton.Margin = new System.Windows.Forms.Padding(2);
             this.CVButton.Name = "CVButton";
             this.CVButton.Size = new System.Drawing.Size(74, 19);
@@ -1375,7 +1413,7 @@ namespace MyDebugApp
             // CCButton
             // 
             this.CCButton.AutoSize = true;
-            this.CCButton.Location = new System.Drawing.Point(139, 218);
+            this.CCButton.Location = new System.Drawing.Point(141, 254);
             this.CCButton.Margin = new System.Windows.Forms.Padding(2);
             this.CCButton.Name = "CCButton";
             this.CCButton.Size = new System.Drawing.Size(74, 19);
@@ -1386,7 +1424,7 @@ namespace MyDebugApp
             // 
             // SetPowerStepButton
             // 
-            this.SetPowerStepButton.Location = new System.Drawing.Point(579, 171);
+            this.SetPowerStepButton.Location = new System.Drawing.Point(579, 199);
             this.SetPowerStepButton.Margin = new System.Windows.Forms.Padding(2);
             this.SetPowerStepButton.Name = "SetPowerStepButton";
             this.SetPowerStepButton.Size = new System.Drawing.Size(52, 22);
@@ -1397,7 +1435,7 @@ namespace MyDebugApp
             // 
             // SetVoltStepButton
             // 
-            this.SetVoltStepButton.Location = new System.Drawing.Point(579, 119);
+            this.SetVoltStepButton.Location = new System.Drawing.Point(579, 149);
             this.SetVoltStepButton.Margin = new System.Windows.Forms.Padding(2);
             this.SetVoltStepButton.Name = "SetVoltStepButton";
             this.SetVoltStepButton.Size = new System.Drawing.Size(52, 22);
@@ -1408,7 +1446,7 @@ namespace MyDebugApp
             // 
             // SetCurrStepButton
             // 
-            this.SetCurrStepButton.Location = new System.Drawing.Point(579, 72);
+            this.SetCurrStepButton.Location = new System.Drawing.Point(579, 97);
             this.SetCurrStepButton.Margin = new System.Windows.Forms.Padding(2);
             this.SetCurrStepButton.Name = "SetCurrStepButton";
             this.SetCurrStepButton.Size = new System.Drawing.Size(52, 22);
@@ -1419,7 +1457,7 @@ namespace MyDebugApp
             // 
             // PowerStepBox
             // 
-            this.PowerStepBox.Location = new System.Drawing.Point(468, 172);
+            this.PowerStepBox.Location = new System.Drawing.Point(468, 199);
             this.PowerStepBox.Margin = new System.Windows.Forms.Padding(2);
             this.PowerStepBox.Name = "PowerStepBox";
             this.PowerStepBox.Size = new System.Drawing.Size(100, 25);
@@ -1428,7 +1466,7 @@ namespace MyDebugApp
             // 
             // VoltStepBox
             // 
-            this.VoltStepBox.Location = new System.Drawing.Point(468, 120);
+            this.VoltStepBox.Location = new System.Drawing.Point(468, 148);
             this.VoltStepBox.Margin = new System.Windows.Forms.Padding(2);
             this.VoltStepBox.Name = "VoltStepBox";
             this.VoltStepBox.Size = new System.Drawing.Size(100, 25);
@@ -1437,7 +1475,7 @@ namespace MyDebugApp
             // 
             // CurrStepBox
             // 
-            this.CurrStepBox.Location = new System.Drawing.Point(468, 71);
+            this.CurrStepBox.Location = new System.Drawing.Point(468, 96);
             this.CurrStepBox.Margin = new System.Windows.Forms.Padding(2);
             this.CurrStepBox.Name = "CurrStepBox";
             this.CurrStepBox.Size = new System.Drawing.Size(100, 25);
@@ -1446,7 +1484,7 @@ namespace MyDebugApp
             // 
             // SetMaxPowerButton
             // 
-            this.SetMaxPowerButton.Location = new System.Drawing.Point(256, 174);
+            this.SetMaxPowerButton.Location = new System.Drawing.Point(256, 200);
             this.SetMaxPowerButton.Margin = new System.Windows.Forms.Padding(2);
             this.SetMaxPowerButton.Name = "SetMaxPowerButton";
             this.SetMaxPowerButton.Size = new System.Drawing.Size(52, 22);
@@ -1457,7 +1495,7 @@ namespace MyDebugApp
             // 
             // SetMaxVoltButton
             // 
-            this.SetMaxVoltButton.Location = new System.Drawing.Point(256, 120);
+            this.SetMaxVoltButton.Location = new System.Drawing.Point(256, 148);
             this.SetMaxVoltButton.Margin = new System.Windows.Forms.Padding(2);
             this.SetMaxVoltButton.Name = "SetMaxVoltButton";
             this.SetMaxVoltButton.Size = new System.Drawing.Size(52, 22);
@@ -1468,7 +1506,7 @@ namespace MyDebugApp
             // 
             // SetMaxCurrButton
             // 
-            this.SetMaxCurrButton.Location = new System.Drawing.Point(256, 72);
+            this.SetMaxCurrButton.Location = new System.Drawing.Point(256, 97);
             this.SetMaxCurrButton.Margin = new System.Windows.Forms.Padding(2);
             this.SetMaxCurrButton.Name = "SetMaxCurrButton";
             this.SetMaxCurrButton.Size = new System.Drawing.Size(52, 22);
@@ -1479,7 +1517,7 @@ namespace MyDebugApp
             // 
             // MaxPowerBox
             // 
-            this.MaxPowerBox.Location = new System.Drawing.Point(139, 175);
+            this.MaxPowerBox.Location = new System.Drawing.Point(139, 199);
             this.MaxPowerBox.Margin = new System.Windows.Forms.Padding(2);
             this.MaxPowerBox.Name = "MaxPowerBox";
             this.MaxPowerBox.Size = new System.Drawing.Size(100, 25);
@@ -1488,7 +1526,7 @@ namespace MyDebugApp
             // 
             // MaxVoltBox
             // 
-            this.MaxVoltBox.Location = new System.Drawing.Point(139, 121);
+            this.MaxVoltBox.Location = new System.Drawing.Point(139, 148);
             this.MaxVoltBox.Margin = new System.Windows.Forms.Padding(2);
             this.MaxVoltBox.Name = "MaxVoltBox";
             this.MaxVoltBox.Size = new System.Drawing.Size(100, 25);
@@ -1497,7 +1535,7 @@ namespace MyDebugApp
             // 
             // MaxCurrBox
             // 
-            this.MaxCurrBox.Location = new System.Drawing.Point(139, 71);
+            this.MaxCurrBox.Location = new System.Drawing.Point(139, 96);
             this.MaxCurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.MaxCurrBox.Name = "MaxCurrBox";
             this.MaxCurrBox.Size = new System.Drawing.Size(100, 25);
@@ -1506,10 +1544,10 @@ namespace MyDebugApp
             // 
             // PowerOffButton
             // 
-            this.PowerOffButton.Location = new System.Drawing.Point(242, 14);
+            this.PowerOffButton.Location = new System.Drawing.Point(245, 32);
             this.PowerOffButton.Margin = new System.Windows.Forms.Padding(2);
             this.PowerOffButton.Name = "PowerOffButton";
-            this.PowerOffButton.Size = new System.Drawing.Size(72, 36);
+            this.PowerOffButton.Size = new System.Drawing.Size(72, 35);
             this.PowerOffButton.TabIndex = 6;
             this.PowerOffButton.Text = "关机";
             this.PowerOffButton.UseVisualStyleBackColor = true;
@@ -1517,10 +1555,10 @@ namespace MyDebugApp
             // 
             // PowerOnButton
             // 
-            this.PowerOnButton.Location = new System.Drawing.Point(135, 14);
+            this.PowerOnButton.Location = new System.Drawing.Point(136, 32);
             this.PowerOnButton.Margin = new System.Windows.Forms.Padding(2);
             this.PowerOnButton.Name = "PowerOnButton";
-            this.PowerOnButton.Size = new System.Drawing.Size(72, 36);
+            this.PowerOnButton.Size = new System.Drawing.Size(72, 35);
             this.PowerOnButton.TabIndex = 5;
             this.PowerOnButton.Text = "开机";
             this.PowerOnButton.UseVisualStyleBackColor = true;
@@ -1528,7 +1566,7 @@ namespace MyDebugApp
             // 
             // ClearErrButton
             // 
-            this.ClearErrButton.Location = new System.Drawing.Point(18, 216);
+            this.ClearErrButton.Location = new System.Drawing.Point(68, 303);
             this.ClearErrButton.Margin = new System.Windows.Forms.Padding(2);
             this.ClearErrButton.Name = "ClearErrButton";
             this.ClearErrButton.Size = new System.Drawing.Size(85, 29);
@@ -1539,7 +1577,7 @@ namespace MyDebugApp
             // 
             // ReadSettingButton
             // 
-            this.ReadSettingButton.Location = new System.Drawing.Point(571, 21);
+            this.ReadSettingButton.Location = new System.Drawing.Point(571, 35);
             this.ReadSettingButton.Margin = new System.Windows.Forms.Padding(2);
             this.ReadSettingButton.Name = "ReadSettingButton";
             this.ReadSettingButton.Size = new System.Drawing.Size(82, 29);
@@ -1551,7 +1589,7 @@ namespace MyDebugApp
             // DCDcOlEnBox
             // 
             this.DCDcOlEnBox.AutoSize = true;
-            this.DCDcOlEnBox.Location = new System.Drawing.Point(466, 24);
+            this.DCDcOlEnBox.Location = new System.Drawing.Point(466, 43);
             this.DCDcOlEnBox.Margin = new System.Windows.Forms.Padding(2);
             this.DCDcOlEnBox.Name = "DCDcOlEnBox";
             this.DCDcOlEnBox.Size = new System.Drawing.Size(75, 19);
@@ -1563,7 +1601,7 @@ namespace MyDebugApp
             // PfcOlEnBox
             // 
             this.PfcOlEnBox.AutoSize = true;
-            this.PfcOlEnBox.Location = new System.Drawing.Point(369, 25);
+            this.PfcOlEnBox.Location = new System.Drawing.Point(369, 44);
             this.PfcOlEnBox.Margin = new System.Windows.Forms.Padding(2);
             this.PfcOlEnBox.Name = "PfcOlEnBox";
             this.PfcOlEnBox.Size = new System.Drawing.Size(83, 19);
@@ -1587,6 +1625,16 @@ namespace MyDebugApp
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.label87);
+            this.groupBox6.Controls.Add(this.SysPinactBox);
+            this.groupBox6.Controls.Add(this.label86);
+            this.groupBox6.Controls.Add(this.SysPoutBox);
+            this.groupBox6.Controls.Add(this.label85);
+            this.groupBox6.Controls.Add(this.label84);
+            this.groupBox6.Controls.Add(this.label83);
+            this.groupBox6.Controls.Add(this.SysIcBox);
+            this.groupBox6.Controls.Add(this.SysIbBox);
+            this.groupBox6.Controls.Add(this.SysIaBox);
             this.groupBox6.Controls.Add(this.label81);
             this.groupBox6.Controls.Add(this.label80);
             this.groupBox6.Controls.Add(this.label79);
@@ -1666,7 +1714,7 @@ namespace MyDebugApp
             this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox6.Size = new System.Drawing.Size(566, 328);
+            this.groupBox6.Size = new System.Drawing.Size(566, 415);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "系统状态";
@@ -1793,7 +1841,7 @@ namespace MyDebugApp
             // 
             // SysCurrBox
             // 
-            this.SysCurrBox.Location = new System.Drawing.Point(128, 292);
+            this.SysCurrBox.Location = new System.Drawing.Point(146, 292);
             this.SysCurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysCurrBox.Name = "SysCurrBox";
             this.SysCurrBox.ReadOnly = true;
@@ -1804,12 +1852,12 @@ namespace MyDebugApp
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(11, 298);
+            this.label69.Location = new System.Drawing.Point(19, 298);
             this.label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(112, 15);
             this.label69.TabIndex = 61;
-            this.label69.Text = "系统总输出电流";
+            this.label69.Text = "系统输出总电流";
             // 
             // Slaver12CurrBox
             // 
@@ -2434,6 +2482,120 @@ namespace MyDebugApp
             this.CheckSlaverStaBox.Text = "查询从机状态";
             this.CheckSlaverStaBox.UseVisualStyleBackColor = true;
             // 
+            // SysIaBox
+            // 
+            this.SysIaBox.Location = new System.Drawing.Point(145, 334);
+            this.SysIaBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SysIaBox.Name = "SysIaBox";
+            this.SysIaBox.ReadOnly = true;
+            this.SysIaBox.Size = new System.Drawing.Size(62, 25);
+            this.SysIaBox.TabIndex = 75;
+            this.SysIaBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // SysIbBox
+            // 
+            this.SysIbBox.Location = new System.Drawing.Point(332, 333);
+            this.SysIbBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SysIbBox.Name = "SysIbBox";
+            this.SysIbBox.ReadOnly = true;
+            this.SysIbBox.Size = new System.Drawing.Size(62, 25);
+            this.SysIbBox.TabIndex = 76;
+            this.SysIbBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // SysIcBox
+            // 
+            this.SysIcBox.Location = new System.Drawing.Point(495, 334);
+            this.SysIcBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SysIcBox.Name = "SysIcBox";
+            this.SysIcBox.ReadOnly = true;
+            this.SysIcBox.Size = new System.Drawing.Size(62, 25);
+            this.SysIcBox.TabIndex = 77;
+            this.SysIcBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(65, 338);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(75, 15);
+            this.label83.TabIndex = 78;
+            this.label83.Text = "A相总电流";
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(252, 338);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(75, 15);
+            this.label84.TabIndex = 79;
+            this.label84.Text = "B相总电流";
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(414, 338);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(75, 15);
+            this.label85.TabIndex = 80;
+            this.label85.Text = "C相总电流";
+            // 
+            // SysPoutBox
+            // 
+            this.SysPoutBox.Location = new System.Drawing.Point(332, 292);
+            this.SysPoutBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SysPoutBox.Name = "SysPoutBox";
+            this.SysPoutBox.ReadOnly = true;
+            this.SysPoutBox.Size = new System.Drawing.Size(62, 25);
+            this.SysPoutBox.TabIndex = 81;
+            this.SysPoutBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(219, 298);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(112, 15);
+            this.label86.TabIndex = 82;
+            this.label86.Text = "系统输出总功率";
+            // 
+            // SysPinactBox
+            // 
+            this.SysPinactBox.Location = new System.Drawing.Point(145, 377);
+            this.SysPinactBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SysPinactBox.Name = "SysPinactBox";
+            this.SysPinactBox.ReadOnly = true;
+            this.SysPinactBox.Size = new System.Drawing.Size(62, 25);
+            this.SysPinactBox.TabIndex = 83;
+            this.SysPinactBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Location = new System.Drawing.Point(12, 383);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(127, 15);
+            this.label87.TabIndex = 84;
+            this.label87.Text = "系统输入有功功率";
+            // 
+            // UpdateMultiBox
+            // 
+            this.UpdateMultiBox.AutoSize = true;
+            this.UpdateMultiBox.Location = new System.Drawing.Point(140, 160);
+            this.UpdateMultiBox.Name = "UpdateMultiBox";
+            this.UpdateMultiBox.Size = new System.Drawing.Size(89, 19);
+            this.UpdateMultiBox.TabIndex = 9;
+            this.UpdateMultiBox.Text = "连续升级";
+            this.UpdateMultiBox.UseVisualStyleBackColor = true;
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.Location = new System.Drawing.Point(65, 256);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(67, 15);
+            this.label88.TabIndex = 28;
+            this.label88.Text = "工作模式";
+            // 
             // CanTabUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -2449,7 +2611,7 @@ namespace MyDebugApp
             this.Controls.Add(this.label5);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CanTabUserControl";
-            this.Size = new System.Drawing.Size(1272, 821);
+            this.Size = new System.Drawing.Size(1272, 925);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -2546,13 +2708,13 @@ namespace MyDebugApp
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox IoutBox;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox Vout2Box;
+        private System.Windows.Forms.TextBox Idcout3Box;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox Iout1Box;
+        private System.Windows.Forms.TextBox Idcout2Box;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox NVbusBox;
+        private System.Windows.Forms.TextBox Idcout1Box;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox PVbusBox;
+        private System.Windows.Forms.TextBox VPwmBusBox;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox VbusBox;
         private System.Windows.Forms.Label label21;
@@ -2667,5 +2829,19 @@ namespace MyDebugApp
         private System.Windows.Forms.TextBox Slaver4CurrBox;
         private System.Windows.Forms.TextBox Slaver1CurrBox;
         private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.TextBox Temp5Box;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.TextBox SysPinactBox;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.TextBox SysPoutBox;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.TextBox SysIcBox;
+        private System.Windows.Forms.TextBox SysIbBox;
+        private System.Windows.Forms.TextBox SysIaBox;
+        private System.Windows.Forms.CheckBox UpdateMultiBox;
+        private System.Windows.Forms.Label label88;
     }
 }

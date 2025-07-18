@@ -70,10 +70,10 @@ namespace MyDebugApp
             // 
             // ClearUartDataShowButton
             // 
-            this.ClearUartDataShowButton.Location = new System.Drawing.Point(11, 403);
-            this.ClearUartDataShowButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ClearUartDataShowButton.Location = new System.Drawing.Point(14, 504);
+            this.ClearUartDataShowButton.Margin = new System.Windows.Forms.Padding(2);
             this.ClearUartDataShowButton.Name = "ClearUartDataShowButton";
-            this.ClearUartDataShowButton.Size = new System.Drawing.Size(69, 23);
+            this.ClearUartDataShowButton.Size = new System.Drawing.Size(86, 29);
             this.ClearUartDataShowButton.TabIndex = 13;
             this.ClearUartDataShowButton.Text = "清空数据";
             this.ClearUartDataShowButton.UseVisualStyleBackColor = true;
@@ -95,11 +95,11 @@ namespace MyDebugApp
             this.groupBox3.Controls.Add(this.DeviceBandListBox);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.CheckDeviceButton);
-            this.groupBox3.Location = new System.Drawing.Point(22, 216);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Location = new System.Drawing.Point(28, 270);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox3.Size = new System.Drawing.Size(236, 430);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(295, 538);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "设置功能";
@@ -107,20 +107,20 @@ namespace MyDebugApp
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 198);
+            this.label6.Location = new System.Drawing.Point(10, 248);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.Size = new System.Drawing.Size(82, 15);
             this.label6.TabIndex = 16;
             this.label6.Text = "升级进度条";
             // 
             // UpdateMultiBox
             // 
             this.UpdateMultiBox.AutoSize = true;
-            this.UpdateMultiBox.Location = new System.Drawing.Point(90, 257);
-            this.UpdateMultiBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpdateMultiBox.Location = new System.Drawing.Point(112, 321);
+            this.UpdateMultiBox.Margin = new System.Windows.Forms.Padding(2);
             this.UpdateMultiBox.Name = "UpdateMultiBox";
-            this.UpdateMultiBox.Size = new System.Drawing.Size(72, 16);
+            this.UpdateMultiBox.Size = new System.Drawing.Size(89, 19);
             this.UpdateMultiBox.TabIndex = 15;
             this.UpdateMultiBox.Text = "连续升级";
             this.UpdateMultiBox.UseVisualStyleBackColor = true;
@@ -128,10 +128,10 @@ namespace MyDebugApp
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 35);
+            this.label5.Location = new System.Drawing.Point(20, 44);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.Size = new System.Drawing.Size(69, 15);
             this.label5.TabIndex = 14;
             this.label5.Text = "boot命令";
             // 
@@ -153,36 +153,36 @@ namespace MyDebugApp
             "从机10",
             "从机11",
             "从机12"});
-            this.ChoseUpdateDeviceBox.Location = new System.Drawing.Point(75, 89);
-            this.ChoseUpdateDeviceBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ChoseUpdateDeviceBox.Location = new System.Drawing.Point(94, 111);
+            this.ChoseUpdateDeviceBox.Margin = new System.Windows.Forms.Padding(2);
             this.ChoseUpdateDeviceBox.Name = "ChoseUpdateDeviceBox";
-            this.ChoseUpdateDeviceBox.Size = new System.Drawing.Size(98, 20);
+            this.ChoseUpdateDeviceBox.Size = new System.Drawing.Size(122, 23);
             this.ChoseUpdateDeviceBox.TabIndex = 13;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 92);
+            this.label3.Location = new System.Drawing.Point(21, 115);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(67, 15);
             this.label3.TabIndex = 12;
             this.label3.Text = "选择设备";
             // 
             // FilePathShowBox
             // 
-            this.FilePathShowBox.Location = new System.Drawing.Point(90, 164);
-            this.FilePathShowBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FilePathShowBox.Location = new System.Drawing.Point(112, 205);
+            this.FilePathShowBox.Margin = new System.Windows.Forms.Padding(2);
             this.FilePathShowBox.Name = "FilePathShowBox";
-            this.FilePathShowBox.Size = new System.Drawing.Size(136, 21);
+            this.FilePathShowBox.Size = new System.Drawing.Size(169, 25);
             this.FilePathShowBox.TabIndex = 11;
             // 
             // ChoseFileButton
             // 
-            this.ChoseFileButton.Location = new System.Drawing.Point(9, 160);
-            this.ChoseFileButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ChoseFileButton.Location = new System.Drawing.Point(11, 200);
+            this.ChoseFileButton.Margin = new System.Windows.Forms.Padding(2);
             this.ChoseFileButton.Name = "ChoseFileButton";
-            this.ChoseFileButton.Size = new System.Drawing.Size(67, 23);
+            this.ChoseFileButton.Size = new System.Drawing.Size(84, 29);
             this.ChoseFileButton.TabIndex = 10;
             this.ChoseFileButton.Text = "选择固件";
             this.ChoseFileButton.UseVisualStyleBackColor = true;
@@ -190,10 +190,10 @@ namespace MyDebugApp
             // 
             // BootButton
             // 
-            this.BootButton.Location = new System.Drawing.Point(74, 32);
-            this.BootButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BootButton.Location = new System.Drawing.Point(92, 40);
+            this.BootButton.Margin = new System.Windows.Forms.Padding(2);
             this.BootButton.Name = "BootButton";
-            this.BootButton.Size = new System.Drawing.Size(60, 23);
+            this.BootButton.Size = new System.Drawing.Size(75, 29);
             this.BootButton.TabIndex = 9;
             this.BootButton.Text = "boot";
             this.BootButton.UseVisualStyleBackColor = true;
@@ -201,18 +201,18 @@ namespace MyDebugApp
             // 
             // UpdateProgressBar
             // 
-            this.UpdateProgressBar.Location = new System.Drawing.Point(10, 213);
-            this.UpdateProgressBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpdateProgressBar.Location = new System.Drawing.Point(12, 266);
+            this.UpdateProgressBar.Margin = new System.Windows.Forms.Padding(2);
             this.UpdateProgressBar.Name = "UpdateProgressBar";
-            this.UpdateProgressBar.Size = new System.Drawing.Size(216, 18);
+            this.UpdateProgressBar.Size = new System.Drawing.Size(270, 22);
             this.UpdateProgressBar.TabIndex = 6;
             // 
             // StartUpdateButton
             // 
-            this.StartUpdateButton.Location = new System.Drawing.Point(10, 251);
-            this.StartUpdateButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.StartUpdateButton.Location = new System.Drawing.Point(12, 314);
+            this.StartUpdateButton.Margin = new System.Windows.Forms.Padding(2);
             this.StartUpdateButton.Name = "StartUpdateButton";
-            this.StartUpdateButton.Size = new System.Drawing.Size(66, 23);
+            this.StartUpdateButton.Size = new System.Drawing.Size(82, 29);
             this.StartUpdateButton.TabIndex = 8;
             this.StartUpdateButton.Text = "开始升级";
             this.StartUpdateButton.UseVisualStyleBackColor = true;
@@ -220,10 +220,10 @@ namespace MyDebugApp
             // 
             // BandConfigButton
             // 
-            this.BandConfigButton.Location = new System.Drawing.Point(86, 372);
-            this.BandConfigButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BandConfigButton.Location = new System.Drawing.Point(108, 465);
+            this.BandConfigButton.Margin = new System.Windows.Forms.Padding(2);
             this.BandConfigButton.Name = "BandConfigButton";
-            this.BandConfigButton.Size = new System.Drawing.Size(76, 23);
+            this.BandConfigButton.Size = new System.Drawing.Size(95, 29);
             this.BandConfigButton.TabIndex = 5;
             this.BandConfigButton.Text = "设置波特率";
             this.BandConfigButton.UseVisualStyleBackColor = true;
@@ -239,28 +239,28 @@ namespace MyDebugApp
             "38400",
             "57600",
             "115200"});
-            this.DeviceBandListBox.Location = new System.Drawing.Point(86, 332);
-            this.DeviceBandListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DeviceBandListBox.Location = new System.Drawing.Point(108, 415);
+            this.DeviceBandListBox.Margin = new System.Windows.Forms.Padding(2);
             this.DeviceBandListBox.Name = "DeviceBandListBox";
-            this.DeviceBandListBox.Size = new System.Drawing.Size(98, 20);
+            this.DeviceBandListBox.Size = new System.Drawing.Size(122, 23);
             this.DeviceBandListBox.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 335);
+            this.label4.Location = new System.Drawing.Point(20, 419);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.Size = new System.Drawing.Size(82, 15);
             this.label4.TabIndex = 3;
             this.label4.Text = "选择波特率";
             // 
             // CheckDeviceButton
             // 
-            this.CheckDeviceButton.Location = new System.Drawing.Point(112, 119);
-            this.CheckDeviceButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CheckDeviceButton.Location = new System.Drawing.Point(140, 149);
+            this.CheckDeviceButton.Margin = new System.Windows.Forms.Padding(2);
             this.CheckDeviceButton.Name = "CheckDeviceButton";
-            this.CheckDeviceButton.Size = new System.Drawing.Size(62, 23);
+            this.CheckDeviceButton.Size = new System.Drawing.Size(78, 29);
             this.CheckDeviceButton.TabIndex = 2;
             this.CheckDeviceButton.Text = "查询设备";
             this.CheckDeviceButton.UseVisualStyleBackColor = true;
@@ -270,11 +270,11 @@ namespace MyDebugApp
             // 
             this.groupBox2.Controls.Add(this.ClearUartDataShowButton);
             this.groupBox2.Controls.Add(this.UartDataBox);
-            this.groupBox2.Location = new System.Drawing.Point(287, 11);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Location = new System.Drawing.Point(359, 14);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox2.Size = new System.Drawing.Size(715, 436);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(894, 545);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数据显示";
@@ -282,13 +282,13 @@ namespace MyDebugApp
             // UartDataBox
             // 
             this.UartDataBox.BackColor = System.Drawing.SystemColors.Window;
-            this.UartDataBox.Location = new System.Drawing.Point(11, 19);
-            this.UartDataBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UartDataBox.Location = new System.Drawing.Point(14, 24);
+            this.UartDataBox.Margin = new System.Windows.Forms.Padding(2);
             this.UartDataBox.Multiline = true;
             this.UartDataBox.Name = "UartDataBox";
             this.UartDataBox.ReadOnly = true;
             this.UartDataBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.UartDataBox.Size = new System.Drawing.Size(694, 374);
+            this.UartDataBox.Size = new System.Drawing.Size(866, 466);
             this.UartDataBox.TabIndex = 0;
             // 
             // groupBox1
@@ -300,11 +300,11 @@ namespace MyDebugApp
             this.groupBox1.Controls.Add(this.BandListBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.SerialListBox);
-            this.groupBox1.Location = new System.Drawing.Point(22, 11);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(28, 14);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(236, 183);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(295, 229);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "串口设置";
@@ -312,20 +312,20 @@ namespace MyDebugApp
             // CheckDataShowStyleBox
             // 
             this.CheckDataShowStyleBox.AutoSize = true;
-            this.CheckDataShowStyleBox.Location = new System.Drawing.Point(102, 149);
-            this.CheckDataShowStyleBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CheckDataShowStyleBox.Location = new System.Drawing.Point(128, 186);
+            this.CheckDataShowStyleBox.Margin = new System.Windows.Forms.Padding(2);
             this.CheckDataShowStyleBox.Name = "CheckDataShowStyleBox";
-            this.CheckDataShowStyleBox.Size = new System.Drawing.Size(72, 16);
+            this.CheckDataShowStyleBox.Size = new System.Drawing.Size(89, 19);
             this.CheckDataShowStyleBox.TabIndex = 6;
             this.CheckDataShowStyleBox.Text = "字符显示";
             this.CheckDataShowStyleBox.UseVisualStyleBackColor = true;
             // 
             // OpenSerialButton
             // 
-            this.OpenSerialButton.Location = new System.Drawing.Point(102, 110);
-            this.OpenSerialButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.OpenSerialButton.Location = new System.Drawing.Point(128, 138);
+            this.OpenSerialButton.Margin = new System.Windows.Forms.Padding(2);
             this.OpenSerialButton.Name = "OpenSerialButton";
-            this.OpenSerialButton.Size = new System.Drawing.Size(61, 23);
+            this.OpenSerialButton.Size = new System.Drawing.Size(76, 29);
             this.OpenSerialButton.TabIndex = 5;
             this.OpenSerialButton.Text = "打开串口";
             this.OpenSerialButton.UseVisualStyleBackColor = true;
@@ -333,10 +333,10 @@ namespace MyDebugApp
             // 
             // CheckSerialButton
             // 
-            this.CheckSerialButton.Location = new System.Drawing.Point(10, 110);
-            this.CheckSerialButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CheckSerialButton.Location = new System.Drawing.Point(12, 138);
+            this.CheckSerialButton.Margin = new System.Windows.Forms.Padding(2);
             this.CheckSerialButton.Name = "CheckSerialButton";
-            this.CheckSerialButton.Size = new System.Drawing.Size(63, 23);
+            this.CheckSerialButton.Size = new System.Drawing.Size(79, 29);
             this.CheckSerialButton.TabIndex = 4;
             this.CheckSerialButton.Text = "扫描串口";
             this.CheckSerialButton.UseVisualStyleBackColor = true;
@@ -346,10 +346,10 @@ namespace MyDebugApp
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 9F);
-            this.label2.Location = new System.Drawing.Point(8, 70);
+            this.label2.Location = new System.Drawing.Point(10, 88);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "波特率";
             // 
@@ -357,20 +357,20 @@ namespace MyDebugApp
             // 
             this.BandListBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BandListBox.FormattingEnabled = true;
-            this.BandListBox.Location = new System.Drawing.Point(65, 67);
-            this.BandListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BandListBox.Location = new System.Drawing.Point(81, 84);
+            this.BandListBox.Margin = new System.Windows.Forms.Padding(2);
             this.BandListBox.Name = "BandListBox";
-            this.BandListBox.Size = new System.Drawing.Size(98, 20);
+            this.BandListBox.Size = new System.Drawing.Size(122, 23);
             this.BandListBox.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 9F);
-            this.label1.Location = new System.Drawing.Point(8, 31);
+            this.label1.Location = new System.Drawing.Point(10, 39);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(52, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "串口号";
             // 
@@ -378,10 +378,10 @@ namespace MyDebugApp
             // 
             this.SerialListBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SerialListBox.FormattingEnabled = true;
-            this.SerialListBox.Location = new System.Drawing.Point(65, 28);
-            this.SerialListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SerialListBox.Location = new System.Drawing.Point(81, 35);
+            this.SerialListBox.Margin = new System.Windows.Forms.Padding(2);
             this.SerialListBox.Name = "SerialListBox";
-            this.SerialListBox.Size = new System.Drawing.Size(98, 20);
+            this.SerialListBox.Size = new System.Drawing.Size(122, 23);
             this.SerialListBox.TabIndex = 0;
             // 
             // timer1000ms
@@ -397,21 +397,21 @@ namespace MyDebugApp
             // 
             this.groupBox4.Controls.Add(this.ClearUpdateLogButton);
             this.groupBox4.Controls.Add(this.UpdateLogBox);
-            this.groupBox4.Location = new System.Drawing.Point(287, 452);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Location = new System.Drawing.Point(359, 565);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox4.Size = new System.Drawing.Size(715, 194);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Size = new System.Drawing.Size(894, 242);
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "升级记录";
             // 
             // ClearUpdateLogButton
             // 
-            this.ClearUpdateLogButton.Location = new System.Drawing.Point(11, 163);
-            this.ClearUpdateLogButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ClearUpdateLogButton.Location = new System.Drawing.Point(14, 204);
+            this.ClearUpdateLogButton.Margin = new System.Windows.Forms.Padding(2);
             this.ClearUpdateLogButton.Name = "ClearUpdateLogButton";
-            this.ClearUpdateLogButton.Size = new System.Drawing.Size(69, 23);
+            this.ClearUpdateLogButton.Size = new System.Drawing.Size(86, 29);
             this.ClearUpdateLogButton.TabIndex = 1;
             this.ClearUpdateLogButton.Text = "清除记录";
             this.ClearUpdateLogButton.UseVisualStyleBackColor = true;
@@ -419,25 +419,25 @@ namespace MyDebugApp
             // 
             // UpdateLogBox
             // 
-            this.UpdateLogBox.Location = new System.Drawing.Point(11, 20);
-            this.UpdateLogBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpdateLogBox.Location = new System.Drawing.Point(14, 25);
+            this.UpdateLogBox.Margin = new System.Windows.Forms.Padding(2);
             this.UpdateLogBox.Multiline = true;
             this.UpdateLogBox.Name = "UpdateLogBox";
             this.UpdateLogBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.UpdateLogBox.Size = new System.Drawing.Size(694, 139);
+            this.UpdateLogBox.Size = new System.Drawing.Size(866, 173);
             this.UpdateLogBox.TabIndex = 0;
             // 
             // UartTabUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UartTabUserControl";
-            this.Size = new System.Drawing.Size(1018, 657);
+            this.Size = new System.Drawing.Size(1272, 925);
             this.Load += new System.EventHandler(this.UartTabUserControl_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
