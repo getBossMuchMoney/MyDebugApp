@@ -391,11 +391,11 @@ namespace MyDebugApp
             CanDevPassNumBox.SelectedIndex = 0;
             CanBandListBox.SelectedIndex = 0;
             ChoseDevListBox.SelectedIndex = 1;
-            Thread dealModDataThread = new Thread(() => DealModAnsw(DealModCts.Token)); 
+            Thread dealModDataThread = new Thread(() => DealModAnsw(DealModCts.Token));
             dealModDataThread.Start();
 
         }
-  
+
         private unsafe void DealModAnsw(CancellationToken token)
         {
             uint[] data = new uint[9];
@@ -532,14 +532,14 @@ namespace MyDebugApp
                 }
 
                 if (canRcvThread != null && canRcvThread.IsAlive)
-                {                   
+                {
                     CanDataRecieveCts.Cancel();
                     while (ShowStrRxQueue.TryTake(out string _)) ;
                     while (UpdateRxQueue.TryTake(out uint[] _)) ;
                     while (ModAnswQueue.TryTake(out uint[] _)) ;
                     canRcvThread.Join();
                 }
-                
+
                 if (updateThread != null && updateThread.IsAlive)
                 {
                     try
@@ -559,9 +559,9 @@ namespace MyDebugApp
                     for (int a = 0; a < 36; a++)
                     {
                         modstadata[i].buff[0] = 0;
+                    }
                 }
-                }
-                            
+
                 SetFlag = 0;
                 setFunccode = 0;
                 SendFunccode = 0;
@@ -739,6 +739,8 @@ namespace MyDebugApp
                 DataLen = (byte)data.Length
             };
 
+            int ErrCnt = 0;
+
             for (int i = 0; i < data.Length; i++)
             {
                 vci_can_obj.Data[i] = data[i];
@@ -748,16 +750,22 @@ namespace MyDebugApp
             {
                 vci_can_obj.Reserved[i] = 0;
             }
-            uint ret = VCI_Transmit(VCI_USBCAN2, CanDevIndex, CanPassNum, ref vci_can_obj, 1);
 
-            if (ret == 1)
+            while (ErrCnt < 3)
             {
-                string timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
-                string str = '[' + timestamp + ']' + "发→◇" + "ID:" + devid.ToString("X") + " Data:" + byteToHexStr(data) + Environment.NewLine;
-                ShowStrRxQueue.Add(str);
-
+                uint ret = VCI_Transmit(VCI_USBCAN2, CanDevIndex, CanPassNum, ref vci_can_obj, 1);
+                if (ret == 1)
+                {
+                    string timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
+                    string str = '[' + timestamp + ']' + "发→◇" + "ID:" + devid.ToString("X") + " Data:" + byteToHexStr(data) + Environment.NewLine;
+                    ShowStrRxQueue.Add(str);
+                    break;
+                }
+                else
+                {
+                    ErrCnt++;
+                }
             }
-
         }
 
         private void Iap_Req()
@@ -942,8 +950,8 @@ namespace MyDebugApp
                     else
                     {
                         SetFlag = 0;
-                    Thread.Sleep(1);
-                }
+                        Thread.Sleep(1);
+                    }
                 }
 
             }
@@ -955,10 +963,10 @@ namespace MyDebugApp
         {
             float fvalue = 0;
             float syscurr = 0;
-            float sysAcurr = 0; 
+            float sysAcurr = 0;
             float sysBcurr = 0;
-            float sysCcurr = 0; 
-            float sysPout = 0; 
+            float sysCcurr = 0;
+            float sysPout = 0;
             float sysPinact = 0;
             ushort u16value = 0;
             short i16value = 0;
@@ -1072,7 +1080,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver3ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1119,7 +1127,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver4ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1166,7 +1174,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver5ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1213,7 +1221,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver6ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1351,7 +1359,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver9ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1397,7 +1405,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver10ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1443,7 +1451,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver11ErrBox.Checked = true;
-                   
+
                 }
                 else
                 {
@@ -1489,7 +1497,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver12ErrBox.Checked = true;
-                 
+
                 }
                 else
                 {
@@ -1602,7 +1610,7 @@ namespace MyDebugApp
                 {
                     DCDcOlEnBox.Checked = false;
                 }
-                
+
             }
 
 
@@ -2603,12 +2611,12 @@ namespace MyDebugApp
         {
             if (devID != 0)
             {
-            if (resault)
-            {
+                if (resault)
+                {
                     UpdateLogBox.AppendText("从机" + devID.ToString() + "升级成功!" + Environment.NewLine);
-            }
-            else
-            {
+                }
+                else
+                {
                     UpdateLogBox.AppendText("从机" + devID.ToString() + "升级失败!!!!!!!!!!!!!!!!!!!!!!!!" + Environment.NewLine);
 
                 }
@@ -2663,76 +2671,76 @@ namespace MyDebugApp
                 while (UpdateRxQueue.TryTake(out uint[] _)) ;
 
                 while (process)
-            {
-                switch (UpdateState)
                 {
-                    case 0:
-                        {
-                            for (int i = 0; i < 3; i++)
+                    switch (UpdateState)
+                    {
+                        case 0:
                             {
-                                Iap_Req();
-                                frame = null;
-                                UpdateRxQueue.TryTake(out frame, 1000);
-                                if (frame != null && frame.Length == 9)
+                                for (int i = 0; i < 3; i++)
                                 {
-                                    UpdateState = 1;
-                                    break;
-                                }
+                                    Iap_Req();
+                                    frame = null;
+                                    UpdateRxQueue.TryTake(out frame, 1000);
+                                    if (frame != null && frame.Length == 9)
+                                    {
+                                        UpdateState = 1;
+                                        break;
+                                    }
 
-                                if (i == 2)
-                                {
+                                    if (i == 2)
+                                    {
                                         if (UpdateMultiBox.Checked == false)
                                         {
-                                    Invoke((Action)(() =>
-                                    {
-                                        MessageBox.Show("未找到目标设备", "错误!");
-                                        StartUpdateButton.Enabled = true;
-                                    }));
-                                    return;
+                                            Invoke((Action)(() =>
+                                            {
+                                                MessageBox.Show("未找到目标设备", "错误!");
+                                                StartUpdateButton.Enabled = true;
+                                            }));
+                                            return;
                                         }
                                         else
                                         {
                                             process = false;
                                             Invoke((Action)(() =>
                                             {
-                                            UpdateResaultLog(ChoseUpdateID, false);
+                                                UpdateResaultLog(ChoseUpdateID, false);
                                             }));
                                         }
-                                }
-                            }
-
-                        }
-                        break;
-
-                    case 1:
-                        {
-                            for (int i = 0; i < 3; i++)
-                            {
-                                Iap_Erase();
-                                frame = null;
-                                UpdateRxQueue.TryTake(out frame, 1000);
-                                if (frame != null)
-                                {
-                                    id.IdFrame = frame[0];
-                                    if (id.AckSts == 0)
-                                    {
-                                        UpdateState = 2;
-                                        break;
                                     }
-                                    else
+                                }
+
+                            }
+                            break;
+
+                        case 1:
+                            {
+                                for (int i = 0; i < 3; i++)
+                                {
+                                    Iap_Erase();
+                                    frame = null;
+                                    UpdateRxQueue.TryTake(out frame, 1000);
+                                    if (frame != null)
                                     {
-                                        if (i == 2)
+                                        id.IdFrame = frame[0];
+                                        if (id.AckSts == 0)
                                         {
+                                            UpdateState = 2;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            if (i == 2)
+                                            {
                                                 if (UpdateMultiBox.Checked == false)
                                                 {
-                                            Invoke((Action)(() =>
-                                            {
-                                                
-                                                MessageBox.Show("擦除失败", "错误!");
-                                                StartUpdateButton.Enabled = true;
-                                            }));
-                                            return;
-                                        }
+                                                    Invoke((Action)(() =>
+                                                    {
+
+                                                        MessageBox.Show("擦除失败", "错误!");
+                                                        StartUpdateButton.Enabled = true;
+                                                    }));
+                                                    return;
+                                                }
                                                 else
                                                 {
                                                     UpdateState = 0;
@@ -2744,21 +2752,21 @@ namespace MyDebugApp
                                                 }
                                             }
 
+                                        }
                                     }
-                                }
 
-                                if (i == 2)
-                                {
+                                    if (i == 2)
+                                    {
                                         if (UpdateMultiBox.Checked == false)
                                         {
-                                    Invoke((Action)(() =>
-                                    {
-                                        
-                                        MessageBox.Show("目标设备已失去连接", "错误!");
-                                        StartUpdateButton.Enabled = true;
-                                    }));
-                                    return;
-                                }
+                                            Invoke((Action)(() =>
+                                            {
+
+                                                MessageBox.Show("目标设备已失去连接", "错误!");
+                                                StartUpdateButton.Enabled = true;
+                                            }));
+                                            return;
+                                        }
                                         else
                                         {
                                             UpdateState = 0;
@@ -2769,60 +2777,60 @@ namespace MyDebugApp
                                             }));
                                         }
                                     }
-                            }
+                                }
 
-                        }
-                        break;
-
-                    case 2:
-                        {
-                            int Group = (int)(FileSize / 2048);
-                            int remainSize = (int)(FileSize % 2048);
-                            if (remainSize > 0)
-                            {
-                                Invoke((Action)(() =>
-                                {
-                                    UpdateProgressBar.Maximum = (int)(Group + 1);
-                                }));
                             }
-                            else
-                            {
-                                Invoke((Action)(() =>
-                                {
-                                    UpdateProgressBar.Maximum = (int)Group;
-                                }));
-                            }
+                            break;
 
-                            int groupIndex = 0;
-                            for (groupIndex = 0; groupIndex < Group; groupIndex++)
+                        case 2:
                             {
-                                byte[] groupData = FileDataBuffer.Skip(groupIndex * 2048).Take(2048).ToArray();
-                                for (int i = 0; i < 3; i++)
+                                int Group = (int)(FileSize / 2048);
+                                int remainSize = (int)(FileSize % 2048);
+                                if (remainSize > 0)
                                 {
-                                    for (int k = 0; k < 256; k++)
+                                    Invoke((Action)(() =>
                                     {
-                                        byte[] sendData = groupData.Skip(k * 8).Take(8).ToArray();
-                                        Iap_Data(sendData, (byte)k);
-                                    }
-                                    frame = null;
-                                    UpdateRxQueue.TryTake(out frame, 5);
-                                    if (frame == null)
+                                        UpdateProgressBar.Maximum = (int)(Group + 1);
+                                    }));
+                                }
+                                else
+                                {
+                                    Invoke((Action)(() =>
                                     {
-                                        break;
-                                    }
-                                    if (i == 2)
+                                        UpdateProgressBar.Maximum = (int)Group;
+                                    }));
+                                }
+
+                                int groupIndex = 0;
+                                for (groupIndex = 0; groupIndex < Group; groupIndex++)
+                                {
+                                    byte[] groupData = FileDataBuffer.Skip(groupIndex * 2048).Take(2048).ToArray();
+                                    for (int i = 0; i < 3; i++)
                                     {
+                                        for (int k = 0; k < 256; k++)
+                                        {
+                                            byte[] sendData = groupData.Skip(k * 8).Take(8).ToArray();
+                                            Iap_Data(sendData, (byte)k);
+                                        }
+                                        frame = null;
+                                        UpdateRxQueue.TryTake(out frame, 5);
+                                        if (frame == null)
+                                        {
+                                            break;
+                                        }
+                                        if (i == 2)
+                                        {
                                             if (UpdateMultiBox.Checked == false)
                                             {
-                                        Invoke((Action)(() =>
-                                        {
-                                            
-                                            MessageBox.Show("数据发送错误", "错误!");
-                                            StartUpdateButton.Enabled = true;
-                                            UpdateProgressBar.Value = 0;
-                                        }));
-                                        return;
-                                    }
+                                                Invoke((Action)(() =>
+                                                {
+
+                                                    MessageBox.Show("数据发送错误", "错误!");
+                                                    StartUpdateButton.Enabled = true;
+                                                    UpdateProgressBar.Value = 0;
+                                                }));
+                                                return;
+                                            }
                                             else
                                             {
                                                 UpdateState = 0;
@@ -2835,31 +2843,31 @@ namespace MyDebugApp
 
                                             }
                                         }
-                                }
-                                byte[] crc = CrcInter.Crc16(groupData, 2048);
-                                for (uint i = 0; i < 3; i++)
-                                {
-                                    Iap_Write(crc);
-                                    frame = null;
-                                    UpdateRxQueue.TryTake(out frame, 1000);
-                                    if (frame != null)
+                                    }
+                                    byte[] crc = CrcInter.Crc16(groupData, 2048);
+                                    for (uint i = 0; i < 3; i++)
                                     {
-                                        id.IdFrame = frame[0];
-                                        if (id.AckSts != 0)
+                                        Iap_Write(crc);
+                                        frame = null;
+                                        UpdateRxQueue.TryTake(out frame, 1000);
+                                        if (frame != null)
                                         {
+                                            id.IdFrame = frame[0];
+                                            if (id.AckSts != 0)
+                                            {
                                                 if (UpdateMultiBox.Checked == false)
                                                 {
-                                            Invoke((Action)(() =>
-                                            {
-                                                
-                                                MessageBox.Show("烧录失败", "错误!");
-                                                StartUpdateButton.Enabled = true;
-                                                UpdateProgressBar.Value = 0;
-                                            }));
-                                            return;
-                                        }
-                                        else
-                                        {
+                                                    Invoke((Action)(() =>
+                                                    {
+
+                                                        MessageBox.Show("烧录失败", "错误!");
+                                                        StartUpdateButton.Enabled = true;
+                                                        UpdateProgressBar.Value = 0;
+                                                    }));
+                                                    return;
+                                                }
+                                                else
+                                                {
                                                     UpdateState = 0;
                                                     process = false;
                                                     Invoke((Action)(() =>
@@ -2871,29 +2879,29 @@ namespace MyDebugApp
                                             }
                                             else
                                             {
-                                            Invoke((Action)(() =>
-                                            {
-                                                UpdateProgressBar.Value = groupIndex + 1;
-                                            }));
-                                            break;
-                                        }
+                                                Invoke((Action)(() =>
+                                                {
+                                                    UpdateProgressBar.Value = groupIndex + 1;
+                                                }));
+                                                break;
+                                            }
 
-                                    }
-                                    else
-                                    {
-                                        if (i == 2)
+                                        }
+                                        else
                                         {
+                                            if (i == 2)
+                                            {
                                                 if (UpdateMultiBox.Checked == false)
                                                 {
-                                            Invoke((Action)(() =>
-                                            {
-                                                
-                                                MessageBox.Show("目标设备已失去连接", "错误!");
-                                                StartUpdateButton.Enabled = true;
-                                                UpdateProgressBar.Value = 0;
-                                            }));
-                                            return;
-                                        }
+                                                    Invoke((Action)(() =>
+                                                    {
+
+                                                        MessageBox.Show("目标设备已失去连接", "错误!");
+                                                        StartUpdateButton.Enabled = true;
+                                                        UpdateProgressBar.Value = 0;
+                                                    }));
+                                                    return;
+                                                }
                                                 else
                                                 {
                                                     UpdateState = 0;
@@ -2907,40 +2915,40 @@ namespace MyDebugApp
                                                 }
                                             }
 
+                                        }
                                     }
+
                                 }
 
-                            }
-
-                            if (remainSize > 0)
-                            {
-                                byte[] groupData = FileDataBuffer.Skip(groupIndex * 2048).Take(remainSize).ToArray();
-                                for (int i = 0; i < 3; i++)
+                                if (remainSize > 0)
                                 {
-                                    for (int k = 0; k < remainSize / 8; k++)
+                                    byte[] groupData = FileDataBuffer.Skip(groupIndex * 2048).Take(remainSize).ToArray();
+                                    for (int i = 0; i < 3; i++)
                                     {
-                                        byte[] sendData = groupData.Skip(k * 8).Take(8).ToArray();
-                                        Iap_Data(sendData, (byte)k);
-                                    }
-                                    frame = null;
-                                    UpdateRxQueue.TryTake(out frame, 5);
-                                    if (frame == null)
-                                    {
-                                        break;
-                                    }
-                                    if (i == 2)
-                                    {
+                                        for (int k = 0; k < remainSize / 8; k++)
+                                        {
+                                            byte[] sendData = groupData.Skip(k * 8).Take(8).ToArray();
+                                            Iap_Data(sendData, (byte)k);
+                                        }
+                                        frame = null;
+                                        UpdateRxQueue.TryTake(out frame, 5);
+                                        if (frame == null)
+                                        {
+                                            break;
+                                        }
+                                        if (i == 2)
+                                        {
                                             if (UpdateMultiBox.Checked == false)
                                             {
-                                        Invoke((Action)(() =>
-                                        {
-                                            
-                                            MessageBox.Show("数据发送错误", "错误!");
-                                            StartUpdateButton.Enabled = true;
-                                            UpdateProgressBar.Value = 0;
-                                        }));
-                                        return;
-                                    }
+                                                Invoke((Action)(() =>
+                                                {
+
+                                                    MessageBox.Show("数据发送错误", "错误!");
+                                                    StartUpdateButton.Enabled = true;
+                                                    UpdateProgressBar.Value = 0;
+                                                }));
+                                                return;
+                                            }
                                             else
                                             {
                                                 UpdateState = 0;
@@ -2952,31 +2960,31 @@ namespace MyDebugApp
                                                 }));
                                             }
                                         }
-                                }
-                                byte[] crc = CrcInter.Crc16(groupData, (uint)remainSize);
-                                for (uint i = 0; i < 3; i++)
-                                {
-                                    Iap_Write(crc);
-                                    frame = null;
-                                    UpdateRxQueue.TryTake(out frame, 1000);
-                                    if (frame != null)
+                                    }
+                                    byte[] crc = CrcInter.Crc16(groupData, (uint)remainSize);
+                                    for (uint i = 0; i < 3; i++)
                                     {
-                                        id.IdFrame = frame[0];
-                                        if (id.AckSts != 0)
+                                        Iap_Write(crc);
+                                        frame = null;
+                                        UpdateRxQueue.TryTake(out frame, 1000);
+                                        if (frame != null)
                                         {
+                                            id.IdFrame = frame[0];
+                                            if (id.AckSts != 0)
+                                            {
                                                 if (UpdateMultiBox.Checked == false)
                                                 {
-                                            Invoke((Action)(() =>
-                                            {
-                                                
-                                                MessageBox.Show("烧录失败", "错误!");
-                                                StartUpdateButton.Enabled = true;
-                                                UpdateProgressBar.Value = 0;
-                                            }));
-                                            return;
-                                        }
-                                        else
-                                        {
+                                                    Invoke((Action)(() =>
+                                                    {
+
+                                                        MessageBox.Show("烧录失败", "错误!");
+                                                        StartUpdateButton.Enabled = true;
+                                                        UpdateProgressBar.Value = 0;
+                                                    }));
+                                                    return;
+                                                }
+                                                else
+                                                {
                                                     UpdateState = 0;
                                                     process = false;
                                                     Invoke((Action)(() =>
@@ -2989,29 +2997,29 @@ namespace MyDebugApp
                                             }
                                             else
                                             {
-                                            Invoke((Action)(() =>
-                                            {
-                                                UpdateProgressBar.Value = groupIndex + 1;
-                                            }));
-                                            break;
-                                        }
+                                                Invoke((Action)(() =>
+                                                {
+                                                    UpdateProgressBar.Value = groupIndex + 1;
+                                                }));
+                                                break;
+                                            }
 
-                                    }
-                                    else
-                                    {
-                                        if (i == 2)
+                                        }
+                                        else
                                         {
+                                            if (i == 2)
+                                            {
                                                 if (UpdateMultiBox.Checked == false)
                                                 {
-                                            Invoke((Action)(() =>
-                                            {
-                                                
-                                                MessageBox.Show("目标设备已失去连接", "错误!");
-                                                StartUpdateButton.Enabled = true;
-                                                UpdateProgressBar.Value = 0;
-                                            }));
-                                            return;
-                                        }
+                                                    Invoke((Action)(() =>
+                                                    {
+
+                                                        MessageBox.Show("目标设备已失去连接", "错误!");
+                                                        StartUpdateButton.Enabled = true;
+                                                        UpdateProgressBar.Value = 0;
+                                                    }));
+                                                    return;
+                                                }
                                                 else
                                                 {
                                                     UpdateState = 0;
@@ -3025,38 +3033,38 @@ namespace MyDebugApp
                                                 }
                                             }
 
+                                        }
                                     }
                                 }
+                                UpdateState = 3;
+
                             }
-                            UpdateState = 3;
+                            break;
 
-                        }
-                        break;
-
-                    case 3:
-                        {
-                            for (int i = 0; i < 3; i++)
+                        case 3:
                             {
-                                Iap_Done();
-                                frame = null;
-                                UpdateRxQueue.TryTake(out frame, 1000);
-                                if (frame != null)
+                                for (int i = 0; i < 3; i++)
                                 {
-                                    id.IdFrame = frame[0];
-                                    if (id.AckSts == 0)
+                                    Iap_Done();
+                                    frame = null;
+                                    UpdateRxQueue.TryTake(out frame, 1000);
+                                    if (frame != null)
                                     {
+                                        id.IdFrame = frame[0];
+                                        if (id.AckSts == 0)
+                                        {
                                             if (UpdateMultiBox.Checked == false)
                                             {
-                                        Invoke((Action)(() =>
-                                        {
-                                            
-                                            MessageBox.Show("固件烧录成功", "提示!");
-                                            StartUpdateButton.Enabled = true;
-                                            UpdateProgressBar.Value = 0;
-                                        }));
-                                        return;
-                                    }
-                                    else
+                                                Invoke((Action)(() =>
+                                                {
+
+                                                    MessageBox.Show("固件烧录成功", "提示!");
+                                                    StartUpdateButton.Enabled = true;
+                                                    UpdateProgressBar.Value = 0;
+                                                }));
+                                                return;
+                                            }
+                                            else
                                             {
                                                 UpdateState = 0;
                                                 process = false;
@@ -3072,16 +3080,16 @@ namespace MyDebugApp
                                         else
                                         {
                                             if (UpdateMultiBox.Checked == false)
-                                    {
-                                        Invoke((Action)(() =>
-                                        {
-                                            
-                                            MessageBox.Show("校验失败", "错误!");
-                                            StartUpdateButton.Enabled = true;
-                                            UpdateProgressBar.Value = 0;
-                                        }));
-                                        return;
-                                    }
+                                            {
+                                                Invoke((Action)(() =>
+                                                {
+
+                                                    MessageBox.Show("校验失败", "错误!");
+                                                    StartUpdateButton.Enabled = true;
+                                                    UpdateProgressBar.Value = 0;
+                                                }));
+                                                return;
+                                            }
                                             else
                                             {
                                                 UpdateState = 0;
@@ -3094,21 +3102,21 @@ namespace MyDebugApp
 
                                             }
                                         }
-                                }
+                                    }
 
-                                if (i == 2)
-                                {
+                                    if (i == 2)
+                                    {
                                         if (UpdateMultiBox.Checked == false)
                                         {
-                                    Invoke((Action)(() =>
-                                    {
-                                        
-                                        MessageBox.Show("目标设备已失去连接", "错误!");
-                                        StartUpdateButton.Enabled = true;
-                                        UpdateProgressBar.Value = 0;
-                                    }));
-                                    return;
-                                }
+                                            Invoke((Action)(() =>
+                                            {
+
+                                                MessageBox.Show("目标设备已失去连接", "错误!");
+                                                StartUpdateButton.Enabled = true;
+                                                UpdateProgressBar.Value = 0;
+                                            }));
+                                            return;
+                                        }
                                         else
                                         {
                                             UpdateState = 0;
@@ -3123,17 +3131,17 @@ namespace MyDebugApp
                                     }
 
 
+                                }
+
                             }
+                            break;
 
-                        }
-                        break;
+                        default: break;
 
-                    default: break;
+                    }
 
+                    Thread.Sleep(1);
                 }
-
-                Thread.Sleep(1);
-            }
             }
 
             Invoke((Action)(() =>
