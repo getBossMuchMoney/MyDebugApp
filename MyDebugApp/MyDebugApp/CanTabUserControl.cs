@@ -940,6 +940,7 @@ namespace MyDebugApp
                     else
                     {
                         SetFlag = 0;
+                        Thread.Sleep(1);
                     }
                 }
 
