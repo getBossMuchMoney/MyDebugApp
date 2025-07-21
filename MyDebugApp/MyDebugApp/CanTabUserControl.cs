@@ -906,7 +906,7 @@ namespace MyDebugApp
                     }
 
                     Can_Transmit(data[0], sendData);
-                    Thread.Sleep(50);
+                    Thread.Sleep(24);
                 }
                 else
                 {
@@ -2594,15 +2594,36 @@ namespace MyDebugApp
 
         }
 
+        private void ClearUpdateLogButton_Click(object sender, EventArgs e)
+        {
+            UpdateLogBox.Clear();
+        }
+
         private void UpdateResaultLog(byte devID, bool resault)
         {
+            if (devID != 0)
+            {
             if (resault)
             {
-                //UpdateLogBox.AppendText("从机" + devID.ToString() + "升级成功!" + Environment.NewLine);
+                    UpdateLogBox.AppendText("从机" + devID.ToString() + "升级成功!" + Environment.NewLine);
             }
             else
             {
-                //UpdateLogBox.AppendText("从机" + devID.ToString() + "升级失败!!!!!!!!!!!!!!!!!!!!!!!!" + Environment.NewLine);
+                    UpdateLogBox.AppendText("从机" + devID.ToString() + "升级失败!!!!!!!!!!!!!!!!!!!!!!!!" + Environment.NewLine);
+
+                }
+            }
+            else
+            {
+                if (resault)
+                {
+                    UpdateLogBox.AppendText("主机" + "升级成功!" + Environment.NewLine);
+                }
+                else
+                {
+                    UpdateLogBox.AppendText("主机" + "升级失败!!!!!!!!!!!!!!!!!!!!!!!!" + Environment.NewLine);
+
+                }
 
             }
 
@@ -2618,7 +2639,7 @@ namespace MyDebugApp
 
             if (UpdateMultiBox.Checked == true)
             {
-                UpdateNum = 10;
+                UpdateNum = 11;
             }
             else
             {
@@ -2630,7 +2651,11 @@ namespace MyDebugApp
             {
                 if (UpdateMultiBox.Checked == true)
                 {
-                    ChoseUpdateID = (byte)(num + 1);
+                    ChoseUpdateID = (byte)num;
+                    Invoke((Action)(() =>
+                    {
+                        ChoseDevListBox.SelectedIndex = num;
+                    }));
                 }
 
                 process = true;
@@ -2668,7 +2693,10 @@ namespace MyDebugApp
                                         else
                                         {
                                             process = false;
+                                            Invoke((Action)(() =>
+                                            {
                                             UpdateResaultLog(ChoseUpdateID, false);
+                                            }));
                                         }
                                 }
                             }
@@ -2695,6 +2723,8 @@ namespace MyDebugApp
                                     {
                                         if (i == 2)
                                         {
+                                                if (UpdateMultiBox.Checked == false)
+                                                {
                                             Invoke((Action)(() =>
                                             {
                                                 
@@ -2703,12 +2733,24 @@ namespace MyDebugApp
                                             }));
                                             return;
                                         }
+                                                else
+                                                {
+                                                    UpdateState = 0;
+                                                    process = false;
+                                                    Invoke((Action)(() =>
+                                                    {
+                                                        UpdateResaultLog(ChoseUpdateID, false);
+                                                    }));
+                                                }
+                                            }
 
                                     }
                                 }
 
                                 if (i == 2)
                                 {
+                                        if (UpdateMultiBox.Checked == false)
+                                        {
                                     Invoke((Action)(() =>
                                     {
                                         
@@ -2717,6 +2759,16 @@ namespace MyDebugApp
                                     }));
                                     return;
                                 }
+                                        else
+                                        {
+                                            UpdateState = 0;
+                                            process = false;
+                                            Invoke((Action)(() =>
+                                            {
+                                                UpdateResaultLog(ChoseUpdateID, false);
+                                            }));
+                                        }
+                                    }
                             }
 
                         }
@@ -2760,6 +2812,8 @@ namespace MyDebugApp
                                     }
                                     if (i == 2)
                                     {
+                                            if (UpdateMultiBox.Checked == false)
+                                            {
                                         Invoke((Action)(() =>
                                         {
                                             
@@ -2769,6 +2823,18 @@ namespace MyDebugApp
                                         }));
                                         return;
                                     }
+                                            else
+                                            {
+                                                UpdateState = 0;
+                                                process = false;
+                                                Invoke((Action)(() =>
+                                                {
+                                                    UpdateResaultLog(ChoseUpdateID, false);
+                                                    UpdateProgressBar.Value = 0;
+                                                }));
+
+                                            }
+                                        }
                                 }
                                 byte[] crc = CrcInter.Crc16(groupData, 2048);
                                 for (uint i = 0; i < 3; i++)
@@ -2781,6 +2847,8 @@ namespace MyDebugApp
                                         id.IdFrame = frame[0];
                                         if (id.AckSts != 0)
                                         {
+                                                if (UpdateMultiBox.Checked == false)
+                                                {
                                             Invoke((Action)(() =>
                                             {
                                                 
@@ -2792,6 +2860,17 @@ namespace MyDebugApp
                                         }
                                         else
                                         {
+                                                    UpdateState = 0;
+                                                    process = false;
+                                                    Invoke((Action)(() =>
+                                                    {
+                                                        UpdateResaultLog(ChoseUpdateID, false);
+                                                        UpdateProgressBar.Value = 0;
+                                                    }));
+                                                }
+                                            }
+                                            else
+                                            {
                                             Invoke((Action)(() =>
                                             {
                                                 UpdateProgressBar.Value = groupIndex + 1;
@@ -2804,6 +2883,8 @@ namespace MyDebugApp
                                     {
                                         if (i == 2)
                                         {
+                                                if (UpdateMultiBox.Checked == false)
+                                                {
                                             Invoke((Action)(() =>
                                             {
                                                 
@@ -2813,6 +2894,18 @@ namespace MyDebugApp
                                             }));
                                             return;
                                         }
+                                                else
+                                                {
+                                                    UpdateState = 0;
+                                                    process = false;
+                                                    Invoke((Action)(() =>
+                                                    {
+                                                        UpdateResaultLog(ChoseUpdateID, false);
+                                                        UpdateProgressBar.Value = 0;
+                                                    }));
+
+                                                }
+                                            }
 
                                     }
                                 }
@@ -2837,6 +2930,8 @@ namespace MyDebugApp
                                     }
                                     if (i == 2)
                                     {
+                                            if (UpdateMultiBox.Checked == false)
+                                            {
                                         Invoke((Action)(() =>
                                         {
                                             
@@ -2846,6 +2941,17 @@ namespace MyDebugApp
                                         }));
                                         return;
                                     }
+                                            else
+                                            {
+                                                UpdateState = 0;
+                                                process = false;
+                                                Invoke((Action)(() =>
+                                                {
+                                                    UpdateResaultLog(ChoseUpdateID, false);
+                                                    UpdateProgressBar.Value = 0;
+                                                }));
+                                            }
+                                        }
                                 }
                                 byte[] crc = CrcInter.Crc16(groupData, (uint)remainSize);
                                 for (uint i = 0; i < 3; i++)
@@ -2858,6 +2964,8 @@ namespace MyDebugApp
                                         id.IdFrame = frame[0];
                                         if (id.AckSts != 0)
                                         {
+                                                if (UpdateMultiBox.Checked == false)
+                                                {
                                             Invoke((Action)(() =>
                                             {
                                                 
@@ -2869,6 +2977,18 @@ namespace MyDebugApp
                                         }
                                         else
                                         {
+                                                    UpdateState = 0;
+                                                    process = false;
+                                                    Invoke((Action)(() =>
+                                                    {
+                                                        UpdateResaultLog(ChoseUpdateID, false);
+                                                        UpdateProgressBar.Value = 0;
+                                                    }));
+
+                                                }
+                                            }
+                                            else
+                                            {
                                             Invoke((Action)(() =>
                                             {
                                                 UpdateProgressBar.Value = groupIndex + 1;
@@ -2881,6 +3001,8 @@ namespace MyDebugApp
                                     {
                                         if (i == 2)
                                         {
+                                                if (UpdateMultiBox.Checked == false)
+                                                {
                                             Invoke((Action)(() =>
                                             {
                                                 
@@ -2890,6 +3012,18 @@ namespace MyDebugApp
                                             }));
                                             return;
                                         }
+                                                else
+                                                {
+                                                    UpdateState = 0;
+                                                    process = false;
+                                                    Invoke((Action)(() =>
+                                                    {
+                                                        UpdateResaultLog(ChoseUpdateID, false);
+                                                        UpdateProgressBar.Value = 0;
+                                                    }));
+
+                                                }
+                                            }
 
                                     }
                                 }
@@ -2911,6 +3045,8 @@ namespace MyDebugApp
                                     id.IdFrame = frame[0];
                                     if (id.AckSts == 0)
                                     {
+                                            if (UpdateMultiBox.Checked == false)
+                                            {
                                         Invoke((Action)(() =>
                                         {
                                             
@@ -2921,6 +3057,21 @@ namespace MyDebugApp
                                         return;
                                     }
                                     else
+                                            {
+                                                UpdateState = 0;
+                                                process = false;
+                                                Invoke((Action)(() =>
+                                                {
+                                                    UpdateResaultLog(ChoseUpdateID, true);
+                                                    UpdateProgressBar.Value = 0;
+                                                }));
+                                                break;
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (UpdateMultiBox.Checked == false)
                                     {
                                         Invoke((Action)(() =>
                                         {
@@ -2931,10 +3082,24 @@ namespace MyDebugApp
                                         }));
                                         return;
                                     }
+                                            else
+                                            {
+                                                UpdateState = 0;
+                                                process = false;
+                                                Invoke((Action)(() =>
+                                                {
+                                                    UpdateResaultLog(ChoseUpdateID, false);
+                                                    UpdateProgressBar.Value = 0;
+                                                }));
+
+                                            }
+                                        }
                                 }
 
                                 if (i == 2)
                                 {
+                                        if (UpdateMultiBox.Checked == false)
+                                        {
                                     Invoke((Action)(() =>
                                     {
                                         
@@ -2944,6 +3109,18 @@ namespace MyDebugApp
                                     }));
                                     return;
                                 }
+                                        else
+                                        {
+                                            UpdateState = 0;
+                                            process = false;
+                                            Invoke((Action)(() =>
+                                            {
+                                                UpdateResaultLog(ChoseUpdateID, false);
+                                                UpdateProgressBar.Value = 0;
+                                            }));
+
+                                        }
+                                    }
 
 
                             }

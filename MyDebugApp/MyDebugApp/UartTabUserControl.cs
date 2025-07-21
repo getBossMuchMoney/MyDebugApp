@@ -631,7 +631,7 @@ namespace MyDebugApp
                     ChoseUpdateID = (byte)(num + 1);
                     Invoke((Action)(() =>
                     {
-                        ChoseUpdateDeviceBox.SelectedIndex = (byte)(num + 1);
+                        ChoseUpdateDeviceBox.SelectedIndex = num + 1;
                     }));
                 }
                 process = true;
