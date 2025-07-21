@@ -906,7 +906,7 @@ namespace MyDebugApp
                     }
 
                     Can_Transmit(data[0], sendData);
-                    Thread.Sleep(24);
+                    Thread.Sleep(50);
                 }
                 else
                 {
@@ -942,8 +942,8 @@ namespace MyDebugApp
                     else
                     {
                         SetFlag = 0;
-                    }
                     Thread.Sleep(1);
+                }
                 }
 
             }
