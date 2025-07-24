@@ -968,6 +968,7 @@ namespace MyDebugApp
             float sysCcurr = 0;
             float sysPout = 0;
             float sysPinact = 0;
+            float sysPin = 0;
             ushort u16value = 0;
             short i16value = 0;
             uint u32value = 0;
@@ -1018,6 +1019,10 @@ namespace MyDebugApp
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
 
+                i16value = (short)modstadata[0].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
+
             }
             else
             {
@@ -1063,6 +1068,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[1].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[1].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1110,6 +1119,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[2].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[2].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1157,6 +1170,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[3].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[3].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1204,6 +1221,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[4].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[4].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1251,6 +1272,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[5].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[5].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1297,6 +1322,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[6].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[6].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1343,6 +1372,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[7].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[7].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1389,6 +1422,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[8].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[8].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1435,6 +1472,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[9].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[9].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1481,6 +1522,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[10].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[10].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1527,6 +1572,10 @@ namespace MyDebugApp
                 i16value = (short)modstadata[11].REG.u16_Pinact;
                 fvalue = i16value * 0.1f;
                 sysPinact += fvalue;
+
+                i16value = (short)modstadata[11].REG.u16_Pin;
+                fvalue = i16value * 0.1f;
+                sysPin += fvalue;
             }
             else
             {
@@ -1541,7 +1590,7 @@ namespace MyDebugApp
             SysIcBox.Text = sysCcurr.ToString("F1");
             SysPoutBox.Text = sysPout.ToString("F1");
             SysPinactBox.Text = sysPinact.ToString("F1");
-
+            SysPinBox.Text = sysPin.ToString("F1");
             OnlinerNumBox.Text = OnlineNum.ToString();
             ErrNumBox.Text = ErrNum.ToString();
 

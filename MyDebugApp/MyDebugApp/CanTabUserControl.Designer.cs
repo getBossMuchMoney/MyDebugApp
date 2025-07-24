@@ -245,6 +245,8 @@ namespace MyDebugApp
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.ClearUpdateLogButton = new System.Windows.Forms.Button();
             this.UpdateLogBox = new System.Windows.Forms.TextBox();
+            this.label89 = new System.Windows.Forms.Label();
+            this.SysPinBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1648,6 +1650,8 @@ namespace MyDebugApp
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.label89);
+            this.groupBox6.Controls.Add(this.SysPinBox);
             this.groupBox6.Controls.Add(this.label87);
             this.groupBox6.Controls.Add(this.SysPinactBox);
             this.groupBox6.Controls.Add(this.label86);
@@ -2634,6 +2638,25 @@ namespace MyDebugApp
             this.UpdateLogBox.Size = new System.Drawing.Size(623, 117);
             this.UpdateLogBox.TabIndex = 0;
             // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(75, 357);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(112, 15);
+            this.label89.TabIndex = 86;
+            this.label89.Text = "系统输入总功率";
+            // 
+            // SysPinBox
+            // 
+            this.SysPinBox.Location = new System.Drawing.Point(192, 354);
+            this.SysPinBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SysPinBox.Name = "SysPinBox";
+            this.SysPinBox.ReadOnly = true;
+            this.SysPinBox.Size = new System.Drawing.Size(62, 25);
+            this.SysPinBox.TabIndex = 85;
+            this.SysPinBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // CanTabUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -2887,5 +2910,7 @@ namespace MyDebugApp
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Button ClearUpdateLogButton;
         private System.Windows.Forms.TextBox UpdateLogBox;
+        private System.Windows.Forms.Label label89;
+        private System.Windows.Forms.TextBox SysPinBox;
     }
 }
