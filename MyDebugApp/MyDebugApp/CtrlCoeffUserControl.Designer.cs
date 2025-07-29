@@ -865,7 +865,7 @@ namespace MyDebugApp
             "从机10",
             "从机11",
             "从机12"});
-            this.ChoseDevListBox.Location = new System.Drawing.Point(590, 12);
+            this.ChoseDevListBox.Location = new System.Drawing.Point(610, 17);
             this.ChoseDevListBox.Margin = new System.Windows.Forms.Padding(2);
             this.ChoseDevListBox.Name = "ChoseDevListBox";
             this.ChoseDevListBox.Size = new System.Drawing.Size(85, 23);
@@ -936,7 +936,7 @@ namespace MyDebugApp
             // 
             this.ReadCalValueButton.Location = new System.Drawing.Point(42, 431);
             this.ReadCalValueButton.Name = "ReadCalValueButton";
-            this.ReadCalValueButton.Size = new System.Drawing.Size(92, 40);
+            this.ReadCalValueButton.Size = new System.Drawing.Size(92, 38);
             this.ReadCalValueButton.TabIndex = 62;
             this.ReadCalValueButton.Text = "读取设置值";
             this.ReadCalValueButton.UseVisualStyleBackColor = true;
@@ -945,7 +945,7 @@ namespace MyDebugApp
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(479, 260);
+            this.label30.Location = new System.Drawing.Point(474, 260);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(82, 15);
             this.label30.TabIndex = 61;
@@ -963,16 +963,16 @@ namespace MyDebugApp
             "校准点6",
             "校准点7",
             "校准点8"});
-            this.CalPointBox.Location = new System.Drawing.Point(483, 283);
+            this.CalPointBox.Location = new System.Drawing.Point(478, 283);
             this.CalPointBox.Name = "CalPointBox";
             this.CalPointBox.Size = new System.Drawing.Size(90, 23);
             this.CalPointBox.TabIndex = 60;
             // 
             // ResetCalButton
             // 
-            this.ResetCalButton.Location = new System.Drawing.Point(587, 429);
+            this.ResetCalButton.Location = new System.Drawing.Point(582, 431);
             this.ResetCalButton.Name = "ResetCalButton";
-            this.ResetCalButton.Size = new System.Drawing.Size(75, 42);
+            this.ResetCalButton.Size = new System.Drawing.Size(80, 38);
             this.ResetCalButton.TabIndex = 59;
             this.ResetCalButton.Text = "重置校准";
             this.ResetCalButton.UseVisualStyleBackColor = true;
@@ -980,9 +980,9 @@ namespace MyDebugApp
             // 
             // FinishCalButton
             // 
-            this.FinishCalButton.Location = new System.Drawing.Point(587, 204);
+            this.FinishCalButton.Location = new System.Drawing.Point(582, 205);
             this.FinishCalButton.Name = "FinishCalButton";
-            this.FinishCalButton.Size = new System.Drawing.Size(75, 38);
+            this.FinishCalButton.Size = new System.Drawing.Size(80, 38);
             this.FinishCalButton.TabIndex = 58;
             this.FinishCalButton.Text = "校准完成";
             this.FinishCalButton.UseVisualStyleBackColor = true;
@@ -990,9 +990,9 @@ namespace MyDebugApp
             // 
             // RunCalButton
             // 
-            this.RunCalButton.Location = new System.Drawing.Point(482, 205);
+            this.RunCalButton.Location = new System.Drawing.Point(477, 205);
             this.RunCalButton.Name = "RunCalButton";
-            this.RunCalButton.Size = new System.Drawing.Size(75, 37);
+            this.RunCalButton.Size = new System.Drawing.Size(80, 38);
             this.RunCalButton.TabIndex = 57;
             this.RunCalButton.Text = "执行校准";
             this.RunCalButton.UseVisualStyleBackColor = true;
@@ -1414,7 +1414,7 @@ namespace MyDebugApp
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(522, 17);
+            this.label19.Location = new System.Drawing.Point(526, 20);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(67, 15);
             this.label19.TabIndex = 13;
@@ -1462,8 +1462,8 @@ namespace MyDebugApp
             // 
             // CtrlCoeffUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.VoutBox);
             this.Controls.Add(this.IoutBox);
             this.Controls.Add(this.label31);

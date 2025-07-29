@@ -1750,7 +1750,7 @@ namespace MyDebugApp
             // label89
             // 
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(83, 357);
+            this.label89.Location = new System.Drawing.Point(81, 365);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(112, 15);
             this.label89.TabIndex = 86;
@@ -1758,7 +1758,7 @@ namespace MyDebugApp
             // 
             // SysPinBox
             // 
-            this.SysPinBox.Location = new System.Drawing.Point(200, 354);
+            this.SysPinBox.Location = new System.Drawing.Point(200, 356);
             this.SysPinBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysPinBox.Name = "SysPinBox";
             this.SysPinBox.ReadOnly = true;
@@ -1769,7 +1769,7 @@ namespace MyDebugApp
             // label87
             // 
             this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(366, 359);
+            this.label87.Location = new System.Drawing.Point(366, 365);
             this.label87.Name = "label87";
             this.label87.Size = new System.Drawing.Size(127, 15);
             this.label87.TabIndex = 84;
@@ -1816,7 +1816,7 @@ namespace MyDebugApp
             // label84
             // 
             this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(270, 327);
+            this.label84.Location = new System.Drawing.Point(270, 332);
             this.label84.Name = "label84";
             this.label84.Size = new System.Drawing.Size(75, 15);
             this.label84.TabIndex = 79;
@@ -1825,7 +1825,7 @@ namespace MyDebugApp
             // label83
             // 
             this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(120, 327);
+            this.label83.Location = new System.Drawing.Point(120, 330);
             this.label83.Name = "label83";
             this.label83.Size = new System.Drawing.Size(75, 15);
             this.label83.TabIndex = 78;
@@ -1843,7 +1843,7 @@ namespace MyDebugApp
             // 
             // SysIbBox
             // 
-            this.SysIbBox.Location = new System.Drawing.Point(350, 322);
+            this.SysIbBox.Location = new System.Drawing.Point(350, 327);
             this.SysIbBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysIbBox.Name = "SysIbBox";
             this.SysIbBox.ReadOnly = true;
@@ -1853,7 +1853,7 @@ namespace MyDebugApp
             // 
             // SysIaBox
             // 
-            this.SysIaBox.Location = new System.Drawing.Point(200, 322);
+            this.SysIaBox.Location = new System.Drawing.Point(200, 324);
             this.SysIaBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysIaBox.Name = "SysIaBox";
             this.SysIaBox.ReadOnly = true;
@@ -1983,7 +1983,7 @@ namespace MyDebugApp
             // 
             // SysCurrBox
             // 
-            this.SysCurrBox.Location = new System.Drawing.Point(200, 286);
+            this.SysCurrBox.Location = new System.Drawing.Point(200, 290);
             this.SysCurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysCurrBox.Name = "SysCurrBox";
             this.SysCurrBox.ReadOnly = true;
