@@ -1695,7 +1695,8 @@ namespace MyDebugApp
             {
                 ReadSettingFinish = 0;
                 CMD_WD cmd = new CMD_WD() { all = 0 };
-                fvalue = (float)(modsetdata[deviceid - 1].REG.u16_MaxIout * 0.1f);
+                i16value = (short)modsetdata[deviceid - 1].REG.u16_MaxIout;
+                fvalue = (float)(i16value * 0.1f);
                 MaxCurrBox.Text = fvalue.ToString("F1");
 
                 u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_MaxVout * 0.1f);
