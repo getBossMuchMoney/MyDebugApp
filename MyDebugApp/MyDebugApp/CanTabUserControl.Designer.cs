@@ -156,6 +156,8 @@ namespace MyDebugApp
             this.PowerOnButton = new System.Windows.Forms.Button();
             this.PfcOlEnBox = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label89 = new System.Windows.Forms.Label();
+            this.SysPinBox = new System.Windows.Forms.TextBox();
             this.label87 = new System.Windows.Forms.Label();
             this.SysPinactBox = new System.Windows.Forms.TextBox();
             this.label86 = new System.Windows.Forms.Label();
@@ -245,8 +247,6 @@ namespace MyDebugApp
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.ClearUpdateLogButton = new System.Windows.Forms.Button();
             this.UpdateLogBox = new System.Windows.Forms.TextBox();
-            this.label89 = new System.Windows.Forms.Label();
-            this.SysPinBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -394,7 +394,7 @@ namespace MyDebugApp
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(308, 199);
+            this.groupBox2.Size = new System.Drawing.Size(320, 199);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "升级功能";
@@ -500,6 +500,7 @@ namespace MyDebugApp
             this.ChoseDevListBox.Name = "ChoseDevListBox";
             this.ChoseDevListBox.Size = new System.Drawing.Size(85, 23);
             this.ChoseDevListBox.TabIndex = 3;
+            this.ChoseDevListBox.SelectedIndexChanged += new System.EventHandler(this.ChoseDevListBox_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -519,14 +520,14 @@ namespace MyDebugApp
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(573, 267);
+            this.groupBox3.Size = new System.Drawing.Size(585, 279);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "数据显示";
             // 
             // ClearRcvDataShowButton
             // 
-            this.ClearRcvDataShowButton.Location = new System.Drawing.Point(12, 227);
+            this.ClearRcvDataShowButton.Location = new System.Drawing.Point(12, 246);
             this.ClearRcvDataShowButton.Margin = new System.Windows.Forms.Padding(2);
             this.ClearRcvDataShowButton.Name = "ClearRcvDataShowButton";
             this.ClearRcvDataShowButton.Size = new System.Drawing.Size(76, 29);
@@ -542,7 +543,7 @@ namespace MyDebugApp
             this.ShowRcvDataBox.Multiline = true;
             this.ShowRcvDataBox.Name = "ShowRcvDataBox";
             this.ShowRcvDataBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ShowRcvDataBox.Size = new System.Drawing.Size(545, 201);
+            this.ShowRcvDataBox.Size = new System.Drawing.Size(548, 220);
             this.ShowRcvDataBox.TabIndex = 0;
             // 
             // showDataTimer
@@ -848,7 +849,7 @@ namespace MyDebugApp
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.VabBox);
             this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Location = new System.Drawing.Point(605, 2);
+            this.groupBox4.Location = new System.Drawing.Point(619, 2);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
@@ -1333,7 +1334,7 @@ namespace MyDebugApp
             this.groupBox5.Controls.Add(this.BrdctSendBox);
             this.groupBox5.Controls.Add(this.PowerOnButton);
             this.groupBox5.Controls.Add(this.PfcOlEnBox);
-            this.groupBox5.Location = new System.Drawing.Point(605, 520);
+            this.groupBox5.Location = new System.Drawing.Point(621, 520);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
@@ -1741,15 +1742,34 @@ namespace MyDebugApp
             this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox6.Size = new System.Drawing.Size(573, 391);
+            this.groupBox6.Size = new System.Drawing.Size(585, 391);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "系统状态";
             // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(83, 357);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(112, 15);
+            this.label89.TabIndex = 86;
+            this.label89.Text = "系统输入总功率";
+            // 
+            // SysPinBox
+            // 
+            this.SysPinBox.Location = new System.Drawing.Point(200, 354);
+            this.SysPinBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SysPinBox.Name = "SysPinBox";
+            this.SysPinBox.ReadOnly = true;
+            this.SysPinBox.Size = new System.Drawing.Size(62, 25);
+            this.SysPinBox.TabIndex = 85;
+            this.SysPinBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // label87
             // 
             this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(356, 357);
+            this.label87.Location = new System.Drawing.Point(366, 359);
             this.label87.Name = "label87";
             this.label87.Size = new System.Drawing.Size(127, 15);
             this.label87.TabIndex = 84;
@@ -1757,7 +1777,7 @@ namespace MyDebugApp
             // 
             // SysPinactBox
             // 
-            this.SysPinactBox.Location = new System.Drawing.Point(488, 354);
+            this.SysPinactBox.Location = new System.Drawing.Point(498, 356);
             this.SysPinactBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysPinactBox.Name = "SysPinactBox";
             this.SysPinactBox.ReadOnly = true;
@@ -1768,7 +1788,7 @@ namespace MyDebugApp
             // label86
             // 
             this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(371, 293);
+            this.label86.Location = new System.Drawing.Point(381, 296);
             this.label86.Name = "label86";
             this.label86.Size = new System.Drawing.Size(112, 15);
             this.label86.TabIndex = 82;
@@ -1776,7 +1796,7 @@ namespace MyDebugApp
             // 
             // SysPoutBox
             // 
-            this.SysPoutBox.Location = new System.Drawing.Point(488, 288);
+            this.SysPoutBox.Location = new System.Drawing.Point(498, 290);
             this.SysPoutBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysPoutBox.Name = "SysPoutBox";
             this.SysPoutBox.ReadOnly = true;
@@ -1787,7 +1807,7 @@ namespace MyDebugApp
             // label85
             // 
             this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(408, 327);
+            this.label85.Location = new System.Drawing.Point(418, 330);
             this.label85.Name = "label85";
             this.label85.Size = new System.Drawing.Size(75, 15);
             this.label85.TabIndex = 80;
@@ -1796,7 +1816,7 @@ namespace MyDebugApp
             // label84
             // 
             this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(260, 327);
+            this.label84.Location = new System.Drawing.Point(270, 327);
             this.label84.Name = "label84";
             this.label84.Size = new System.Drawing.Size(75, 15);
             this.label84.TabIndex = 79;
@@ -1805,7 +1825,7 @@ namespace MyDebugApp
             // label83
             // 
             this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(112, 327);
+            this.label83.Location = new System.Drawing.Point(120, 327);
             this.label83.Name = "label83";
             this.label83.Size = new System.Drawing.Size(75, 15);
             this.label83.TabIndex = 78;
@@ -1813,7 +1833,7 @@ namespace MyDebugApp
             // 
             // SysIcBox
             // 
-            this.SysIcBox.Location = new System.Drawing.Point(488, 322);
+            this.SysIcBox.Location = new System.Drawing.Point(498, 324);
             this.SysIcBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysIcBox.Name = "SysIcBox";
             this.SysIcBox.ReadOnly = true;
@@ -1823,7 +1843,7 @@ namespace MyDebugApp
             // 
             // SysIbBox
             // 
-            this.SysIbBox.Location = new System.Drawing.Point(340, 322);
+            this.SysIbBox.Location = new System.Drawing.Point(350, 322);
             this.SysIbBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysIbBox.Name = "SysIbBox";
             this.SysIbBox.ReadOnly = true;
@@ -1833,7 +1853,7 @@ namespace MyDebugApp
             // 
             // SysIaBox
             // 
-            this.SysIaBox.Location = new System.Drawing.Point(192, 322);
+            this.SysIaBox.Location = new System.Drawing.Point(200, 322);
             this.SysIaBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysIaBox.Name = "SysIaBox";
             this.SysIaBox.ReadOnly = true;
@@ -1844,7 +1864,7 @@ namespace MyDebugApp
             // label81
             // 
             this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(431, 258);
+            this.label81.Location = new System.Drawing.Point(441, 258);
             this.label81.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label81.Name = "label81";
             this.label81.Size = new System.Drawing.Size(53, 15);
@@ -1854,7 +1874,7 @@ namespace MyDebugApp
             // label80
             // 
             this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(431, 226);
+            this.label80.Location = new System.Drawing.Point(441, 227);
             this.label80.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label80.Name = "label80";
             this.label80.Size = new System.Drawing.Size(53, 15);
@@ -1864,7 +1884,7 @@ namespace MyDebugApp
             // label79
             // 
             this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(431, 196);
+            this.label79.Location = new System.Drawing.Point(441, 196);
             this.label79.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label79.Name = "label79";
             this.label79.Size = new System.Drawing.Size(53, 15);
@@ -1874,7 +1894,7 @@ namespace MyDebugApp
             // label78
             // 
             this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(290, 258);
+            this.label78.Location = new System.Drawing.Point(300, 258);
             this.label78.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label78.Name = "label78";
             this.label78.Size = new System.Drawing.Size(45, 15);
@@ -1884,7 +1904,7 @@ namespace MyDebugApp
             // label77
             // 
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(290, 226);
+            this.label77.Location = new System.Drawing.Point(300, 226);
             this.label77.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(45, 15);
@@ -1894,7 +1914,7 @@ namespace MyDebugApp
             // label76
             // 
             this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(290, 196);
+            this.label76.Location = new System.Drawing.Point(300, 196);
             this.label76.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(45, 15);
@@ -1904,7 +1924,7 @@ namespace MyDebugApp
             // label75
             // 
             this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(143, 258);
+            this.label75.Location = new System.Drawing.Point(151, 258);
             this.label75.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(45, 15);
@@ -1914,7 +1934,7 @@ namespace MyDebugApp
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(143, 225);
+            this.label74.Location = new System.Drawing.Point(151, 225);
             this.label74.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(45, 15);
@@ -1924,7 +1944,7 @@ namespace MyDebugApp
             // label73
             // 
             this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(143, 196);
+            this.label73.Location = new System.Drawing.Point(151, 196);
             this.label73.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(45, 15);
@@ -1963,7 +1983,7 @@ namespace MyDebugApp
             // 
             // SysCurrBox
             // 
-            this.SysCurrBox.Location = new System.Drawing.Point(192, 286);
+            this.SysCurrBox.Location = new System.Drawing.Point(200, 286);
             this.SysCurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysCurrBox.Name = "SysCurrBox";
             this.SysCurrBox.ReadOnly = true;
@@ -1974,7 +1994,7 @@ namespace MyDebugApp
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(76, 293);
+            this.label69.Location = new System.Drawing.Point(84, 293);
             this.label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(112, 15);
@@ -1983,7 +2003,7 @@ namespace MyDebugApp
             // 
             // Slaver12CurrBox
             // 
-            this.Slaver12CurrBox.Location = new System.Drawing.Point(488, 254);
+            this.Slaver12CurrBox.Location = new System.Drawing.Point(498, 254);
             this.Slaver12CurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver12CurrBox.Name = "Slaver12CurrBox";
             this.Slaver12CurrBox.ReadOnly = true;
@@ -1993,7 +2013,7 @@ namespace MyDebugApp
             // 
             // Slaver9CurrBox
             // 
-            this.Slaver9CurrBox.Location = new System.Drawing.Point(340, 254);
+            this.Slaver9CurrBox.Location = new System.Drawing.Point(350, 254);
             this.Slaver9CurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver9CurrBox.Name = "Slaver9CurrBox";
             this.Slaver9CurrBox.ReadOnly = true;
@@ -2003,7 +2023,7 @@ namespace MyDebugApp
             // 
             // Slaver6CurrBox
             // 
-            this.Slaver6CurrBox.Location = new System.Drawing.Point(192, 254);
+            this.Slaver6CurrBox.Location = new System.Drawing.Point(200, 254);
             this.Slaver6CurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver6CurrBox.Name = "Slaver6CurrBox";
             this.Slaver6CurrBox.ReadOnly = true;
@@ -2023,7 +2043,7 @@ namespace MyDebugApp
             // 
             // Slaver11CurrBox
             // 
-            this.Slaver11CurrBox.Location = new System.Drawing.Point(488, 222);
+            this.Slaver11CurrBox.Location = new System.Drawing.Point(497, 222);
             this.Slaver11CurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver11CurrBox.Name = "Slaver11CurrBox";
             this.Slaver11CurrBox.ReadOnly = true;
@@ -2033,7 +2053,7 @@ namespace MyDebugApp
             // 
             // Slaver8CurrBox
             // 
-            this.Slaver8CurrBox.Location = new System.Drawing.Point(340, 222);
+            this.Slaver8CurrBox.Location = new System.Drawing.Point(350, 222);
             this.Slaver8CurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver8CurrBox.Name = "Slaver8CurrBox";
             this.Slaver8CurrBox.ReadOnly = true;
@@ -2043,7 +2063,7 @@ namespace MyDebugApp
             // 
             // Slaver5CurrBox
             // 
-            this.Slaver5CurrBox.Location = new System.Drawing.Point(192, 222);
+            this.Slaver5CurrBox.Location = new System.Drawing.Point(200, 222);
             this.Slaver5CurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver5CurrBox.Name = "Slaver5CurrBox";
             this.Slaver5CurrBox.ReadOnly = true;
@@ -2063,7 +2083,7 @@ namespace MyDebugApp
             // 
             // Slaver10CurrBox
             // 
-            this.Slaver10CurrBox.Location = new System.Drawing.Point(488, 191);
+            this.Slaver10CurrBox.Location = new System.Drawing.Point(497, 191);
             this.Slaver10CurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver10CurrBox.Name = "Slaver10CurrBox";
             this.Slaver10CurrBox.ReadOnly = true;
@@ -2073,7 +2093,7 @@ namespace MyDebugApp
             // 
             // Slaver7CurrBox
             // 
-            this.Slaver7CurrBox.Location = new System.Drawing.Point(340, 192);
+            this.Slaver7CurrBox.Location = new System.Drawing.Point(350, 192);
             this.Slaver7CurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver7CurrBox.Name = "Slaver7CurrBox";
             this.Slaver7CurrBox.ReadOnly = true;
@@ -2083,7 +2103,7 @@ namespace MyDebugApp
             // 
             // Slaver4CurrBox
             // 
-            this.Slaver4CurrBox.Location = new System.Drawing.Point(192, 192);
+            this.Slaver4CurrBox.Location = new System.Drawing.Point(200, 192);
             this.Slaver4CurrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver4CurrBox.Name = "Slaver4CurrBox";
             this.Slaver4CurrBox.ReadOnly = true;
@@ -2114,7 +2134,7 @@ namespace MyDebugApp
             // label67
             // 
             this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(438, 143);
+            this.label67.Location = new System.Drawing.Point(448, 143);
             this.label67.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(67, 15);
@@ -2124,7 +2144,7 @@ namespace MyDebugApp
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(147, 143);
+            this.label66.Location = new System.Drawing.Point(155, 143);
             this.label66.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(67, 15);
@@ -2133,7 +2153,7 @@ namespace MyDebugApp
             // 
             // ErrNumBox
             // 
-            this.ErrNumBox.Location = new System.Drawing.Point(515, 137);
+            this.ErrNumBox.Location = new System.Drawing.Point(525, 137);
             this.ErrNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.ErrNumBox.Name = "ErrNumBox";
             this.ErrNumBox.ReadOnly = true;
@@ -2143,7 +2163,7 @@ namespace MyDebugApp
             // 
             // OnlinerNumBox
             // 
-            this.OnlinerNumBox.Location = new System.Drawing.Point(218, 137);
+            this.OnlinerNumBox.Location = new System.Drawing.Point(226, 137);
             this.OnlinerNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.OnlinerNumBox.Name = "OnlinerNumBox";
             this.OnlinerNumBox.ReadOnly = true;
@@ -2154,7 +2174,7 @@ namespace MyDebugApp
             // Slaver12ErrBox
             // 
             this.Slaver12ErrBox.AutoSize = true;
-            this.Slaver12ErrBox.Location = new System.Drawing.Point(532, 109);
+            this.Slaver12ErrBox.Location = new System.Drawing.Point(541, 107);
             this.Slaver12ErrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver12ErrBox.Name = "Slaver12ErrBox";
             this.Slaver12ErrBox.Size = new System.Drawing.Size(18, 17);
@@ -2164,7 +2184,7 @@ namespace MyDebugApp
             // Slaver11ErrBox
             // 
             this.Slaver11ErrBox.AutoSize = true;
-            this.Slaver11ErrBox.Location = new System.Drawing.Point(532, 82);
+            this.Slaver11ErrBox.Location = new System.Drawing.Point(541, 80);
             this.Slaver11ErrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver11ErrBox.Name = "Slaver11ErrBox";
             this.Slaver11ErrBox.Size = new System.Drawing.Size(18, 17);
@@ -2174,7 +2194,7 @@ namespace MyDebugApp
             // Slaver10ErrBox
             // 
             this.Slaver10ErrBox.AutoSize = true;
-            this.Slaver10ErrBox.Location = new System.Drawing.Point(532, 55);
+            this.Slaver10ErrBox.Location = new System.Drawing.Point(541, 53);
             this.Slaver10ErrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver10ErrBox.Name = "Slaver10ErrBox";
             this.Slaver10ErrBox.Size = new System.Drawing.Size(18, 17);
@@ -2184,7 +2204,7 @@ namespace MyDebugApp
             // Slaver9ErrBox
             // 
             this.Slaver9ErrBox.AutoSize = true;
-            this.Slaver9ErrBox.Location = new System.Drawing.Point(384, 108);
+            this.Slaver9ErrBox.Location = new System.Drawing.Point(394, 108);
             this.Slaver9ErrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver9ErrBox.Name = "Slaver9ErrBox";
             this.Slaver9ErrBox.Size = new System.Drawing.Size(18, 17);
@@ -2194,7 +2214,7 @@ namespace MyDebugApp
             // Slaver8ErrBox
             // 
             this.Slaver8ErrBox.AutoSize = true;
-            this.Slaver8ErrBox.Location = new System.Drawing.Point(384, 82);
+            this.Slaver8ErrBox.Location = new System.Drawing.Point(394, 82);
             this.Slaver8ErrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver8ErrBox.Name = "Slaver8ErrBox";
             this.Slaver8ErrBox.Size = new System.Drawing.Size(18, 17);
@@ -2204,7 +2224,7 @@ namespace MyDebugApp
             // Slaver7ErrBox
             // 
             this.Slaver7ErrBox.AutoSize = true;
-            this.Slaver7ErrBox.Location = new System.Drawing.Point(384, 55);
+            this.Slaver7ErrBox.Location = new System.Drawing.Point(394, 55);
             this.Slaver7ErrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver7ErrBox.Name = "Slaver7ErrBox";
             this.Slaver7ErrBox.Size = new System.Drawing.Size(18, 17);
@@ -2214,7 +2234,7 @@ namespace MyDebugApp
             // Slaver6ErrBox
             // 
             this.Slaver6ErrBox.AutoSize = true;
-            this.Slaver6ErrBox.Location = new System.Drawing.Point(239, 108);
+            this.Slaver6ErrBox.Location = new System.Drawing.Point(247, 108);
             this.Slaver6ErrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver6ErrBox.Name = "Slaver6ErrBox";
             this.Slaver6ErrBox.Size = new System.Drawing.Size(18, 17);
@@ -2224,7 +2244,7 @@ namespace MyDebugApp
             // Slaver5ErrBox
             // 
             this.Slaver5ErrBox.AutoSize = true;
-            this.Slaver5ErrBox.Location = new System.Drawing.Point(239, 80);
+            this.Slaver5ErrBox.Location = new System.Drawing.Point(247, 80);
             this.Slaver5ErrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver5ErrBox.Name = "Slaver5ErrBox";
             this.Slaver5ErrBox.Size = new System.Drawing.Size(18, 17);
@@ -2234,7 +2254,7 @@ namespace MyDebugApp
             // Slaver4ErrBox
             // 
             this.Slaver4ErrBox.AutoSize = true;
-            this.Slaver4ErrBox.Location = new System.Drawing.Point(239, 55);
+            this.Slaver4ErrBox.Location = new System.Drawing.Point(247, 55);
             this.Slaver4ErrBox.Margin = new System.Windows.Forms.Padding(2);
             this.Slaver4ErrBox.Name = "Slaver4ErrBox";
             this.Slaver4ErrBox.Size = new System.Drawing.Size(18, 17);
@@ -2274,7 +2294,7 @@ namespace MyDebugApp
             // label65
             // 
             this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(433, 109);
+            this.label65.Location = new System.Drawing.Point(448, 109);
             this.label65.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label65.Name = "label65";
             this.label65.Size = new System.Drawing.Size(53, 15);
@@ -2284,7 +2304,7 @@ namespace MyDebugApp
             // label64
             // 
             this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(433, 82);
+            this.label64.Location = new System.Drawing.Point(448, 82);
             this.label64.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(53, 15);
@@ -2294,7 +2314,7 @@ namespace MyDebugApp
             // label63
             // 
             this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(433, 56);
+            this.label63.Location = new System.Drawing.Point(448, 56);
             this.label63.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(53, 15);
@@ -2304,7 +2324,7 @@ namespace MyDebugApp
             // label62
             // 
             this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(301, 109);
+            this.label62.Location = new System.Drawing.Point(311, 109);
             this.label62.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(45, 15);
@@ -2314,7 +2334,7 @@ namespace MyDebugApp
             // label61
             // 
             this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(301, 82);
+            this.label61.Location = new System.Drawing.Point(311, 82);
             this.label61.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(45, 15);
@@ -2324,7 +2344,7 @@ namespace MyDebugApp
             // label60
             // 
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(301, 55);
+            this.label60.Location = new System.Drawing.Point(311, 55);
             this.label60.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(45, 15);
@@ -2334,7 +2354,7 @@ namespace MyDebugApp
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(152, 108);
+            this.label59.Location = new System.Drawing.Point(160, 108);
             this.label59.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(45, 15);
@@ -2344,7 +2364,7 @@ namespace MyDebugApp
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(152, 82);
+            this.label58.Location = new System.Drawing.Point(160, 82);
             this.label58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(45, 15);
@@ -2354,7 +2374,7 @@ namespace MyDebugApp
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(152, 54);
+            this.label57.Location = new System.Drawing.Point(160, 54);
             this.label57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(45, 15);
@@ -2394,7 +2414,7 @@ namespace MyDebugApp
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(529, 28);
+            this.label52.Location = new System.Drawing.Point(534, 28);
             this.label52.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(37, 15);
@@ -2404,7 +2424,7 @@ namespace MyDebugApp
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(471, 28);
+            this.label53.Location = new System.Drawing.Point(476, 28);
             this.label53.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(37, 15);
@@ -2414,7 +2434,7 @@ namespace MyDebugApp
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(381, 28);
+            this.label50.Location = new System.Drawing.Point(391, 28);
             this.label50.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(37, 15);
@@ -2424,7 +2444,7 @@ namespace MyDebugApp
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(331, 28);
+            this.label51.Location = new System.Drawing.Point(341, 28);
             this.label51.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(37, 15);
@@ -2434,7 +2454,7 @@ namespace MyDebugApp
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(236, 28);
+            this.label48.Location = new System.Drawing.Point(244, 28);
             this.label48.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(37, 15);
@@ -2444,7 +2464,7 @@ namespace MyDebugApp
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(184, 28);
+            this.label49.Location = new System.Drawing.Point(192, 28);
             this.label49.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(37, 15);
@@ -2474,7 +2494,7 @@ namespace MyDebugApp
             // Slave12Box
             // 
             this.Slave12Box.AutoSize = true;
-            this.Slave12Box.Location = new System.Drawing.Point(498, 108);
+            this.Slave12Box.Location = new System.Drawing.Point(507, 106);
             this.Slave12Box.Margin = new System.Windows.Forms.Padding(2);
             this.Slave12Box.Name = "Slave12Box";
             this.Slave12Box.Size = new System.Drawing.Size(18, 17);
@@ -2484,7 +2504,7 @@ namespace MyDebugApp
             // Slave11Box
             // 
             this.Slave11Box.AutoSize = true;
-            this.Slave11Box.Location = new System.Drawing.Point(498, 82);
+            this.Slave11Box.Location = new System.Drawing.Point(507, 80);
             this.Slave11Box.Margin = new System.Windows.Forms.Padding(2);
             this.Slave11Box.Name = "Slave11Box";
             this.Slave11Box.Size = new System.Drawing.Size(18, 17);
@@ -2494,7 +2514,7 @@ namespace MyDebugApp
             // Slave10Box
             // 
             this.Slave10Box.AutoSize = true;
-            this.Slave10Box.Location = new System.Drawing.Point(498, 54);
+            this.Slave10Box.Location = new System.Drawing.Point(507, 52);
             this.Slave10Box.Margin = new System.Windows.Forms.Padding(2);
             this.Slave10Box.Name = "Slave10Box";
             this.Slave10Box.Size = new System.Drawing.Size(18, 17);
@@ -2504,7 +2524,7 @@ namespace MyDebugApp
             // Slave9Box
             // 
             this.Slave9Box.AutoSize = true;
-            this.Slave9Box.Location = new System.Drawing.Point(350, 108);
+            this.Slave9Box.Location = new System.Drawing.Point(360, 108);
             this.Slave9Box.Margin = new System.Windows.Forms.Padding(2);
             this.Slave9Box.Name = "Slave9Box";
             this.Slave9Box.Size = new System.Drawing.Size(18, 17);
@@ -2514,7 +2534,7 @@ namespace MyDebugApp
             // Slave8Box
             // 
             this.Slave8Box.AutoSize = true;
-            this.Slave8Box.Location = new System.Drawing.Point(350, 82);
+            this.Slave8Box.Location = new System.Drawing.Point(360, 82);
             this.Slave8Box.Margin = new System.Windows.Forms.Padding(2);
             this.Slave8Box.Name = "Slave8Box";
             this.Slave8Box.Size = new System.Drawing.Size(18, 17);
@@ -2524,7 +2544,7 @@ namespace MyDebugApp
             // Slave7Box
             // 
             this.Slave7Box.AutoSize = true;
-            this.Slave7Box.Location = new System.Drawing.Point(350, 55);
+            this.Slave7Box.Location = new System.Drawing.Point(360, 55);
             this.Slave7Box.Margin = new System.Windows.Forms.Padding(2);
             this.Slave7Box.Name = "Slave7Box";
             this.Slave7Box.Size = new System.Drawing.Size(18, 17);
@@ -2534,7 +2554,7 @@ namespace MyDebugApp
             // Slave6Box
             // 
             this.Slave6Box.AutoSize = true;
-            this.Slave6Box.Location = new System.Drawing.Point(203, 108);
+            this.Slave6Box.Location = new System.Drawing.Point(211, 108);
             this.Slave6Box.Margin = new System.Windows.Forms.Padding(2);
             this.Slave6Box.Name = "Slave6Box";
             this.Slave6Box.Size = new System.Drawing.Size(18, 17);
@@ -2544,7 +2564,7 @@ namespace MyDebugApp
             // Slave5Box
             // 
             this.Slave5Box.AutoSize = true;
-            this.Slave5Box.Location = new System.Drawing.Point(203, 80);
+            this.Slave5Box.Location = new System.Drawing.Point(211, 80);
             this.Slave5Box.Margin = new System.Windows.Forms.Padding(2);
             this.Slave5Box.Name = "Slave5Box";
             this.Slave5Box.Size = new System.Drawing.Size(18, 17);
@@ -2554,7 +2574,7 @@ namespace MyDebugApp
             // Slave4Box
             // 
             this.Slave4Box.AutoSize = true;
-            this.Slave4Box.Location = new System.Drawing.Point(203, 55);
+            this.Slave4Box.Location = new System.Drawing.Point(211, 55);
             this.Slave4Box.Margin = new System.Windows.Forms.Padding(2);
             this.Slave4Box.Name = "Slave4Box";
             this.Slave4Box.Size = new System.Drawing.Size(18, 17);
@@ -2608,18 +2628,18 @@ namespace MyDebugApp
             // 
             this.groupBox7.Controls.Add(this.ClearUpdateLogButton);
             this.groupBox7.Controls.Add(this.UpdateLogBox);
-            this.groupBox7.Location = new System.Drawing.Point(605, 716);
+            this.groupBox7.Location = new System.Drawing.Point(619, 716);
             this.groupBox7.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox7.Size = new System.Drawing.Size(652, 186);
+            this.groupBox7.Size = new System.Drawing.Size(652, 198);
             this.groupBox7.TabIndex = 14;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "升级记录";
             // 
             // ClearUpdateLogButton
             // 
-            this.ClearUpdateLogButton.Location = new System.Drawing.Point(14, 146);
+            this.ClearUpdateLogButton.Location = new System.Drawing.Point(14, 165);
             this.ClearUpdateLogButton.Margin = new System.Windows.Forms.Padding(2);
             this.ClearUpdateLogButton.Name = "ClearUpdateLogButton";
             this.ClearUpdateLogButton.Size = new System.Drawing.Size(86, 29);
@@ -2635,27 +2655,8 @@ namespace MyDebugApp
             this.UpdateLogBox.Multiline = true;
             this.UpdateLogBox.Name = "UpdateLogBox";
             this.UpdateLogBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.UpdateLogBox.Size = new System.Drawing.Size(623, 117);
+            this.UpdateLogBox.Size = new System.Drawing.Size(623, 136);
             this.UpdateLogBox.TabIndex = 0;
-            // 
-            // label89
-            // 
-            this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(75, 357);
-            this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(112, 15);
-            this.label89.TabIndex = 86;
-            this.label89.Text = "系统输入总功率";
-            // 
-            // SysPinBox
-            // 
-            this.SysPinBox.Location = new System.Drawing.Point(192, 354);
-            this.SysPinBox.Margin = new System.Windows.Forms.Padding(2);
-            this.SysPinBox.Name = "SysPinBox";
-            this.SysPinBox.ReadOnly = true;
-            this.SysPinBox.Size = new System.Drawing.Size(62, 25);
-            this.SysPinBox.TabIndex = 85;
-            this.SysPinBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // CanTabUserControl
             // 
@@ -2673,7 +2674,7 @@ namespace MyDebugApp
             this.Controls.Add(this.label5);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CanTabUserControl";
-            this.Size = new System.Drawing.Size(1272, 925);
+            this.Size = new System.Drawing.Size(1292, 930);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

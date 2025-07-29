@@ -95,7 +95,7 @@ namespace MyDebugApp
             this.groupBox3.Controls.Add(this.DeviceBandListBox);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.CheckDeviceButton);
-            this.groupBox3.Location = new System.Drawing.Point(28, 270);
+            this.groupBox3.Location = new System.Drawing.Point(28, 310);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -270,7 +270,7 @@ namespace MyDebugApp
             // 
             this.groupBox2.Controls.Add(this.ClearUartDataShowButton);
             this.groupBox2.Controls.Add(this.UartDataBox);
-            this.groupBox2.Location = new System.Drawing.Point(359, 14);
+            this.groupBox2.Location = new System.Drawing.Point(359, 54);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -300,7 +300,7 @@ namespace MyDebugApp
             this.groupBox1.Controls.Add(this.BandListBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.SerialListBox);
-            this.groupBox1.Location = new System.Drawing.Point(28, 14);
+            this.groupBox1.Location = new System.Drawing.Point(28, 54);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -397,7 +397,7 @@ namespace MyDebugApp
             // 
             this.groupBox4.Controls.Add(this.ClearUpdateLogButton);
             this.groupBox4.Controls.Add(this.UpdateLogBox);
-            this.groupBox4.Location = new System.Drawing.Point(359, 565);
+            this.groupBox4.Location = new System.Drawing.Point(359, 605);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
@@ -437,7 +437,7 @@ namespace MyDebugApp
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UartTabUserControl";
-            this.Size = new System.Drawing.Size(1272, 925);
+            this.Size = new System.Drawing.Size(1292, 930);
             this.Load += new System.EventHandler(this.UartTabUserControl_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

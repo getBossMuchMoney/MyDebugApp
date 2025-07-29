@@ -126,6 +126,13 @@
     <Compile Include="CanTabUserControl.Designer.cs">
       <DependentUpon>CanTabUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CanCrossFileQueue.cs" />
+    <Compile Include="CtrlCoeffUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtrlCoeffUserControl.Designer.cs">
+      <DependentUpon>CtrlCoeffUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="HighPrecisionTimer.cs" />
     <Compile Include="ModbusCrc.cs" />
     <Compile Include="DebugForm.cs">
@@ -144,6 +151,9 @@
     </Compile>
     <EmbeddedResource Include="CanTabUserControl.resx">
       <DependentUpon>CanTabUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtrlCoeffUserControl.resx">
+      <DependentUpon>CtrlCoeffUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DebugForm.resx">
       <DependentUpon>DebugForm.cs</DependentUpon>

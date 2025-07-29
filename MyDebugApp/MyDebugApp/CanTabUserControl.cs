@@ -176,12 +176,18 @@ public struct CMD_WD
         set => all = (ushort)((all & ~(0x01U << 6)) | ((value & 0x01U) << 6));
     }
 
+    public ushort ResetCtrlPara
+    {
+        get => (byte)((all >> 7) & 0x01U);
+        set => all = (ushort)((all & ~(0x01U << 7)) | ((value & 0x01U) << 7));
+    }
+
     // 辅助结构体（不实际使用，仅用于占位）
     [StructLayout(LayoutKind.Sequential)]
     private struct BitFields { }
 }
 
-public struct MOD_SET
+unsafe public struct MOD_SET
 {
     public ushort u16_MaxIout;
     public ushort u16_MaxVout;
@@ -191,6 +197,75 @@ public struct MOD_SET
     public ushort u16_SlopeVcv;
     public ushort u16_SlopePcp;
     public CMD_WD u16_CmdWd;
+    public ushort u16_ModEn;
+    public ushort u16_EnCalType;
+    public ushort u16_RunCal;
+    public ushort u16_RefVbus;
+    public ushort u16_FreqMode;
+    public ushort u16_OverloadCoeffi;
+    public ushort u16_OverloadTime;
+    public ushort u16_DutyPfcOpenLoop;
+    public ushort u16_DutyDcDcOpenLoop;
+
+
+    public ushort u16_RefValCCal1;
+    public ushort u16_ActValCCal1;
+    public ushort u16_RefValCCal2;
+    public ushort u16_ActValCCal2;
+    public ushort u16_RefValCCal3;
+    public ushort u16_ActValCCal3;
+    public ushort u16_RefValCCal4;
+    public ushort u16_ActValCCal4;
+    public ushort u16_RefValCCal5;
+    public ushort u16_ActValCCal5;
+    public ushort u16_RefValCCal6;
+    public ushort u16_ActValCCal6;
+    public ushort u16_RefValCCal7;
+    public ushort u16_ActValCCal7;
+    public ushort u16_RefValCCal8;
+    public ushort u16_ActValCCal8;
+
+    public ushort u16_RefValUCal1;
+    public ushort u16_ActValUCal1;
+    public ushort u16_RefValUCal2;
+    public ushort u16_ActValUCal2;
+    public ushort u16_RefValUCal3;
+    public ushort u16_ActValUCal3;
+    public ushort u16_RefValUCal4;
+    public ushort u16_ActValUCal4;
+    public ushort u16_RefValUCal5;
+    public ushort u16_ActValUCal5;
+    public ushort u16_RefValUCal6;
+    public ushort u16_ActValUCal6;
+    public ushort u16_RefValUCal7;
+    public ushort u16_ActValUCal7;
+    public ushort u16_RefValUCal8;
+    public ushort u16_ActValUCal8;
+    public fixed ushort u16_Resv[3];
+
+    public int i32_CtrlK1;
+    public int i32_CtrlK2;
+    public int i32_CtrlK3;
+    public int i32_CtrlK4;
+    public int i32_CtrlK5;
+    public int i32_CtrlK6;
+    public int i32_CtrlK7;
+    public int i32_CtrlK8;
+    public int i32_CtrlK9;
+    public int i32_CtrlK10;
+    public int i32_CtrlK11;
+    public int i32_CtrlK12;
+    public int i32_CtrlK13;
+    public int i32_CtrlK14;
+    public int i32_CtrlK15;
+    public int i32_CtrlK16;
+    public int i32_CtrlK17;
+    public int i32_CtrlK18;
+    public int i32_CtrlK19;
+    public int i32_CtrlK20;
+
+    public int u32_MaxIout;
+    public int u32_MaxVout;
 }
 
 [StructLayout(LayoutKind.Explicit)]
@@ -200,7 +275,7 @@ unsafe public struct U_MOD_SET
     public MOD_SET REG;           // 结构体部分
 
     [FieldOffset(0)]
-    public fixed ushort buff[8]; // 固定大小的 uint16_t 数组
+    public fixed ushort buff[96]; // 固定大小的 uint16_t 数组
 }
 
 
@@ -358,8 +433,7 @@ namespace MyDebugApp
         UInt32 FileSize = 0;
         ModbusCrc CrcInter = new ModbusCrc();
         BlockingCollection<uint[]> UpdateRxQueue = new BlockingCollection<uint[]>(new ConcurrentQueue<uint[]>());
-        BlockingCollection<uint[]> ModAnswQueue = new BlockingCollection<uint[]>(new ConcurrentQueue<uint[]>());
-        BlockingCollection<uint[]> AppTxQueue = new BlockingCollection<uint[]>(new ConcurrentQueue<uint[]>());
+        BlockingCollection<uint[]> ModAnswQueue = new BlockingCollection<uint[]>(new ConcurrentQueue<uint[]>());       
         BlockingCollection<string> ShowStrRxQueue = new BlockingCollection<string>(new ConcurrentQueue<string>());
         byte ChoseUpdateID = 0;
         CancellationTokenSource CanDataRecieveCts = new CancellationTokenSource();
@@ -372,12 +446,16 @@ namespace MyDebugApp
         U_MOD_STA[] modstadata = new U_MOD_STA[12];
         U_MOD_SET[] modsetdata = new U_MOD_SET[12];
         uint ReadSettingFinish = 0;
+        uint ReadCtrlCoeffFinish = 0;
+        uint ReadCalFinish = 0;
         uint[] DevOfflineCheckCnt = new uint[12];
         uint[] SlaverConnectSta = new uint[12];
-
-        public CanTabUserControl()
+        private CtrlCoeffUserControl _CtrlCoeffUserControl;
+        public CanTabUserControl(CtrlCoeffUserControl ctrlCoeffUserControl)
         {
             InitializeComponent();
+            _CtrlCoeffUserControl = ctrlCoeffUserControl;
+            _CtrlCoeffUserControl.OnDeviceSelected += OnCtrlCoeffUserControl_DeviceSelected;
             UInt32 CanDevNum = VCI_FindUsbDevice2(ref boardInfos[0]);
             for (int i = 0; i < CanDevNum; i++)
             {
@@ -396,6 +474,11 @@ namespace MyDebugApp
 
         }
 
+        private void OnCtrlCoeffUserControl_DeviceSelected(object sender, int index)
+        {
+            ChoseDevListBox.SelectedIndex = index;
+
+        }
         private unsafe void DealModAnsw(CancellationToken token)
         {
             uint[] data = new uint[9];
@@ -434,6 +517,18 @@ namespace MyDebugApp
                                 {
                                     ReadSettingFinish = 1;
                                 }
+
+                                if (data[1] == 0x56)
+                                {
+                                    ReadCtrlCoeffFinish = 1;
+                                }
+
+                                if (data[1] == 0x20 || data[1] == 0x30)
+                                {
+                                    ReadCalFinish = 1;
+                                }
+
+
                             }
 
                         }
@@ -508,6 +603,7 @@ namespace MyDebugApp
                         if (ret == 1)
                         {
                             OpenCanDevButton.Text = "关闭分析仪";
+                            while (CanCrossFileQueue.AppTxQueue.TryTake(out uint[] _));
                             CanDevIndex = (uint)CanDevListBox.SelectedIndex;
                             CanPassNum = (uint)CanDevPassNumBox.SelectedIndex;
                             CanDataRecieveCts = new CancellationTokenSource();
@@ -527,16 +623,16 @@ namespace MyDebugApp
                 if (canAppSendThread != null && canAppSendThread.IsAlive)
                 {
                     CanSendCts.Cancel();
-                    while (AppTxQueue.TryTake(out uint[] _)) ;
+                    while (CanCrossFileQueue.AppTxQueue.TryTake(out uint[] _));
                     canAppSendThread.Join();
                 }
 
                 if (canRcvThread != null && canRcvThread.IsAlive)
                 {
                     CanDataRecieveCts.Cancel();
-                    while (ShowStrRxQueue.TryTake(out string _)) ;
-                    while (UpdateRxQueue.TryTake(out uint[] _)) ;
-                    while (ModAnswQueue.TryTake(out uint[] _)) ;
+                    while (ShowStrRxQueue.TryTake(out string _));
+                    while (UpdateRxQueue.TryTake(out uint[] _));
+                    while (ModAnswQueue.TryTake(out uint[] _));
                     canRcvThread.Join();
                 }
 
@@ -711,11 +807,11 @@ namespace MyDebugApp
             if ((FileSize > 0) && (OpenCanDevButton.Text == "关闭分析仪"))
             {
                 while (UpdateRxQueue.TryTake(out uint[] _)) ;
-                while (AppTxQueue.TryTake(out uint[] _)) ;
+                while (CanCrossFileQueue.AppTxQueue.TryTake(out uint[] _)) ;
                 if (canAppSendThread != null && canAppSendThread.IsAlive)
                 {
                     CanSendCts.Cancel();
-                    while (AppTxQueue.TryTake(out uint[] _)) ;
+                    while (CanCrossFileQueue.AppTxQueue.TryTake(out uint[] _)) ;
                     canAppSendThread.Join();
                 }
                 SendFunccode = 0;
@@ -906,7 +1002,7 @@ namespace MyDebugApp
 
             while (!token.IsCancellationRequested)
             {
-                if (AppTxQueue.TryTake(out data))
+                if (CanCrossFileQueue.AppTxQueue.TryTake(out data))
                 {
                     for (uint i = 0; i < 8; i++)
                     {
@@ -937,7 +1033,7 @@ namespace MyDebugApp
                         }
 
                         querydata[0] = id.IdFrame;
-                        AppTxQueue.Add(querydata);
+                        CanCrossFileQueue.AppTxQueue.Add(querydata);
                         if (SendFunccode < 8)
                         {
                             SendFunccode++;
@@ -972,6 +1068,7 @@ namespace MyDebugApp
             ushort u16value = 0;
             short i16value = 0;
             uint u32value = 0;
+            int i32value = 0;
             uint OnlineNum = 0;
             uint ErrNum = 0;
 
@@ -1662,6 +1759,210 @@ namespace MyDebugApp
 
             }
 
+            if (ReadCtrlCoeffFinish == 1)
+            {
+                ReadCtrlCoeffFinish = 0;
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK1;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.PllKpBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK2;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.PllKiBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK3;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.PfcDrKpBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK4;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.PfcDrKiBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK5;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.PfcQrKpBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK6;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.PfcQrKiBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK7;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.PfcDumResBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK10;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.PfcVoltKpBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK11;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.PfcVoltKiBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK12;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.DcCurrKpBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK13;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.DcCurrKiBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK16;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.DcVoltKpBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK17;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.DcVoltKiBox.Text = fvalue.ToString("F4");
+
+                i32value = modsetdata[deviceid - 1].REG.i32_CtrlK18;
+                fvalue = i32value * 0.0001f;
+                _CtrlCoeffUserControl.DroopRatioBox.Text = fvalue.ToString("F4");
+
+            }
+
+            if (ReadCalFinish == 1)
+            {
+                ReadCalFinish = 0;
+                if (_CtrlCoeffUserControl.NoCalButton.Checked == true)
+                {
+                    return;
+                }
+
+                if (_CtrlCoeffUserControl.CalCurrButton.Checked == true)
+                {
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValCCal1;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef1Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValCCal2;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef2Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValCCal3;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef3Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValCCal4;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef4Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValCCal5;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef5Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValCCal6;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef6Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValCCal7;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef7Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValCCal8;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef8Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValCCal1;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct1Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValCCal2;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct2Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValCCal3;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct3Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValCCal4;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct4Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValCCal5;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct5Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValCCal6;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct6Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValCCal7;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct7Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValCCal8;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct8Box.Text = fvalue.ToString("F1");
+                }
+                else
+                {
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValUCal1;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef1Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValUCal2;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef2Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValUCal3;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef3Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValUCal4;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef4Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValUCal5;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef5Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValUCal6;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef6Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValUCal7;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef7Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_RefValUCal8;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalRef8Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValUCal1;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct1Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValUCal2;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct2Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValUCal3;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct3Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValUCal4;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct4Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValUCal5;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct5Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValUCal6;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct6Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValUCal7;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct7Box.Text = fvalue.ToString("F1");
+
+                    u16value = modsetdata[deviceid - 1].REG.u16_ActValUCal8;
+                    fvalue = u16value * 0.1f;
+                    _CtrlCoeffUserControl.CalAct8Box.Text = fvalue.ToString("F1");
+
+                }
+
+            }
 
             u16value = modstadata[deviceid - 1].REG.u16_Vab;
             fvalue = 0.1f * u16value;
@@ -1726,10 +2027,12 @@ namespace MyDebugApp
             u16value = modstadata[deviceid - 1].REG.u16_Vout;
             fvalue = 0.1f * u16value;
             VoutBox.Text = fvalue.ToString("F1");
+            _CtrlCoeffUserControl.VoutBox.Text = fvalue.ToString("F1");
 
             i16value = (short)modstadata[deviceid - 1].REG.u16_Idcout;
             fvalue = 0.1f * i16value;
             IoutBox.Text = fvalue.ToString("F1");
+            _CtrlCoeffUserControl.IoutBox.Text = fvalue.ToString("F1");
 
             switch (modstadata[deviceid - 1].REG.u16_WorkMode)
             {
@@ -1853,13 +2156,13 @@ namespace MyDebugApp
 
             data[1] = 0;
             data[2] = 3;
-            AppTxQueue.Add(data);
+            CanCrossFileQueue.AppTxQueue.Add(data);
             data1[1] = 3;
             data1[2] = 3;
-            AppTxQueue.Add(data1);
+            CanCrossFileQueue.AppTxQueue.Add(data1);
             data2[1] = 6;
             data2[2] = 2;
-            AppTxQueue.Add(data2);
+            CanCrossFileQueue.AppTxQueue.Add(data2);
         }
 
         private void ReadSettingButton_Click(object sender, EventArgs e)
@@ -1910,7 +2213,7 @@ namespace MyDebugApp
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -1959,7 +2262,7 @@ namespace MyDebugApp
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2029,7 +2332,7 @@ namespace MyDebugApp
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                CanCrossFileQueue.AppTxQueue.Add(data);
             }
         }
 
@@ -2076,7 +2379,7 @@ namespace MyDebugApp
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2125,7 +2428,7 @@ namespace MyDebugApp
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2174,7 +2477,7 @@ namespace MyDebugApp
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2182,10 +2485,10 @@ namespace MyDebugApp
 
         private unsafe void SetMaxCurrButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             float value = 0;
+            ushort u16value = 0;
 
             if (float.TryParse(MaxCurrBox.Text, out value))
             {
@@ -2232,10 +2535,10 @@ namespace MyDebugApp
                 data[1] = 0;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxIout = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxIout;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                u16value = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxIout;
+                data[3] = (uint)(u16value >> 8);
+                data[4] = (uint)(u16value & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2243,10 +2546,10 @@ namespace MyDebugApp
 
         private unsafe void SetMaxVoltButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             float value = 0;
+            ushort u16value = 0;
 
             if (float.TryParse(MaxVoltBox.Text, out value))
             {
@@ -2293,10 +2596,10 @@ namespace MyDebugApp
                 data[1] = 1;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxVout = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxVout;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                u16value = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxVout;
+                data[3] = (uint)(u16value >> 8);
+                data[4] = (uint)(u16value & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2304,10 +2607,10 @@ namespace MyDebugApp
 
         private unsafe void SetMaxPowerButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             float value = 0;
+            ushort u16value = 0;
 
             if (float.TryParse(MaxPowerBox.Text, out value))
             {
@@ -2354,10 +2657,10 @@ namespace MyDebugApp
                 data[1] = 2;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxPout = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxPout;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                u16value = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxPout;
+                data[3] = (uint)(u16value >> 8);
+                data[4] = (uint)(u16value & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2365,10 +2668,10 @@ namespace MyDebugApp
 
         private unsafe void SetCurrStepButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             float value = 0;
+            ushort u16value = 0;
 
             if (float.TryParse(CurrStepBox.Text, out value))
             {
@@ -2415,10 +2718,10 @@ namespace MyDebugApp
                 data[1] = 4;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeIcc = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeIcc;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                u16value = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeIcc;
+                data[3] = (uint)(u16value >> 8);
+                data[4] = (uint)(u16value & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2426,10 +2729,10 @@ namespace MyDebugApp
 
         private unsafe void SetVoltStepButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             float value = 0;
+            ushort u16value = 0;
 
             if (float.TryParse(VoltStepBox.Text, out value))
             {
@@ -2476,10 +2779,10 @@ namespace MyDebugApp
                 data[1] = 5;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeVcv = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeVcv;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                u16value = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeVcv;
+                data[3] = (uint)(u16value >> 8);
+                data[4] = (uint)(u16value & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2487,10 +2790,10 @@ namespace MyDebugApp
 
         private unsafe void SetPowerStepButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             float value = 0;
+            ushort u16value = 0;
 
             if (float.TryParse(PowerStepBox.Text, out value))
             {
@@ -2537,10 +2840,10 @@ namespace MyDebugApp
                 data[1] = 6;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopePcp = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopePcp;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                u16value = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopePcp;
+                data[3] = (uint)(u16value >> 8);
+                data[4] = (uint)(u16value & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2585,7 +2888,7 @@ namespace MyDebugApp
                 cmd.ClearErr = 1;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2644,7 +2947,7 @@ namespace MyDebugApp
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
 
@@ -2654,6 +2957,11 @@ namespace MyDebugApp
         private void ClearUpdateLogButton_Click(object sender, EventArgs e)
         {
             UpdateLogBox.Clear();
+        }
+
+        private void ChoseDevListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CtrlCoeffUserControl.ChoseDevListBox.SelectedIndex = ChoseDevListBox.SelectedIndex;
         }
 
         private void UpdateResaultLog(byte devID, bool resault)
