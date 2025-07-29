@@ -1750,7 +1750,7 @@ namespace MyDebugApp
             // label89
             // 
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(83, 365);
+            this.label89.Location = new System.Drawing.Point(81, 365);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(112, 15);
             this.label89.TabIndex = 86;
@@ -1758,7 +1758,7 @@ namespace MyDebugApp
             // 
             // SysPinBox
             // 
-            this.SysPinBox.Location = new System.Drawing.Point(200, 357);
+            this.SysPinBox.Location = new System.Drawing.Point(200, 356);
             this.SysPinBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysPinBox.Name = "SysPinBox";
             this.SysPinBox.ReadOnly = true;
@@ -1825,7 +1825,7 @@ namespace MyDebugApp
             // label83
             // 
             this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(121, 332);
+            this.label83.Location = new System.Drawing.Point(120, 330);
             this.label83.Name = "label83";
             this.label83.Size = new System.Drawing.Size(75, 15);
             this.label83.TabIndex = 78;
@@ -1853,7 +1853,7 @@ namespace MyDebugApp
             // 
             // SysIaBox
             // 
-            this.SysIaBox.Location = new System.Drawing.Point(200, 325);
+            this.SysIaBox.Location = new System.Drawing.Point(200, 324);
             this.SysIaBox.Margin = new System.Windows.Forms.Padding(2);
             this.SysIaBox.Name = "SysIaBox";
             this.SysIaBox.ReadOnly = true;
@@ -1994,7 +1994,7 @@ namespace MyDebugApp
             // label69
             // 
             this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(84, 296);
+            this.label69.Location = new System.Drawing.Point(84, 293);
             this.label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(112, 15);
