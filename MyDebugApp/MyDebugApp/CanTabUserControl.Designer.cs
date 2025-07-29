@@ -1422,7 +1422,7 @@ namespace MyDebugApp
             this.CPButton.TabIndex = 21;
             this.CPButton.Text = "CP模式";
             this.CPButton.UseVisualStyleBackColor = true;
-            this.CPButton.CheckedChanged += new System.EventHandler(this.CPButton_CheckedChanged);
+            this.CPButton.Click += new System.EventHandler(this.CPButton_Click);
             // 
             // CVButton
             // 
@@ -1434,7 +1434,7 @@ namespace MyDebugApp
             this.CVButton.TabIndex = 20;
             this.CVButton.Text = "CV模式";
             this.CVButton.UseVisualStyleBackColor = true;
-            this.CVButton.CheckedChanged += new System.EventHandler(this.CVButton_CheckedChanged);
+            this.CVButton.Click += new System.EventHandler(this.CVButton_Click);
             // 
             // CCButton
             // 
@@ -1446,7 +1446,7 @@ namespace MyDebugApp
             this.CCButton.TabIndex = 19;
             this.CCButton.Text = "CC模式";
             this.CCButton.UseVisualStyleBackColor = true;
-            this.CCButton.CheckedChanged += new System.EventHandler(this.CCButton_CheckedChanged);
+            this.CCButton.Click += new System.EventHandler(this.CCButton_Click);
             // 
             // SetPowerStepButton
             // 
@@ -1611,7 +1611,7 @@ namespace MyDebugApp
             this.DCDcOlEnBox.TabIndex = 2;
             this.DCDcOlEnBox.Text = "DC开环";
             this.DCDcOlEnBox.UseVisualStyleBackColor = true;
-            this.DCDcOlEnBox.CheckedChanged += new System.EventHandler(this.DCDcOlEnBox_CheckedChanged);
+            this.DCDcOlEnBox.Click += new System.EventHandler(this.DCDcOlEnBox_Click);
             // 
             // BrdctSendBox
             // 
@@ -1647,7 +1647,7 @@ namespace MyDebugApp
             this.PfcOlEnBox.TabIndex = 1;
             this.PfcOlEnBox.Text = "PFC开环";
             this.PfcOlEnBox.UseVisualStyleBackColor = true;
-            this.PfcOlEnBox.CheckedChanged += new System.EventHandler(this.PfcOlEnBox_CheckedChanged);
+            this.PfcOlEnBox.Click += new System.EventHandler(this.PfcOlEnBox_Click);
             // 
             // groupBox6
             // 

@@ -368,13 +368,13 @@ namespace MyDebugApp
 
         private void DcCurrAverKpButton_Click(object sender, EventArgs e)
         {
-           
+
 
         }
 
         private void DcCurrAverKiButton_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -474,7 +474,7 @@ namespace MyDebugApp
         private void ReadCoeffButton_Click(object sender, EventArgs e)
         {
             CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data1 = new uint[] { 0,0,0,0,0,0,0,0,0};
+            uint[] data1 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             uint[] data2 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             uint[] data3 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             uint[] data4 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -1270,57 +1270,6 @@ namespace MyDebugApp
 
         }
 
-        private void NoCalButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-            id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-            id.FuncCode = 0x20;
-            id.SlaverFlag = 1;
-            data[0] = id.IdFrame;
-            data[1] = 0x09;
-            data[2] = 0x01;
-            data[3] = 0;
-            data[4] = 0;
-            CanCrossFileQueue.AppTxQueue.Add(data);
-
-        }
-
-        private void CalCurrButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-            id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-            id.FuncCode = 0x20;
-            id.SlaverFlag = 1;
-            data[0] = id.IdFrame;
-            data[1] = 0x09;
-            data[2] = 0x01;
-            data[3] = 0;
-            data[4] = 1;
-            CanCrossFileQueue.AppTxQueue.Add(data);
-
-        }
-
-        private void CalVoltButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-            id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-            id.FuncCode = 0x20;
-            id.SlaverFlag = 1;
-            data[0] = id.IdFrame;
-            data[1] = 0x09;
-            data[2] = 0x01;
-            data[3] = 0;
-            data[4] = 2;
-            CanCrossFileQueue.AppTxQueue.Add(data);
-
-        }
-
         private void RunCalButton_Click(object sender, EventArgs e)
         {
             CanAppId id = new CanAppId() { IdFrame = 0 };
@@ -1474,6 +1423,56 @@ namespace MyDebugApp
             data6[2] = 0x01;
             CanCrossFileQueue.AppTxQueue.Add(data6);
 
+        }
+
+        private void NoCalButton_Click(object sender, EventArgs e)
+        {
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+            id.FuncCode = 0x20;
+            id.SlaverFlag = 1;
+            data[0] = id.IdFrame;
+            data[1] = 0x09;
+            data[2] = 0x01;
+            data[3] = 0;
+            data[4] = 0;
+            CanCrossFileQueue.AppTxQueue.Add(data);
+
+        }
+
+        private void CalCurrButton_Click(object sender, EventArgs e)
+        {
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+            id.FuncCode = 0x20;
+            id.SlaverFlag = 1;
+            data[0] = id.IdFrame;
+            data[1] = 0x09;
+            data[2] = 0x01;
+            data[3] = 0;
+            data[4] = 1;
+            CanCrossFileQueue.AppTxQueue.Add(data);
+
+        }
+
+        private void CalVoltButton_Click(object sender, EventArgs e)
+        {
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+            id.FuncCode = 0x20;
+            id.SlaverFlag = 1;
+            data[0] = id.IdFrame;
+            data[1] = 0x09;
+            data[2] = 0x01;
+            data[3] = 0;
+            data[4] = 2;
+            CanCrossFileQueue.AppTxQueue.Add(data);
         }
     }
 }
