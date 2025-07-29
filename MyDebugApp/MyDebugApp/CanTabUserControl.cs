@@ -2266,223 +2266,7 @@ namespace MyDebugApp
 
             }
 
-        }
-
-        private unsafe void PfcOlEnBox_CheckedChanged(object sender, EventArgs e)
-        {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-
-            if (BrdctSendBox.Checked == true)
-            {
-
-                SetFlag = 1;
-                setFunccode = 1;
-
-                if (PfcOlEnBox.Checked == true)
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        modsetdata[i].REG.u16_CmdWd.PfcOL = 1;
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        modsetdata[i].REG.u16_CmdWd.PfcOL = 0;
-                    }
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
-                }
-
-            }
-            else
-            {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 7;
-                data[2] = 1;
-                if (PfcOlEnBox.Checked == true)
-                {
-                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 1;
-                }
-                else
-                {
-                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 0;
-                }
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                CanCrossFileQueue.AppTxQueue.Add(data);
-            }
-        }
-
-        private unsafe void CCButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            if (BrdctSendBox.Checked)
-            {
-                SetFlag = 1;
-                setFunccode = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_OutputMode = 0;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
-                }
-
-            }
-            else
-            {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 3;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 0;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                CanCrossFileQueue.AppTxQueue.Add(data);
-
-            }
-
-        }
-
-        private unsafe void CVButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            if (BrdctSendBox.Checked)
-            {
-                SetFlag = 1;
-                setFunccode = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_OutputMode = 1;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
-                }
-
-            }
-            else
-            {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 3;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 1;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                CanCrossFileQueue.AppTxQueue.Add(data);
-
-            }
-
-        }
-
-        private unsafe void CPButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            if (BrdctSendBox.Checked)
-            {
-                SetFlag = 1;
-                setFunccode = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_OutputMode = 2;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
-                }
-
-            }
-            else
-            {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 3;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 2;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                CanCrossFileQueue.AppTxQueue.Add(data);
-
-            }
-
-        }
-
+        }    
         private unsafe void SetMaxCurrButton_Click(object sender, EventArgs e)
         {
             CanAppId id = new CanAppId() { IdFrame = 0 };
@@ -2894,7 +2678,228 @@ namespace MyDebugApp
 
         }
 
-        private unsafe void DCDcOlEnBox_CheckedChanged(object sender, EventArgs e)
+        private void ClearUpdateLogButton_Click(object sender, EventArgs e)
+        {
+            UpdateLogBox.Clear();
+        }
+
+        private void ChoseDevListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CtrlCoeffUserControl.ChoseDevListBox.SelectedIndex = ChoseDevListBox.SelectedIndex;
+        }
+
+        private unsafe void CCButton_Click(object sender, EventArgs e)
+        {
+            CMD_WD cmd = new CMD_WD() { all = 0 };
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            if (BrdctSendBox.Checked)
+            {
+                SetFlag = 1;
+                setFunccode = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    modsetdata[i].REG.u16_OutputMode = 0;
+                }
+
+                int index = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    if (SlaverConnectSta[i] == 1)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
+                }
+
+            }
+            else
+            {
+                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+                id.FuncCode = 0x20;
+                id.SlaverFlag = 1;
+                data[0] = id.IdFrame;
+                data[1] = 3;
+                data[2] = 1;
+                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 0;
+                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
+                data[3] = (uint)(cmd.all >> 8);
+                data[4] = (uint)(cmd.all & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
+
+            }
+        }
+
+        private unsafe void CVButton_Click(object sender, EventArgs e)
+        {
+            CMD_WD cmd = new CMD_WD() { all = 0 };
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            if (BrdctSendBox.Checked)
+            {
+                SetFlag = 1;
+                setFunccode = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    modsetdata[i].REG.u16_OutputMode = 1;
+                }
+
+                int index = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    if (SlaverConnectSta[i] == 1)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
+                }
+
+            }
+            else
+            {
+                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+                id.FuncCode = 0x20;
+                id.SlaverFlag = 1;
+                data[0] = id.IdFrame;
+                data[1] = 3;
+                data[2] = 1;
+                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 1;
+                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
+                data[3] = (uint)(cmd.all >> 8);
+                data[4] = (uint)(cmd.all & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
+
+            }
+        }
+
+        private unsafe void CPButton_Click(object sender, EventArgs e)
+        {
+            CMD_WD cmd = new CMD_WD() { all = 0 };
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            if (BrdctSendBox.Checked)
+            {
+                SetFlag = 1;
+                setFunccode = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    modsetdata[i].REG.u16_OutputMode = 2;
+                }
+
+                int index = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    if (SlaverConnectSta[i] == 1)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
+                }
+
+            }
+            else
+            {
+                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+                id.FuncCode = 0x20;
+                id.SlaverFlag = 1;
+                data[0] = id.IdFrame;
+                data[1] = 3;
+                data[2] = 1;
+                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 2;
+                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
+                data[3] = (uint)(cmd.all >> 8);
+                data[4] = (uint)(cmd.all & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
+
+            }
+        }
+
+        private unsafe void PfcOlEnBox_Click(object sender, EventArgs e)
+        {
+            CMD_WD cmd = new CMD_WD() { all = 0 };
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+
+            if (BrdctSendBox.Checked == true)
+            {
+                SetFlag = 1;
+                setFunccode = 1;
+
+                if (PfcOlEnBox.Checked == true)
+                {
+                    for (int i = 0; i < 12; i++)
+                    {
+                        modsetdata[i].REG.u16_CmdWd.PfcOL = 1;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 12; i++)
+                    {
+                        modsetdata[i].REG.u16_CmdWd.PfcOL = 0;
+                    }
+                }
+
+                int index = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    if (SlaverConnectSta[i] == 1)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
+                }
+
+            }
+            else
+            {
+                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+                id.FuncCode = 0x20;
+                id.SlaverFlag = 1;
+                data[0] = id.IdFrame;
+                data[1] = 7;
+                data[2] = 1;
+                if (PfcOlEnBox.Checked == true)
+                {
+                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 1;
+                }
+                else
+                {
+                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 0;
+                }
+                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
+                data[3] = (uint)(cmd.all >> 8);
+                data[4] = (uint)(cmd.all & 0xFF);
+                CanCrossFileQueue.AppTxQueue.Add(data);
+            }
+        }
+
+        private unsafe void DCDcOlEnBox_Click(object sender, EventArgs e)
         {
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
@@ -2950,18 +2955,6 @@ namespace MyDebugApp
                 CanCrossFileQueue.AppTxQueue.Add(data);
 
             }
-
-
-        }
-
-        private void ClearUpdateLogButton_Click(object sender, EventArgs e)
-        {
-            UpdateLogBox.Clear();
-        }
-
-        private void ChoseDevListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _CtrlCoeffUserControl.ChoseDevListBox.SelectedIndex = ChoseDevListBox.SelectedIndex;
         }
 
         private void UpdateResaultLog(byte devID, bool resault)

@@ -1007,7 +1007,7 @@ namespace MyDebugApp
             this.CalVoltButton.TabIndex = 56;
             this.CalVoltButton.Text = "电压校准";
             this.CalVoltButton.UseVisualStyleBackColor = true;
-            this.CalVoltButton.CheckedChanged += new System.EventHandler(this.CalVoltButton_CheckedChanged);
+            this.CalVoltButton.Click += new System.EventHandler(this.CalVoltButton_Click);
             // 
             // CalCurrButton
             // 
@@ -1018,7 +1018,7 @@ namespace MyDebugApp
             this.CalCurrButton.TabIndex = 55;
             this.CalCurrButton.Text = "电流校准";
             this.CalCurrButton.UseVisualStyleBackColor = true;
-            this.CalCurrButton.CheckedChanged += new System.EventHandler(this.CalCurrButton_CheckedChanged);
+            this.CalCurrButton.Click += new System.EventHandler(this.CalCurrButton_Click);
             // 
             // NoCalButton
             // 
@@ -1031,7 +1031,7 @@ namespace MyDebugApp
             this.NoCalButton.TabStop = true;
             this.NoCalButton.Text = "无校准";
             this.NoCalButton.UseVisualStyleBackColor = true;
-            this.NoCalButton.CheckedChanged += new System.EventHandler(this.NoCalButton_CheckedChanged);
+            this.NoCalButton.Click += new System.EventHandler(this.NoCalButton_Click);
             // 
             // Cal8ActButton
             // 
