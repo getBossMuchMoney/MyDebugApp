@@ -513,17 +513,17 @@ namespace MyDebugApp
                                     modsetdata[id.SrcId - 1].buff[data[1] + i] = (ushort)((data[i * 2 + 3] << 8) | (data[i * 2 + 4]));
                                 }
 
-                                if (data[1] == 6)
+                                if (data[1] == 6 && data[2] == 2)
                                 {
                                     ReadSettingFinish = 1;
                                 }
 
-                                if (data[1] == 0x56)
+                                if (data[1] == 0x55 && data[2] == 3)
                                 {
                                     ReadCtrlCoeffFinish = 1;
                                 }
 
-                                if (data[1] == 0x20 || data[1] == 0x30)
+                                if ((data[1] == 0x20 || data[1] == 0x30) && (data[2] == 1))
                                 {
                                     ReadCalFinish = 1;
                                 }

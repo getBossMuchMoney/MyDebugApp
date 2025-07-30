@@ -484,11 +484,6 @@ namespace MyDebugApp
             uint[] data8 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             uint[] data9 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             uint[] data10 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            uint[] data11 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            uint[] data12 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            uint[] data13 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            uint[] data14 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            uint[] data15 = new uint[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
             id.DesId = 0;
             id.FuncCode = 0x21;
@@ -497,80 +492,53 @@ namespace MyDebugApp
 
             data1[0] = id.IdFrame;
             data1[1] = 0x34;
-            data1[2] = 0x02;
+            data1[2] = 0x03;
             CanCrossFileQueue.AppTxQueue.Add(data1);
 
             data2[0] = id.IdFrame;
-            data2[1] = 0x36;
-            data2[2] = 0x02;
+            data2[1] = 0x37;
+            data2[2] = 0x03;
             CanCrossFileQueue.AppTxQueue.Add(data2);
 
             data3[0] = id.IdFrame;
-            data3[1] = 0x38;
-            data3[2] = 0x02;
+            data3[1] = 0x3A;
+            data3[2] = 0x03;
             CanCrossFileQueue.AppTxQueue.Add(data3);
 
             data4[0] = id.IdFrame;
-            data4[1] = 0x3a;
-            data4[2] = 0x02;
+            data4[1] = 0x3D;
+            data4[2] = 0x03;
             CanCrossFileQueue.AppTxQueue.Add(data4);
 
             data5[0] = id.IdFrame;
-            data5[1] = 0x3c;
+            data5[1] = 0x40;
             data5[2] = 0x02;
             CanCrossFileQueue.AppTxQueue.Add(data5);
 
             data6[0] = id.IdFrame;
-            data6[1] = 0x3e;
-            data6[2] = 0x02;
+            data6[1] = 0x46;
+            data6[2] = 0x03;
             CanCrossFileQueue.AppTxQueue.Add(data6);
 
             data7[0] = id.IdFrame;
-            data7[1] = 0x40;
-            data7[2] = 0x02;
+            data7[1] = 0x49;
+            data7[2] = 0x03;
             CanCrossFileQueue.AppTxQueue.Add(data7);
 
             data8[0] = id.IdFrame;
-            data8[1] = 0x44;
+            data8[1] = 0x4C;
             data8[2] = 0x02;
             CanCrossFileQueue.AppTxQueue.Add(data8);
 
             data9[0] = id.IdFrame;
-            data9[1] = 0x46;
-            data9[2] = 0x02;
+            data9[1] = 0x52;
+            data9[2] = 0x03;
             CanCrossFileQueue.AppTxQueue.Add(data9);
 
             data10[0] = id.IdFrame;
-            data10[1] = 0x48;
-            data10[2] = 0x02;
+            data10[1] = 0x55;
+            data10[2] = 0x03;
             CanCrossFileQueue.AppTxQueue.Add(data10);
-
-            data11[0] = id.IdFrame;
-            data11[1] = 0x4a;
-            data11[2] = 0x02;
-            CanCrossFileQueue.AppTxQueue.Add(data11);
-
-            data12[0] = id.IdFrame;
-            data12[1] = 0x4c;
-            data12[2] = 0x02;
-            CanCrossFileQueue.AppTxQueue.Add(data12);
-
-            data13[0] = id.IdFrame;
-            data13[1] = 0x52;
-            data13[2] = 0x02;
-            CanCrossFileQueue.AppTxQueue.Add(data13);
-
-            data14[0] = id.IdFrame;
-            data14[1] = 0x54;
-            data14[2] = 0x02;
-            CanCrossFileQueue.AppTxQueue.Add(data14);
-
-            data15[0] = id.IdFrame;
-            data15[1] = 0x56;
-            data15[2] = 0x02;
-            CanCrossFileQueue.AppTxQueue.Add(data15);
-
-
         }
 
         private void SaveCoeffButton_Click(object sender, EventArgs e)
