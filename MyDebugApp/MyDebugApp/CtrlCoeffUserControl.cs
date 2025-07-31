@@ -234,17 +234,6 @@ namespace MyDebugApp
             data[6] = (u32value >> 16) & 0xFF;
             CanCrossFileQueue.AppTxQueue.Add(data);
         }
-
-        private void PfcKdButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PfcKzButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void PfcVoltKpButton_Click(object sender, EventArgs e)
         {
             CanAppId id = new CanAppId() { IdFrame = 0 };
