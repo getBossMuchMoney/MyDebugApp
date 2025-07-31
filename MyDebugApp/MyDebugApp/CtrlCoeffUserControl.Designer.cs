@@ -436,7 +436,6 @@ namespace MyDebugApp
             this.PfcKzButton.TabIndex = 14;
             this.PfcKzButton.Text = "设定";
             this.PfcKzButton.UseVisualStyleBackColor = true;
-            this.PfcKzButton.Click += new System.EventHandler(this.PfcKzButton_Click);
             // 
             // PfcKzBox
             // 
@@ -454,7 +453,6 @@ namespace MyDebugApp
             this.PfcKdButton.TabIndex = 12;
             this.PfcKdButton.Text = "设定";
             this.PfcKdButton.UseVisualStyleBackColor = true;
-            this.PfcKdButton.Click += new System.EventHandler(this.PfcKdButton_Click);
             // 
             // PfcKdBox
             // 
