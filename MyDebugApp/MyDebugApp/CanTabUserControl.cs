@@ -2175,6 +2175,12 @@ namespace MyDebugApp
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            if (OpenCanDevButton.Text == "打开分析仪")
+            {
+                return;
+            }
+
             if (BrdctSendBox.Checked)
             {
                 SetFlag = 1;
@@ -2224,6 +2230,12 @@ namespace MyDebugApp
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            if (OpenCanDevButton.Text == "打开分析仪")
+            {
+                return;
+            }
+
             if (BrdctSendBox.Checked)
             {
                 SetFlag = 1;
@@ -2638,6 +2650,12 @@ namespace MyDebugApp
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            if (OpenCanDevButton.Text == "打开分析仪")
+            {
+                return;
+            }
+
             if (BrdctSendBox.Checked)
             {
                 SetFlag = 1;
@@ -2693,6 +2711,12 @@ namespace MyDebugApp
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            if (OpenCanDevButton.Text == "打开分析仪")
+            {
+                return;
+            }
+
             if (BrdctSendBox.Checked)
             {
                 SetFlag = 1;
@@ -2741,6 +2765,12 @@ namespace MyDebugApp
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            if (OpenCanDevButton.Text == "打开分析仪")
+            {
+                return;
+            }
+
             if (BrdctSendBox.Checked)
             {
                 SetFlag = 1;
@@ -2789,6 +2819,12 @@ namespace MyDebugApp
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            if (OpenCanDevButton.Text == "打开分析仪")
+            {
+                return;
+            }
+
             if (BrdctSendBox.Checked)
             {
                 SetFlag = 1;
@@ -2837,6 +2873,11 @@ namespace MyDebugApp
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            if (OpenCanDevButton.Text == "打开分析仪")
+            {
+                return;
+            }
 
 
             if (BrdctSendBox.Checked == true)
@@ -2904,6 +2945,11 @@ namespace MyDebugApp
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            if (OpenCanDevButton.Text == "打开分析仪")
+            {
+                return;
+            }
 
             if (BrdctSendBox.Checked)
             {
