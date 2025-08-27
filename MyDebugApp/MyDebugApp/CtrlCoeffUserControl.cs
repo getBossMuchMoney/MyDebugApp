@@ -1432,5 +1432,89 @@ namespace MyDebugApp
             data[4] = 2;
             CanCrossFileQueue.AppTxQueue.Add(data);
         }
+
+        private void ConvButton_Click(object sender, EventArgs e)
+        {
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            byte value = 0;
+            if (byte.TryParse(AckStsBox.Text, System.Globalization.NumberStyles.HexNumber, null, out value))
+            {
+                id.AckSts = value;
+            }
+            else
+            {
+                MessageBox.Show("AckSts输入非法参数", "错误!");
+            }
+
+            if (byte.TryParse(ActFlagBox.Text, System.Globalization.NumberStyles.HexNumber, null, out value))
+            {
+                id.ActFlag = value;
+            }
+            else
+            {
+                
+            }
+
+            if (byte.TryParse(FuncCodeBox.Text, System.Globalization.NumberStyles.HexNumber, null, out value))
+            {
+                id.FuncCode = value;
+            }
+            else
+            {
+                MessageBox.Show("FuncCode输入非法参数", "错误!");
+            }
+
+            if (byte.TryParse(DesIdBox.Text, System.Globalization.NumberStyles.HexNumber, null, out value))
+            {
+                id.DesId = value;
+            }
+            else
+            {
+                MessageBox.Show("DesId输入非法参数", "错误!");
+            }
+
+            if (byte.TryParse(SlaverFlagBox.Text, System.Globalization.NumberStyles.HexNumber, null, out value))
+            {
+                id.SlaverFlag = value;
+            }
+            else
+            {
+                MessageBox.Show("SlaverFlag输入非法参数", "错误!");
+            }
+
+            if (byte.TryParse(SrcIdBox.Text, System.Globalization.NumberStyles.HexNumber, null, out value))
+            {
+                id.SrcId= value;
+            }
+            else
+            {
+                MessageBox.Show("SrcId输入非法参数", "错误!");
+            }
+
+            IdShowBox.Text = id.IdFrame.ToString("X");
+
+
+        }
+
+        private void AnalyIdButton_Click(object sender, EventArgs e)
+        {
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint value = 0;
+
+            if (uint.TryParse(IdShowBox.Text, System.Globalization.NumberStyles.HexNumber, null, out value))
+            {
+                id.IdFrame = value;
+                AckStsBox.Text = id.AckSts.ToString("X");
+                ActFlagBox.Text = id.ActFlag.ToString("X");
+                FuncCodeBox.Text = id.FuncCode.ToString("X");
+                DesIdBox.Text = id.DesId.ToString("X");
+                SlaverFlagBox.Text = id.SlaverFlag.ToString("X");
+                SrcIdBox.Text = id.SrcId.ToString("X");
+            }
+            else
+            {
+                MessageBox.Show("Id输入非法参数", "错误!");
+            }
+        }
     }
 }

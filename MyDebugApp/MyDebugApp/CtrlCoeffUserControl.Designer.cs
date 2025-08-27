@@ -156,6 +156,23 @@ namespace MyDebugApp
             this.IoutBox = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.AnalyIdButton = new System.Windows.Forms.Button();
+            this.ConvButton = new System.Windows.Forms.Button();
+            this.IdShowBox = new System.Windows.Forms.TextBox();
+            this.SrcIdBox = new System.Windows.Forms.TextBox();
+            this.SlaverFlagBox = new System.Windows.Forms.TextBox();
+            this.DesIdBox = new System.Windows.Forms.TextBox();
+            this.FuncCodeBox = new System.Windows.Forms.TextBox();
+            this.ActFlagBox = new System.Windows.Forms.TextBox();
+            this.AckStsBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -165,6 +182,7 @@ namespace MyDebugApp
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1458,10 +1476,181 @@ namespace MyDebugApp
             this.label32.TabIndex = 43;
             this.label32.Text = "输出电流Iout";
             // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.label39);
+            this.groupBox10.Controls.Add(this.label38);
+            this.groupBox10.Controls.Add(this.label37);
+            this.groupBox10.Controls.Add(this.label36);
+            this.groupBox10.Controls.Add(this.label35);
+            this.groupBox10.Controls.Add(this.label34);
+            this.groupBox10.Controls.Add(this.label33);
+            this.groupBox10.Controls.Add(this.AnalyIdButton);
+            this.groupBox10.Controls.Add(this.ConvButton);
+            this.groupBox10.Controls.Add(this.IdShowBox);
+            this.groupBox10.Controls.Add(this.SrcIdBox);
+            this.groupBox10.Controls.Add(this.SlaverFlagBox);
+            this.groupBox10.Controls.Add(this.DesIdBox);
+            this.groupBox10.Controls.Add(this.FuncCodeBox);
+            this.groupBox10.Controls.Add(this.ActFlagBox);
+            this.groupBox10.Controls.Add(this.AckStsBox);
+            this.groupBox10.Location = new System.Drawing.Point(610, 618);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(668, 292);
+            this.groupBox10.TabIndex = 47;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "ID转换";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(462, 51);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(47, 15);
+            this.label39.TabIndex = 60;
+            this.label39.Text = "ID 0x";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(268, 160);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(71, 15);
+            this.label38.TabIndex = 59;
+            this.label38.Text = "SrcId 0x";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(228, 109);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(111, 15);
+            this.label37.TabIndex = 58;
+            this.label37.Text = "SlaverFlag 0x";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(268, 51);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(71, 15);
+            this.label36.TabIndex = 57;
+            this.label36.Text = "DesId 0x";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(5, 165);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(95, 15);
+            this.label35.TabIndex = 56;
+            this.label35.Text = "FuncCode 0x";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(13, 105);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(87, 15);
+            this.label34.TabIndex = 55;
+            this.label34.Text = "ActFlag 0x";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(21, 51);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(79, 15);
+            this.label33.TabIndex = 54;
+            this.label33.Text = "AckSts 0x";
+            // 
+            // AnalyIdButton
+            // 
+            this.AnalyIdButton.Location = new System.Drawing.Point(515, 174);
+            this.AnalyIdButton.Name = "AnalyIdButton";
+            this.AnalyIdButton.Size = new System.Drawing.Size(75, 23);
+            this.AnalyIdButton.TabIndex = 53;
+            this.AnalyIdButton.Text = "id解析";
+            this.AnalyIdButton.UseVisualStyleBackColor = true;
+            this.AnalyIdButton.Click += new System.EventHandler(this.AnalyIdButton_Click);
+            // 
+            // ConvButton
+            // 
+            this.ConvButton.Location = new System.Drawing.Point(515, 120);
+            this.ConvButton.Name = "ConvButton";
+            this.ConvButton.Size = new System.Drawing.Size(75, 23);
+            this.ConvButton.TabIndex = 52;
+            this.ConvButton.Text = "转换id";
+            this.ConvButton.UseVisualStyleBackColor = true;
+            this.ConvButton.Click += new System.EventHandler(this.ConvButton_Click);
+            // 
+            // IdShowBox
+            // 
+            this.IdShowBox.Location = new System.Drawing.Point(515, 48);
+            this.IdShowBox.Name = "IdShowBox";
+            this.IdShowBox.Size = new System.Drawing.Size(100, 25);
+            this.IdShowBox.TabIndex = 51;
+            this.IdShowBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // SrcIdBox
+            // 
+            this.SrcIdBox.Location = new System.Drawing.Point(345, 156);
+            this.SrcIdBox.Name = "SrcIdBox";
+            this.SrcIdBox.Size = new System.Drawing.Size(100, 25);
+            this.SrcIdBox.TabIndex = 50;
+            this.SrcIdBox.Text = "0";
+            this.SrcIdBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // SlaverFlagBox
+            // 
+            this.SlaverFlagBox.Location = new System.Drawing.Point(345, 101);
+            this.SlaverFlagBox.Name = "SlaverFlagBox";
+            this.SlaverFlagBox.Size = new System.Drawing.Size(100, 25);
+            this.SlaverFlagBox.TabIndex = 49;
+            this.SlaverFlagBox.Text = "1";
+            this.SlaverFlagBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // DesIdBox
+            // 
+            this.DesIdBox.Location = new System.Drawing.Point(345, 48);
+            this.DesIdBox.Name = "DesIdBox";
+            this.DesIdBox.Size = new System.Drawing.Size(100, 25);
+            this.DesIdBox.TabIndex = 48;
+            this.DesIdBox.Text = "0";
+            this.DesIdBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // FuncCodeBox
+            // 
+            this.FuncCodeBox.Location = new System.Drawing.Point(103, 158);
+            this.FuncCodeBox.Name = "FuncCodeBox";
+            this.FuncCodeBox.Size = new System.Drawing.Size(100, 25);
+            this.FuncCodeBox.TabIndex = 47;
+            this.FuncCodeBox.Text = "0";
+            this.FuncCodeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // ActFlagBox
+            // 
+            this.ActFlagBox.Location = new System.Drawing.Point(103, 101);
+            this.ActFlagBox.Name = "ActFlagBox";
+            this.ActFlagBox.Size = new System.Drawing.Size(100, 25);
+            this.ActFlagBox.TabIndex = 46;
+            this.ActFlagBox.Text = "0";
+            this.ActFlagBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // AckStsBox
+            // 
+            this.AckStsBox.Location = new System.Drawing.Point(103, 48);
+            this.AckStsBox.Name = "AckStsBox";
+            this.AckStsBox.Size = new System.Drawing.Size(100, 25);
+            this.AckStsBox.TabIndex = 45;
+            this.AckStsBox.Text = "0";
+            this.AckStsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // CtrlCoeffUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.VoutBox);
             this.Controls.Add(this.IoutBox);
             this.Controls.Add(this.label31);
@@ -1500,6 +1689,8 @@ namespace MyDebugApp
             this.groupBox8.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1634,5 +1825,22 @@ namespace MyDebugApp
         public System.Windows.Forms.TextBox IoutBox;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.GroupBox groupBox10;
+        public System.Windows.Forms.TextBox FuncCodeBox;
+        public System.Windows.Forms.TextBox ActFlagBox;
+        public System.Windows.Forms.TextBox AckStsBox;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Button AnalyIdButton;
+        private System.Windows.Forms.Button ConvButton;
+        public System.Windows.Forms.TextBox IdShowBox;
+        public System.Windows.Forms.TextBox SrcIdBox;
+        public System.Windows.Forms.TextBox SlaverFlagBox;
+        public System.Windows.Forms.TextBox DesIdBox;
+        private System.Windows.Forms.Label label39;
     }
 }
