@@ -107,13 +107,13 @@ namespace MyDebugApp
             this.label27 = new System.Windows.Forms.Label();
             this.IoutBox = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.Vout2Box = new System.Windows.Forms.TextBox();
+            this.Iout2Box = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.Iout1Box = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.NVbusBox = new System.Windows.Forms.TextBox();
+            this.Ipri2Box = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.PVbusBox = new System.Windows.Forms.TextBox();
+            this.Ipri1Box = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.VbusBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -149,7 +149,7 @@ namespace MyDebugApp
             this.ClearErrButton = new System.Windows.Forms.Button();
             this.ReadSettingButton = new System.Windows.Forms.Button();
             this.DCDcOlEnBox = new System.Windows.Forms.CheckBox();
-            this.PfcOlEnBox = new System.Windows.Forms.CheckBox();
+            this.DabOLEnBox = new System.Windows.Forms.CheckBox();
             this.BrdctSendBox = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label81 = new System.Windows.Forms.Label();
@@ -778,13 +778,13 @@ namespace MyDebugApp
             this.groupBox4.Controls.Add(this.label27);
             this.groupBox4.Controls.Add(this.IoutBox);
             this.groupBox4.Controls.Add(this.label26);
-            this.groupBox4.Controls.Add(this.Vout2Box);
+            this.groupBox4.Controls.Add(this.Iout2Box);
             this.groupBox4.Controls.Add(this.label25);
             this.groupBox4.Controls.Add(this.Iout1Box);
             this.groupBox4.Controls.Add(this.label24);
-            this.groupBox4.Controls.Add(this.NVbusBox);
+            this.groupBox4.Controls.Add(this.Ipri2Box);
             this.groupBox4.Controls.Add(this.label23);
-            this.groupBox4.Controls.Add(this.PVbusBox);
+            this.groupBox4.Controls.Add(this.Ipri1Box);
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Controls.Add(this.VbusBox);
             this.groupBox4.Controls.Add(this.label21);
@@ -1104,15 +1104,15 @@ namespace MyDebugApp
             this.label26.TabIndex = 39;
             this.label26.Text = "工作状态";
             // 
-            // Vout2Box
+            // Iout2Box
             // 
-            this.Vout2Box.Location = new System.Drawing.Point(321, 288);
-            this.Vout2Box.Margin = new System.Windows.Forms.Padding(2);
-            this.Vout2Box.Name = "Vout2Box";
-            this.Vout2Box.ReadOnly = true;
-            this.Vout2Box.Size = new System.Drawing.Size(100, 25);
-            this.Vout2Box.TabIndex = 38;
-            this.Vout2Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Iout2Box.Location = new System.Drawing.Point(321, 288);
+            this.Iout2Box.Margin = new System.Windows.Forms.Padding(2);
+            this.Iout2Box.Name = "Iout2Box";
+            this.Iout2Box.ReadOnly = true;
+            this.Iout2Box.Size = new System.Drawing.Size(100, 25);
+            this.Iout2Box.TabIndex = 38;
+            this.Iout2Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label25
             // 
@@ -1144,45 +1144,45 @@ namespace MyDebugApp
             this.label24.TabIndex = 35;
             this.label24.Text = "输出电流Iout";
             // 
-            // NVbusBox
+            // Ipri2Box
             // 
-            this.NVbusBox.Location = new System.Drawing.Point(321, 202);
-            this.NVbusBox.Margin = new System.Windows.Forms.Padding(2);
-            this.NVbusBox.Name = "NVbusBox";
-            this.NVbusBox.ReadOnly = true;
-            this.NVbusBox.Size = new System.Drawing.Size(100, 25);
-            this.NVbusBox.TabIndex = 34;
-            this.NVbusBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ipri2Box.Location = new System.Drawing.Point(321, 202);
+            this.Ipri2Box.Margin = new System.Windows.Forms.Padding(2);
+            this.Ipri2Box.Name = "Ipri2Box";
+            this.Ipri2Box.ReadOnly = true;
+            this.Ipri2Box.Size = new System.Drawing.Size(100, 25);
+            this.Ipri2Box.TabIndex = 34;
+            this.Ipri2Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(228, 291);
+            this.label23.Location = new System.Drawing.Point(218, 291);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(87, 15);
+            this.label23.Size = new System.Drawing.Size(99, 15);
             this.label23.TabIndex = 33;
-            this.label23.Text = "LLC2 Vout2";
+            this.label23.Text = "DAB输出电流2";
             // 
-            // PVbusBox
+            // Ipri1Box
             // 
-            this.PVbusBox.Location = new System.Drawing.Point(321, 155);
-            this.PVbusBox.Margin = new System.Windows.Forms.Padding(2);
-            this.PVbusBox.Name = "PVbusBox";
-            this.PVbusBox.ReadOnly = true;
-            this.PVbusBox.Size = new System.Drawing.Size(100, 25);
-            this.PVbusBox.TabIndex = 32;
-            this.PVbusBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ipri1Box.Location = new System.Drawing.Point(321, 155);
+            this.Ipri1Box.Margin = new System.Windows.Forms.Padding(2);
+            this.Ipri1Box.Name = "Ipri1Box";
+            this.Ipri1Box.ReadOnly = true;
+            this.Ipri1Box.Size = new System.Drawing.Size(100, 25);
+            this.Ipri1Box.TabIndex = 32;
+            this.Ipri1Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(222, 248);
+            this.label22.Location = new System.Drawing.Point(218, 248);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(92, 15);
+            this.label22.Size = new System.Drawing.Size(99, 15);
             this.label22.TabIndex = 31;
-            this.label22.Text = "小电流Iout1";
+            this.label22.Text = "DAB输出电流1";
             // 
             // VbusBox
             // 
@@ -1197,12 +1197,12 @@ namespace MyDebugApp
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(252, 209);
+            this.label21.Location = new System.Drawing.Point(218, 209);
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(62, 15);
+            this.label21.Size = new System.Drawing.Size(99, 15);
             this.label21.TabIndex = 29;
-            this.label21.Text = "负NVbus";
+            this.label21.Text = "DAB原边电流2";
             // 
             // Ic2Box
             // 
@@ -1217,12 +1217,12 @@ namespace MyDebugApp
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(251, 162);
+            this.label20.Location = new System.Drawing.Point(218, 163);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(62, 15);
+            this.label20.Size = new System.Drawing.Size(99, 15);
             this.label20.TabIndex = 27;
-            this.label20.Text = "正PVbus";
+            this.label20.Text = "DAB原边电流1";
             // 
             // Ic1Box
             // 
@@ -1277,7 +1277,7 @@ namespace MyDebugApp
             this.groupBox5.Controls.Add(this.ClearErrButton);
             this.groupBox5.Controls.Add(this.ReadSettingButton);
             this.groupBox5.Controls.Add(this.DCDcOlEnBox);
-            this.groupBox5.Controls.Add(this.PfcOlEnBox);
+            this.groupBox5.Controls.Add(this.DabOLEnBox);
             this.groupBox5.Controls.Add(this.BrdctSendBox);
             this.groupBox5.Location = new System.Drawing.Point(591, 549);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
@@ -1358,7 +1358,7 @@ namespace MyDebugApp
             this.CPButton.TabIndex = 21;
             this.CPButton.Text = "CP模式";
             this.CPButton.UseVisualStyleBackColor = true;
-            this.CPButton.CheckedChanged += new System.EventHandler(this.CPButton_CheckedChanged);
+            this.CPButton.Click += new System.EventHandler(this.CPButton_Click);
             // 
             // CVButton
             // 
@@ -1370,7 +1370,7 @@ namespace MyDebugApp
             this.CVButton.TabIndex = 20;
             this.CVButton.Text = "CV模式";
             this.CVButton.UseVisualStyleBackColor = true;
-            this.CVButton.CheckedChanged += new System.EventHandler(this.CVButton_CheckedChanged);
+            this.CVButton.Click += new System.EventHandler(this.CVButton_Click);
             // 
             // CCButton
             // 
@@ -1382,7 +1382,7 @@ namespace MyDebugApp
             this.CCButton.TabIndex = 19;
             this.CCButton.Text = "CC模式";
             this.CCButton.UseVisualStyleBackColor = true;
-            this.CCButton.CheckedChanged += new System.EventHandler(this.CCButton_CheckedChanged);
+            this.CCButton.Click += new System.EventHandler(this.CCButton_Click);
             // 
             // SetPowerStepButton
             // 
@@ -1551,6 +1551,7 @@ namespace MyDebugApp
             // DCDcOlEnBox
             // 
             this.DCDcOlEnBox.AutoSize = true;
+            this.DCDcOlEnBox.Enabled = false;
             this.DCDcOlEnBox.Location = new System.Drawing.Point(466, 24);
             this.DCDcOlEnBox.Margin = new System.Windows.Forms.Padding(2);
             this.DCDcOlEnBox.Name = "DCDcOlEnBox";
@@ -1558,19 +1559,19 @@ namespace MyDebugApp
             this.DCDcOlEnBox.TabIndex = 2;
             this.DCDcOlEnBox.Text = "DC开环";
             this.DCDcOlEnBox.UseVisualStyleBackColor = true;
-            this.DCDcOlEnBox.CheckedChanged += new System.EventHandler(this.DCDcOlEnBox_CheckedChanged);
+            this.DCDcOlEnBox.Click += new System.EventHandler(this.DCDcOlEnBox_Click);
             // 
-            // PfcOlEnBox
+            // DabOLEnBox
             // 
-            this.PfcOlEnBox.AutoSize = true;
-            this.PfcOlEnBox.Location = new System.Drawing.Point(369, 25);
-            this.PfcOlEnBox.Margin = new System.Windows.Forms.Padding(2);
-            this.PfcOlEnBox.Name = "PfcOlEnBox";
-            this.PfcOlEnBox.Size = new System.Drawing.Size(83, 19);
-            this.PfcOlEnBox.TabIndex = 1;
-            this.PfcOlEnBox.Text = "PFC开环";
-            this.PfcOlEnBox.UseVisualStyleBackColor = true;
-            this.PfcOlEnBox.CheckedChanged += new System.EventHandler(this.PfcOlEnBox_CheckedChanged);
+            this.DabOLEnBox.AutoSize = true;
+            this.DabOLEnBox.Location = new System.Drawing.Point(369, 25);
+            this.DabOLEnBox.Margin = new System.Windows.Forms.Padding(2);
+            this.DabOLEnBox.Name = "DabOLEnBox";
+            this.DabOLEnBox.Size = new System.Drawing.Size(83, 19);
+            this.DabOLEnBox.TabIndex = 1;
+            this.DabOLEnBox.Text = "DAB开环";
+            this.DabOLEnBox.UseVisualStyleBackColor = true;
+            this.DabOLEnBox.Click += new System.EventHandler(this.DabOLEnBox_Click);
             // 
             // BrdctSendBox
             // 
@@ -2546,13 +2547,13 @@ namespace MyDebugApp
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox IoutBox;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox Vout2Box;
+        private System.Windows.Forms.TextBox Iout2Box;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox Iout1Box;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox NVbusBox;
+        private System.Windows.Forms.TextBox Ipri2Box;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox PVbusBox;
+        private System.Windows.Forms.TextBox Ipri1Box;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox VbusBox;
         private System.Windows.Forms.Label label21;
@@ -2563,7 +2564,7 @@ namespace MyDebugApp
         private System.Windows.Forms.Timer ModStaUpdateTimer;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox BrdctSendBox;
-        private System.Windows.Forms.CheckBox PfcOlEnBox;
+        private System.Windows.Forms.CheckBox DabOLEnBox;
         private System.Windows.Forms.CheckBox DCDcOlEnBox;
         private System.Windows.Forms.Button SetPowerStepButton;
         private System.Windows.Forms.Button SetVoltStepButton;

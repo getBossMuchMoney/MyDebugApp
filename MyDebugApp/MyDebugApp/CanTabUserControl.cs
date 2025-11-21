@@ -90,10 +90,10 @@ public struct MOD_STA
     public ushort u16_Ibi2;
     public ushort u16_Ici2;
     public ushort u16_Vbus;
-    public ushort u16_Resv13;
-    public ushort u16_Resv14;
-    public ushort u16_Iout1;
-    public ushort u16_Vout2;
+    public ushort u16_Idabpri1;
+    public ushort u16_Idabpri2;
+    public ushort u16_Idabout1;
+    public ushort u16_Idabout2;
     public ushort u16_Freq;
     public ushort u16_Idcout;
     public ushort u16_Vout;
@@ -140,7 +140,7 @@ public struct CMD_WD
         set => all = (ushort)((all & ~0x01U) | (value & 0x01U));
     }
 
-    public ushort Resv
+    public ushort Pfc_ClearErr
     {
         get => (byte)((all >> 1) & 0x01U);
         set => all = (ushort)((all & ~(0x01U << 1)) | ((value & 0x01U) << 1));
@@ -183,9 +183,9 @@ public struct CMD_WD
 
 public struct MOD_SET
 {
-    public ushort u16_MaxIout;
-    public ushort u16_MaxVout;
-    public ushort u16_MaxPout;
+    public Int32 i32_MaxIout;
+    public short i16_MaxVout;
+    public short i16_MaxPout;
     public ushort u16_OutputMode;
     public ushort u16_SlopeIcc;
     public ushort u16_SlopeVcv;
@@ -200,7 +200,7 @@ unsafe public struct U_MOD_SET
     public MOD_SET REG;           // 结构体部分
 
     [FieldOffset(0)]
-    public fixed ushort buff[8]; // 固定大小的 uint16_t 数组
+    public fixed ushort buff[9]; // 固定大小的 uint16_t 数组
 }
 
 
@@ -428,10 +428,10 @@ namespace MyDebugApp
                             {
                                 for (int i = 0; i < data[2]; i++)
                                 {
-                                    modsetdata[id.SrcId - 1].buff[data[1] + i] = (ushort)((data[i * 2 + 3] << 8) | (data[i * 2 + 4]));
+                                    modsetdata[id.SrcId - 1].buff[data[1]-128 + i] = (ushort)((data[i * 2 + 3] << 8) | (data[i * 2 + 4]));
                                 }
 
-                                if (data[1] == 6)
+                                if (data[1] == 134)
                                 {
                                     ReadSettingFinish = 1;
                                 }
@@ -979,8 +979,8 @@ namespace MyDebugApp
                     Slaver1ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[0].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver1CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver1CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1004,8 +1004,8 @@ namespace MyDebugApp
                     Slaver2ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[1].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver2CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver2CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1031,8 +1031,8 @@ namespace MyDebugApp
                     Slaver3ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[2].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver3CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver3CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1058,8 +1058,8 @@ namespace MyDebugApp
                     Slaver4ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[3].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver4CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver4CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1085,8 +1085,8 @@ namespace MyDebugApp
                     Slaver5ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[4].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver5CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver5CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1112,8 +1112,8 @@ namespace MyDebugApp
                     Slaver6ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[5].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver6CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver6CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1138,8 +1138,8 @@ namespace MyDebugApp
                     Slaver7ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[6].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver7CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver7CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1164,8 +1164,8 @@ namespace MyDebugApp
                     Slaver8ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[7].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver8CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver8CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1190,8 +1190,8 @@ namespace MyDebugApp
                     Slaver9ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[8].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver9CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver9CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1216,8 +1216,8 @@ namespace MyDebugApp
                     Slaver10ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[9].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver10CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver10CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1242,8 +1242,8 @@ namespace MyDebugApp
                     Slaver11ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[10].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver11CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver11CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1268,8 +1268,8 @@ namespace MyDebugApp
                     Slaver12ErrBox.Checked = false;
                 }
                 i16value = (short)modstadata[11].REG.u16_Idcout;
-                fvalue = i16value * 0.01f;
-                Slaver12CurrBox.Text = fvalue.ToString("F2");
+                fvalue = i16value * 1.0f;
+                Slaver12CurrBox.Text = fvalue.ToString("F1");
                 syscurr += fvalue;
             }
             else
@@ -1279,7 +1279,7 @@ namespace MyDebugApp
                 Slaver12CurrBox.Text = "0";
             }
 
-            SysCurrBox.Text = syscurr.ToString("F2");
+            SysCurrBox.Text = syscurr.ToString("F1");
             OnlinerNumBox.Text = OnlineNum.ToString();
             ErrNumBox.Text = ErrNum.ToString();
 
@@ -1287,13 +1287,13 @@ namespace MyDebugApp
             {
                 ReadSettingFinish = 0;
                 CMD_WD cmd = new CMD_WD() { all = 0 };
-                fvalue = (float)(modsetdata[deviceid - 1].REG.u16_MaxIout * 0.01f);
-                MaxCurrBox.Text = fvalue.ToString("F2");
+                fvalue = (float)(modsetdata[deviceid - 1].REG.i32_MaxIout * 0.1f);
+                MaxCurrBox.Text = fvalue.ToString("F1");
 
-                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_MaxVout * 0.1);
+                u16value = (ushort)(modsetdata[deviceid - 1].REG.i16_MaxVout * 0.1f);
                 MaxVoltBox.Text = u16value.ToString();
 
-                u16value = (ushort)(modsetdata[deviceid - 1].REG.u16_MaxPout * 0.1);
+                u16value = (ushort)(modsetdata[deviceid - 1].REG.i16_MaxPout * 0.1f);
                 MaxPowerBox.Text = u16value.ToString();
 
                 switch (modsetdata[deviceid - 1].REG.u16_OutputMode)
@@ -1333,11 +1333,11 @@ namespace MyDebugApp
 
                 if (cmd.PfcOL == 1)
                 {
-                    PfcOlEnBox.Checked = true;
+                    DabOLEnBox.Checked = true;
                 }
                 else
                 {
-                    PfcOlEnBox.Checked = false;
+                    DabOLEnBox.Checked = false;
                 }
 
                 if (cmd.DcOL == 1)
@@ -1408,27 +1408,29 @@ namespace MyDebugApp
             fvalue = 0.1f * u16value;
             VbusBox.Text = fvalue.ToString("F1");
 
+            u16value = modstadata[deviceid - 1].REG.u16_Idabpri1;
             fvalue = 0;
-            PVbusBox.Text = fvalue.ToString("F1");
+            Ipri1Box.Text = fvalue.ToString("F1");
 
+            u16value = modstadata[deviceid - 1].REG.u16_Idabpri2;
             fvalue = 0;
-            NVbusBox.Text = fvalue.ToString("F1");
+            Ipri2Box.Text = fvalue.ToString("F1");
 
-            i16value = (short)modstadata[deviceid - 1].REG.u16_Iout1;
-            fvalue = 0.1f * i16value;
+            i16value = (short)modstadata[deviceid - 1].REG.u16_Idabout1;
+            fvalue = 1.0f * i16value;
             Iout1Box.Text = fvalue.ToString("F1");
 
-            u16value = modstadata[deviceid - 1].REG.u16_Vout2;
-            fvalue = 0.1f * u16value;
-            Vout2Box.Text = fvalue.ToString("F1");
+            u16value = modstadata[deviceid - 1].REG.u16_Idabout2;
+            fvalue = 1.0f * u16value;
+            Iout2Box.Text = fvalue.ToString("F1");
 
             u16value = modstadata[deviceid - 1].REG.u16_Vout;
-            fvalue = 0.1f * u16value;
-            VoutBox.Text = fvalue.ToString("F1");
+            fvalue = 0.01f * u16value;
+            VoutBox.Text = fvalue.ToString("F2");
 
             i16value = (short)modstadata[deviceid - 1].REG.u16_Idcout;
-            fvalue = 0.01f * i16value;
-            IoutBox.Text = fvalue.ToString("F2");
+            fvalue = 1.0f * i16value;
+            IoutBox.Text = fvalue.ToString("F1");
 
             switch (modstadata[deviceid - 1].REG.u16_WorkMode)
             {
@@ -1526,35 +1528,25 @@ namespace MyDebugApp
 
         }
 
-        private void ReadSetting()
+        private void ReadRegFunc(uint offset,uint reg_num)
         {
-            uint[] data = new uint[9];
-            uint[] data1 = new uint[9];
-            uint[] data2 = new uint[9];
+            uint[] data = new uint[9]{ 0,0,0,0,0,0,0,0,0};
             CanAppId id = new CanAppId() { IdFrame = 0 };
-            for (int i = 0; i < 9; i++)
-            {
-                data[i] = 0;
-                data1[i] = 0;
-                data2[i] = 0;
-            }
             id.SlaverFlag = 1;
             id.ActFlag = 1;
             id.DesId = 0;
             id.FuncCode = 0x21;
             data[0] = id.IdFrame;
-            data1[0] = id.IdFrame;
-            data2[0] = id.IdFrame;
-
-            data[1] = 0;
-            data[2] = 3;
+            data[1] = offset;
+            data[2] = reg_num;
             AppTxQueue.Add(data);
-            data1[1] = 3;
-            data1[2] = 3;
-            AppTxQueue.Add(data1);
-            data2[1] = 6;
-            data2[2] = 2;
-            AppTxQueue.Add(data2);
+        }
+
+        private void ReadSetting()
+        {
+            ReadRegFunc(128,3);
+            ReadRegFunc(131,3);
+            ReadRegFunc(134,3);
         }
 
         private void ReadSettingButton_Click(object sender, EventArgs e)
@@ -1570,7 +1562,7 @@ namespace MyDebugApp
             if (BrdctSendBox.Checked)
             {
                 SetFlag = 1;
-                setFunccode = 1;
+                setFunccode = 2;
                 for (int i = 0; i < 12; i++)
                 {
                     modsetdata[i].REG.u16_CmdWd.PowerOnOff = 1;
@@ -1588,8 +1580,8 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode*4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
                 }
 
             }
@@ -1599,7 +1591,7 @@ namespace MyDebugApp
                 id.FuncCode = 0x20;
                 id.SlaverFlag = 1;
                 data[0] = id.IdFrame;
-                data[1] = 7;
+                data[1] = 136;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PowerOnOff = 1;
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
@@ -1619,7 +1611,7 @@ namespace MyDebugApp
             if (BrdctSendBox.Checked)
             {
                 SetFlag = 1;
-                setFunccode = 1;
+                setFunccode = 2;
                 for (int i = 0; i < 12; i++)
                 {
                     modsetdata[i].REG.u16_CmdWd.PowerOnOff = 0;
@@ -1637,8 +1629,8 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
                 }
 
             }
@@ -1648,7 +1640,7 @@ namespace MyDebugApp
                 id.FuncCode = 0x20;
                 id.SlaverFlag = 1;
                 data[0] = id.IdFrame;
-                data[1] = 7;
+                data[1] = 136;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PowerOnOff = 0;
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
@@ -1660,231 +1652,22 @@ namespace MyDebugApp
 
         }
 
-        private unsafe void PfcOlEnBox_CheckedChanged(object sender, EventArgs e)
-        {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-
-            if (BrdctSendBox.Checked == true)
-            {
-
-                SetFlag = 1;
-                setFunccode = 1;
-
-                if (PfcOlEnBox.Checked == true)
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        modsetdata[i].REG.u16_CmdWd.PfcOL = 1;
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        modsetdata[i].REG.u16_CmdWd.PfcOL = 0;
-                    }
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
-                }
-
-            }
-            else
-            {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 7;
-                data[2] = 1;
-                if (PfcOlEnBox.Checked == true)
-                {
-                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 1;
-                }
-                else
-                {
-                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 0;
-                }
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-            }
-        }
-
-        private unsafe void CCButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            if (BrdctSendBox.Checked)
-            {
-                SetFlag = 1;
-                setFunccode = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_OutputMode = 0;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
-                }
-
-            }
-            else
-            {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 3;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 0;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
-            }
-
-        }
-
-        private unsafe void CVButton_CheckedChanged(object sender, EventArgs e)
-        {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            if (BrdctSendBox.Checked)
-            {
-                SetFlag = 1;
-                setFunccode = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_OutputMode = 1;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
-                }
-
-            }
-            else
-            {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 3;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 1;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
-            }
-
-        }
 
         private unsafe void CPButton_CheckedChanged(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            if (BrdctSendBox.Checked)
-            {
-                SetFlag = 1;
-                setFunccode = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_OutputMode = 2;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
-                }
-
-            }
-            else
-            {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 3;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 2;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
-            }
 
         }
 
         private unsafe void SetMaxCurrButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             float value = 0;
 
             if (float.TryParse(MaxCurrBox.Text, out value))
             {
-                value = value * 100;
+                value = value * 10;
             }
             else
             {
@@ -1898,7 +1681,7 @@ namespace MyDebugApp
                 setFunccode = 0;
                 for (int i = 0; i < 12; i++)
                 {
-                    modsetdata[i].REG.u16_MaxIout = (ushort)value;
+                    modsetdata[i].REG.i32_MaxIout = (Int32)value;
                 }
 
                 int index = 0;
@@ -1913,8 +1696,8 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode*4+i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
                 }
 
             }
@@ -1924,12 +1707,14 @@ namespace MyDebugApp
                 id.FuncCode = 0x20;
                 id.SlaverFlag = 1;
                 data[0] = id.IdFrame;
-                data[1] = 0;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxIout = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxIout;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
+                data[1] = 128;
+                data[2] = 2;
+                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i32_MaxIout = (int)value;
+                int set = (int)value;
+                data[3] = (uint)((set>>8)&0xFF);
+                data[4] = (uint)(set & 0xFF);
+                data[5] = (uint)((set >> 24) & 0xFF);
+                data[6] = (uint)((set >> 16) & 0xFF);
                 AppTxQueue.Add(data);
 
             }
@@ -1959,7 +1744,7 @@ namespace MyDebugApp
                 setFunccode = 0;
                 for (int i = 0; i < 12; i++)
                 {
-                    modsetdata[i].REG.u16_MaxVout = (ushort)value;
+                    modsetdata[i].REG.i16_MaxVout = (short)value;
                 }
 
                 int index = 0;
@@ -1974,8 +1759,8 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
                 }
 
             }
@@ -1985,10 +1770,10 @@ namespace MyDebugApp
                 id.FuncCode = 0x20;
                 id.SlaverFlag = 1;
                 data[0] = id.IdFrame;
-                data[1] = 1;
+                data[1] = 130;
                 data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxVout = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxVout;
+                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i16_MaxVout = (short)value;
+                cmd.all = (ushort)modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i16_MaxVout;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
                 AppTxQueue.Add(data);
@@ -2020,7 +1805,7 @@ namespace MyDebugApp
                 setFunccode = 0;
                 for (int i = 0; i < 12; i++)
                 {
-                    modsetdata[i].REG.u16_MaxPout = (ushort)value;
+                    modsetdata[i].REG.i16_MaxPout = (short)value;
                 }
 
                 int index = 0;
@@ -2035,8 +1820,8 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[i] & 0xFF);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
                 }
 
             }
@@ -2046,10 +1831,10 @@ namespace MyDebugApp
                 id.FuncCode = 0x20;
                 id.SlaverFlag = 1;
                 data[0] = id.IdFrame;
-                data[1] = 2;
+                data[1] = 131;
                 data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxPout = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_MaxPout;
+                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i16_MaxPout = (short)value;
+                cmd.all = (ushort)modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i16_MaxPout;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
                 AppTxQueue.Add(data);
@@ -2096,8 +1881,8 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4+ i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
                 }
 
             }
@@ -2107,7 +1892,7 @@ namespace MyDebugApp
                 id.FuncCode = 0x20;
                 id.SlaverFlag = 1;
                 data[0] = id.IdFrame;
-                data[1] = 4;
+                data[1] = 133;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeIcc = (ushort)value;
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeIcc;
@@ -2157,8 +1942,8 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
                 }
 
             }
@@ -2168,7 +1953,7 @@ namespace MyDebugApp
                 id.FuncCode = 0x20;
                 id.SlaverFlag = 1;
                 data[0] = id.IdFrame;
-                data[1] = 5;
+                data[1] = 134;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeVcv = (ushort)value;
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeVcv;
@@ -2218,8 +2003,8 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
                 }
 
             }
@@ -2229,7 +2014,7 @@ namespace MyDebugApp
                 id.FuncCode = 0x20;
                 id.SlaverFlag = 1;
                 data[0] = id.IdFrame;
-                data[1] = 6;
+                data[1] = 135;
                 data[2] = 1;
                 modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopePcp = (ushort)value;
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopePcp;
@@ -2249,7 +2034,7 @@ namespace MyDebugApp
             if (BrdctSendBox.Checked)
             {
                 SetFlag = 1;
-                setFunccode = 1;
+                setFunccode = 2;
 
                 int index = 0;
                 for (int i = 0; i < 12; i++)
@@ -2263,10 +2048,10 @@ namespace MyDebugApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[4 + i] & 0xFF);
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
                 }
-                Setbuff[7] |= 0x04;
+                Setbuff[1] |= 0x06;
             }
             else
             {
@@ -2274,10 +2059,11 @@ namespace MyDebugApp
                 id.FuncCode = 0x20;
                 id.SlaverFlag = 1;
                 data[0] = id.IdFrame;
-                data[1] = 7;
+                data[1] = 136;
                 data[2] = 1;
                 cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
                 cmd.ClearErr = 1;
+                cmd.Pfc_ClearErr = 1;
                 data[3] = (uint)(cmd.all >> 8);
                 data[4] = (uint)(cmd.all & 0xFF);
                 AppTxQueue.Add(data);
@@ -2286,7 +2072,219 @@ namespace MyDebugApp
 
         }
 
-        private unsafe void DCDcOlEnBox_CheckedChanged(object sender, EventArgs e)
+        unsafe private void DabOLEnBox_Click(object sender, EventArgs e)
+        {
+            CMD_WD cmd = new CMD_WD() { all = 0 };
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+
+            if (BrdctSendBox.Checked == true)
+            {
+
+                SetFlag = 1;
+                setFunccode = 2;
+
+                if (DabOLEnBox.Checked == true)
+                {
+                    for (int i = 0; i < 12; i++)
+                    {
+                        modsetdata[i].REG.u16_CmdWd.PfcOL = 1;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 12; i++)
+                    {
+                        modsetdata[i].REG.u16_CmdWd.PfcOL = 0;
+                    }
+                }
+
+                int index = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    if (SlaverConnectSta[i] == 1)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
+                }
+
+            }
+            else
+            {
+                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+                id.FuncCode = 0x20;
+                id.SlaverFlag = 1;
+                data[0] = id.IdFrame;
+                data[1] = 136;
+                data[2] = 1;
+                if (DabOLEnBox.Checked == true)
+                {
+                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 1;
+                }
+                else
+                {
+                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 0;
+                }
+                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
+                data[3] = (uint)(cmd.all >> 8);
+                data[4] = (uint)(cmd.all & 0xFF);
+                AppTxQueue.Add(data);
+            }
+        }
+
+        unsafe private void CCButton_Click(object sender, EventArgs e)
+        {
+            CMD_WD cmd = new CMD_WD() { all = 0 };
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            if (BrdctSendBox.Checked)
+            {
+                SetFlag = 1;
+                setFunccode = 1;
+                for (int i = 0; i < 12; i++)
+                {
+                    modsetdata[i].REG.u16_OutputMode = 0;
+                }
+
+                int index = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    if (SlaverConnectSta[i] == 1)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
+                }
+
+            }
+            else
+            {
+                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+                id.FuncCode = 0x20;
+                id.SlaverFlag = 1;
+                data[0] = id.IdFrame;
+                data[1] = 132;
+                data[2] = 1;
+                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 0;
+                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
+                data[3] = (uint)(cmd.all >> 8);
+                data[4] = (uint)(cmd.all & 0xFF);
+                AppTxQueue.Add(data);
+
+            }
+        }
+
+        unsafe private void CVButton_Click(object sender, EventArgs e)
+        {
+            CMD_WD cmd = new CMD_WD() { all = 0 };
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            if (BrdctSendBox.Checked)
+            {
+                SetFlag = 1;
+                setFunccode = 1;
+                for (int i = 0; i < 12; i++)
+                {
+                    modsetdata[i].REG.u16_OutputMode = 1;
+                }
+
+                int index = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    if (SlaverConnectSta[i] == 1)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
+                }
+
+            }
+            else
+            {
+                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+                id.FuncCode = 0x20;
+                id.SlaverFlag = 1;
+                data[0] = id.IdFrame;
+                data[1] = 132;
+                data[2] = 1;
+                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 1;
+                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
+                data[3] = (uint)(cmd.all >> 8);
+                data[4] = (uint)(cmd.all & 0xFF);
+                AppTxQueue.Add(data);
+
+            }
+        }
+
+        unsafe private void CPButton_Click(object sender, EventArgs e)
+        {
+            CMD_WD cmd = new CMD_WD() { all = 0 };
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            if (BrdctSendBox.Checked)
+            {
+                SetFlag = 1;
+                setFunccode = 1;
+                for (int i = 0; i < 12; i++)
+                {
+                    modsetdata[i].REG.u16_OutputMode = 2;
+                }
+
+                int index = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    if (SlaverConnectSta[i] == 1)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
+                }
+
+            }
+            else
+            {
+                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+                id.FuncCode = 0x20;
+                id.SlaverFlag = 1;
+                data[0] = id.IdFrame;
+                data[1] = 132;
+                data[2] = 1;
+                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 2;
+                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
+                data[3] = (uint)(cmd.all >> 8);
+                data[4] = (uint)(cmd.all & 0xFF);
+                AppTxQueue.Add(data);
+
+            }
+        }
+
+        unsafe private void DCDcOlEnBox_Click(object sender, EventArgs e)
         {
             CMD_WD cmd = new CMD_WD() { all = 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
@@ -2342,9 +2340,8 @@ namespace MyDebugApp
                 AppTxQueue.Add(data);
 
             }
-
-
         }
+
 
         private void Update_Process(CancellationToken token)
         {
