@@ -126,6 +126,7 @@
     <Compile Include="CanTabUserControl.Designer.cs">
       <DependentUpon>CanTabUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="GloabalCfg.cs" />
     <Compile Include="HighPrecisionTimer.cs" />
     <Compile Include="ModbusCrc.cs" />
     <Compile Include="DebugForm.cs">
