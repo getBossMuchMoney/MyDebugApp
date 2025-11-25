@@ -191,6 +191,71 @@ public struct MOD_SET
     public ushort u16_SlopeVcv;
     public ushort u16_SlopePcp;
     public CMD_WD u16_CmdWd;
+    public ushort u16_ModuleEn;
+    public ushort u16_EnCalType;
+    public ushort u16_RunCal;
+    public ushort u16_RefVbus;
+    public ushort u16_OverloadCoeffi;
+    public ushort u16_OverloadTime;
+    public ushort i16_DabShPha;
+    public ushort i16_DabPriInShPha;
+    public ushort i16_DabSecInShPha;
+    public int i32_RefValCCal1;
+    public int i32_ActValCCal1;
+    public int i32_RefValCCal2;
+    public int i32_ActValCCal2;
+    public int i32_RefValCCal3;
+    public int i32_ActValCCal3;
+    public int i32_RefValCCal4;
+    public int i32_ActValCCal4;
+    public int i32_RefValCCal5;
+    public int i32_ActValCCal5;
+    public int i32_RefValCCal6;
+    public int i32_ActValCCal6;
+    public int i32_RefValCCal7;
+    public int i32_ActValCCal7;
+    public int i32_RefValCCal8;
+    public int i32_ActValCCal8;
+
+    public int i32_RefValUCal1;
+    public int i32_ActValUCal1;
+    public int i32_RefValUCal2;
+    public int i32_ActValUCal2;
+    public int i32_RefValUCal3;
+    public int i32_ActValUCal3;
+    public int i32_RefValUCal4;
+    public int i32_ActValUCal4;
+    public int i32_RefValUCal5;
+    public int i32_ActValUCal5;
+    public int i32_RefValUCal6;
+    public int i32_ActValUCal6;
+    public int i32_RefValUCal7;
+    public int i32_ActValUCal7;
+    public int i32_RefValUCal8;
+    public int i32_ActValUCal8;
+
+
+    public int i32_CtrlK1;
+    public int i32_CtrlK2;
+    public int i32_CtrlK3;
+    public int i32_CtrlK4;
+    public int i32_CtrlK5;
+    public int i32_CtrlK6;
+    public int i32_CtrlK7;
+    public int i32_CtrlK8;
+    public int i32_CtrlK9;
+    public int i32_CtrlK10;
+    public int i32_CtrlK11;
+    public int i32_CtrlK12;
+    public int i32_CtrlK13;
+    public int i32_CtrlK14;
+    public int i32_CtrlK15;
+    public int i32_CtrlK16;
+    public int i32_CtrlK17;
+    public int i32_CtrlK18;
+    public int i32_CtrlK19;
+    public int i32_CtrlK20;
+
 }
 
 [StructLayout(LayoutKind.Explicit)]
@@ -200,7 +265,7 @@ unsafe public struct U_MOD_SET
     public MOD_SET REG;           // 结构体部分
 
     [FieldOffset(0)]
-    public fixed ushort buff[9]; // 固定大小的 uint16_t 数组
+    public fixed ushort buff[122]; // 固定大小的 uint16_t 数组
 }
 
 
@@ -375,6 +440,7 @@ namespace MyDebugApp
         uint ReadSettingFinish = 0;
         uint[] DevOfflineCheckCnt = new uint[12];
         uint[] SlaverConnectSta = new uint[12];
+        ushort SystemSlaverNum = 12;
 
         public CanTabUserControl()
         {
@@ -389,19 +455,24 @@ namespace MyDebugApp
                 }
             }
 
+            for (int i = 0; i < SystemSlaverNum; i++)
+            {
+                modsetdata[i].REG.u16_ModuleEn = 0xFFFF;
+            }
+
             CanDevPassNumBox.SelectedIndex = 0;
             CanBandListBox.SelectedIndex = 0;
             ChoseDevListBox.SelectedIndex = 1;
-            Thread dealModDataThread = new Thread(() => DealModAnsw(DealModCts.Token)); 
+            Thread dealModDataThread = new Thread(() => DealModAnsw(DealModCts.Token));
             dealModDataThread.Start();
 
         }
-  
+
         private unsafe void DealModAnsw(CancellationToken token)
         {
             uint[] data = new uint[9];
             CanAppId id = new CanAppId();
-            Array.Clear(DevOfflineCheckCnt,0, DevOfflineCheckCnt.Length);
+            Array.Clear(DevOfflineCheckCnt, 0, DevOfflineCheckCnt.Length);
             Array.Clear(SlaverConnectSta, 0, SlaverConnectSta.Length);
             while (!token.IsCancellationRequested)
             {
@@ -428,7 +499,7 @@ namespace MyDebugApp
                             {
                                 for (int i = 0; i < data[2]; i++)
                                 {
-                                    modsetdata[id.SrcId - 1].buff[data[1]-128 + i] = (ushort)((data[i * 2 + 3] << 8) | (data[i * 2 + 4]));
+                                    modsetdata[id.SrcId - 1].buff[data[1] - 128 + i] = (ushort)((data[i * 2 + 3] << 8) | (data[i * 2 + 4]));
                                 }
 
                                 if (data[1] == 134)
@@ -533,14 +604,14 @@ namespace MyDebugApp
                 }
 
                 if (canRcvThread != null && canRcvThread.IsAlive)
-                {                   
+                {
                     CanDataRecieveCts.Cancel();
                     while (ShowStrRxQueue.TryTake(out string _)) ;
                     while (UpdateRxQueue.TryTake(out uint[] _)) ;
                     while (ModAnswQueue.TryTake(out uint[] _)) ;
                     canRcvThread.Join();
                 }
-                
+
                 if (updateThread != null && updateThread.IsAlive)
                 {
                     updateCts.Cancel();
@@ -556,9 +627,9 @@ namespace MyDebugApp
                     for (int a = 0; a < 36; a++)
                     {
                         modstadata[i].buff[0] = 0;
+                    }
                 }
-                }
-                            
+
                 SetFlag = 0;
                 setFunccode = 0;
                 SendFunccode = 0;
@@ -1024,7 +1095,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver3ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1051,7 +1122,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver4ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1078,7 +1149,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver5ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1105,7 +1176,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver6ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1183,7 +1254,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver9ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1209,7 +1280,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver10ErrBox.Checked = true;
-                    
+
                 }
                 else
                 {
@@ -1235,7 +1306,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver11ErrBox.Checked = true;
-                   
+
                 }
                 else
                 {
@@ -1261,7 +1332,7 @@ namespace MyDebugApp
                 {
                     ErrNum++;
                     Slaver12ErrBox.Checked = true;
-                 
+
                 }
                 else
                 {
@@ -1348,7 +1419,7 @@ namespace MyDebugApp
                 {
                     DCDcOlEnBox.Checked = false;
                 }
-                
+
             }
 
 
@@ -1478,7 +1549,6 @@ namespace MyDebugApp
                 case 6:
                     {
                         WorkModeBox.Text = "故障模式";
-                        modsetdata[deviceid - 1].REG.u16_CmdWd.PowerOnOff = 0;
 
                     }
                     break;
@@ -1524,13 +1594,14 @@ namespace MyDebugApp
             ErrCodeBox.Text = u32value.ToString();
 
             u32value = modstadata[deviceid - 1].REG.u32_Version;
-            VersionBox.Text = u32value.ToString();
+
+            VersionBox.Text = (u32value / 1000 / 1000).ToString() + "." + (u32value / 1000 % 10000).ToString() + "." + (u32value % 10000).ToString();
 
         }
 
-        private void ReadRegFunc(uint offset,uint reg_num)
+        private void ReadRegFunc(uint offset, uint reg_num)
         {
-            uint[] data = new uint[9]{ 0,0,0,0,0,0,0,0,0};
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             CanAppId id = new CanAppId() { IdFrame = 0 };
             id.SlaverFlag = 1;
             id.ActFlag = 1;
@@ -1544,9 +1615,9 @@ namespace MyDebugApp
 
         private void ReadSetting()
         {
-            ReadRegFunc(128,3);
-            ReadRegFunc(131,3);
-            ReadRegFunc(134,3);
+            ReadRegFunc(128, 3);
+            ReadRegFunc(131, 3);
+            ReadRegFunc(134, 3);
         }
 
         private void ReadSettingButton_Click(object sender, EventArgs e)
@@ -1554,22 +1625,98 @@ namespace MyDebugApp
             ReadSetting();
         }
 
-        private unsafe void PowerOnButton_Click(object sender, EventArgs e)
+        private void ResetCmdBitUsedOnce()
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
+            for (int i = 0; i < SystemSlaverNum; i++)
+            {
+                ushort SetCmdMask = 0x00CE;
+                modsetdata[i].REG.u16_CmdWd.all &= (ushort)~SetCmdMask;
+            }
+
+        }
+
+        unsafe private void SetParaMap(byte FuncCode, byte Offset, string StSetValue,float Format, bool Data32Bit)
+        {
             CanAppId id = new CanAppId() { IdFrame = 0 };
             uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            if (BrdctSendBox.Checked)
-            {
-                SetFlag = 1;
-                setFunccode = 2;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_CmdWd.PowerOnOff = 1;
-                }
+            SetFlag = 1;
+            setFunccode = FuncCode;
+            float fvalue = 0;
+            ushort u16value = 0;
+            uint u32value = 0;
 
-                int index = 0;
-                for (int i = 0; i < 12; i++)
+            if (float.TryParse(StSetValue, out fvalue))
+            {
+                fvalue = fvalue / Format;
+            }
+            else
+            {
+                MessageBox.Show("输入非法参数", "错误!");
+                return;
+            }
+
+            for (int i = 0; i < SystemSlaverNum; i++)
+            {
+                if (!Data32Bit)
+                {
+                    u16value = (ushort)fvalue;
+                    modsetdata[i].buff[setFunccode * 4 + Offset] = u16value;
+                }
+                else
+                {
+                    u32value = (uint)fvalue;
+                    modsetdata[i].buff[setFunccode * 4 + Offset] = (ushort)(u32value & 0xFFFF);
+                    modsetdata[i].buff[setFunccode * 4 + Offset + 1] = (ushort)(u32value >> 16);
+                }
+            }
+
+            int index = 0;
+            for (int i = 0; i < SystemSlaverNum; i++)
+            {
+                if (SlaverConnectSta[i] == 1)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
+                Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
+            }
+
+            ResetCmdBitUsedOnce();
+
+        }
+
+        unsafe private void SetParaSpe(byte Offset, string StSetValue, float Format, bool Data32Bit,bool Brdct)
+        {
+            CanAppId id = new CanAppId() { IdFrame = 0 };
+            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            float fvalue = 0;
+            ushort u16value = 0;
+            uint u32value = 0;
+            int index = 0;
+
+            if (float.TryParse(StSetValue, out fvalue))
+            {
+                fvalue = fvalue / Format;
+            }
+            else
+            {
+                MessageBox.Show("输入非法参数", "错误!");
+                return;
+            }
+
+            if (!Brdct)
+            {
+                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
+                index = ChoseDevListBox.SelectedIndex;
+            }
+            else
+            {
+                for (int i = 0; i < SystemSlaverNum; i++)
                 {
                     if (SlaverConnectSta[i] == 1)
                     {
@@ -1577,531 +1724,197 @@ namespace MyDebugApp
                         break;
                     }
                 }
-
-                for (int i = 0; i < 4; i++)
+            }
+            id.FuncCode = 0x20;
+            id.SlaverFlag = 1;
+            data[0] = id.IdFrame;
+            data[1] = Offset;
+            if (!Data32Bit)
+            {
+                data[2] = 1;
+                u16value = (ushort)fvalue;
+                if (!Brdct)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode*4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
+                    modsetdata[index - 1].buff[Offset - 128] = u16value;
                 }
-
+                else
+                {
+                    for (int i = 0; i < SystemSlaverNum; i++)
+                    {
+                        modsetdata[i].buff[Offset - 128] = u16value;
+                    }
+                }
+                data[3] = (uint)(u16value >> 8);
+                data[4] = (uint)(u16value & 0xFF);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 136;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PowerOnOff = 1;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
+                data[2] = 2;
+                u32value = (uint)fvalue;
+                if (!Brdct)
+                {
+                    modsetdata[index - 1].buff[Offset - 128] = (ushort)(u32value & 0xFFFF);
+                    modsetdata[index - 1].buff[Offset - 128 + 1] = (ushort)(u32value >> 16);
+                }
+                else
+                {
+                    for (int i = 0; i < SystemSlaverNum; i++)
+                    {
+                        modsetdata[i].buff[Offset - 128] = (ushort)(u32value & 0xFFFF);
+                        modsetdata[i].buff[Offset - 128 + 1] = (ushort)(u32value >> 16);
+                    }
+                }
+                data[3] = (uint)((u32value >> 8) & 0xFF);
+                data[4] = (uint)(u32value & 0xFF);
+                data[5] = (uint)((u32value >> 24) & 0xFF);
+                data[6] = (uint)((u32value >> 16) & 0xFF);
+            }
+            AppTxQueue.Add(data);
 
+            ResetCmdBitUsedOnce();
+        }
+
+        private unsafe void PowerOnButton_Click(object sender, EventArgs e)
+        {
+            CMD_WD cmd = new CMD_WD() { all = 0 };
+
+            cmd.PowerOnOff = 1;
+            if (DabOLEnBox.Checked)
+            {
+                cmd.PfcOL = 1;
             }
 
+            if (BrdctSendBox.Checked)
+            {
+                SetParaMap(0x02,0, cmd.all.ToString(), 1,false);
+            }
+            else
+            {
+                SetParaSpe(136, cmd.all.ToString(), 1,false,false);
+            }
         }
 
         private unsafe void PowerOffButton_Click(object sender, EventArgs e)
         {
             CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            if (BrdctSendBox.Checked)
+
+            if (DabOLEnBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 2;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_CmdWd.PowerOnOff = 0;
-                }
+                cmd.PfcOL = 1;
+            }
 
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+            if (BrdctSendBox.Checked)
+            {              
+                SetParaMap(0x02, 0, cmd.all.ToString(), 1, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 136;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PowerOnOff = 0;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(136, cmd.all.ToString(), 1, false, false);
             }
-
-        }
-
-
-
-        private unsafe void CPButton_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private unsafe void SetMaxCurrButton_Click(object sender, EventArgs e)
         {
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            float value = 0;
-
-            if (float.TryParse(MaxCurrBox.Text, out value))
-            {
-                value = value * 10;
-            }
-            else
-            {
-                MessageBox.Show("输入非法参数", "错误!");
-                return;
-            }
-
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.i32_MaxIout = (Int32)value;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode*4+i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+                SetParaMap(0, 0, MaxCurrBox.Text.ToString(), 0.1f, true);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 128;
-                data[2] = 2;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i32_MaxIout = (int)value;
-                int set = (int)value;
-                data[3] = (uint)((set>>8)&0xFF);
-                data[4] = (uint)(set & 0xFF);
-                data[5] = (uint)((set >> 24) & 0xFF);
-                data[6] = (uint)((set >> 16) & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(128, MaxCurrBox.Text.ToString(), 0.1f, true, false);
             }
-
         }
 
         private unsafe void SetMaxVoltButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            float value = 0;
-
-            if (float.TryParse(MaxVoltBox.Text, out value))
-            {
-                value = value * 10;
-            }
-            else
-            {
-                MessageBox.Show("输入非法参数", "错误!");
-                return;
-            }
-
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.i16_MaxVout = (short)value;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+                SetParaMap(0, 2, MaxVoltBox.Text.ToString(), 0.1f, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 130;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i16_MaxVout = (short)value;
-                cmd.all = (ushort)modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i16_MaxVout;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(130, MaxVoltBox.Text.ToString(), 0.1f, false, false);
             }
 
         }
 
         private unsafe void SetMaxPowerButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            float value = 0;
-
-            if (float.TryParse(MaxPowerBox.Text, out value))
-            {
-                value = value * 10;
-            }
-            else
-            {
-                MessageBox.Show("输入非法参数", "错误!");
-                return;
-            }
-
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.i16_MaxPout = (short)value;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+                SetParaMap(0, 3, MaxPowerBox.Text.ToString(), 0.1f, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 131;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i16_MaxPout = (short)value;
-                cmd.all = (ushort)modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.i16_MaxPout;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(131, MaxPowerBox.Text.ToString(), 0.1f, false, false);
             }
-
         }
 
         private unsafe void SetCurrStepButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            float value = 0;
-
-            if (float.TryParse(CurrStepBox.Text, out value))
-            {
-                value = value * 10;
-            }
-            else
-            {
-                MessageBox.Show("输入非法参数", "错误!");
-                return;
-            }
-
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 1;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_SlopeIcc = (ushort)value;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+                SetParaMap(1, 1, CurrStepBox.Text.ToString(), 0.1f, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 133;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeIcc = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeIcc;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(133, CurrStepBox.Text.ToString(), 0.1f, false, false);
             }
 
         }
 
         private unsafe void SetVoltStepButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            float value = 0;
-
-            if (float.TryParse(VoltStepBox.Text, out value))
-            {
-                value = value * 10;
-            }
-            else
-            {
-                MessageBox.Show("输入非法参数", "错误!");
-                return;
-            }
-
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 1;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_SlopeVcv = (ushort)value;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+                SetParaMap(1, 2, VoltStepBox.Text.ToString(), 0.1f, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 134;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeVcv = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopeVcv;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(134, VoltStepBox.Text.ToString(), 0.1f, false, false);
             }
-
         }
 
         private unsafe void SetPowerStepButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            float value = 0;
-
-            if (float.TryParse(PowerStepBox.Text, out value))
-            {
-                value = value * 10;
-            }
-            else
-            {
-                MessageBox.Show("输入非法参数", "错误!");
-                return;
-            }
-
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 1;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_SlopePcp = (ushort)value;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+                SetParaMap(1, 3, PowerStepBox.Text.ToString(), 0.1f, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 135;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopePcp = (ushort)value;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_SlopePcp;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(135, PowerStepBox.Text.ToString(), 0.1f, false, false);
             }
-
         }
 
         private unsafe void ClearErrButton_Click(object sender, EventArgs e)
         {
             CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            cmd.ClearErr = 1;
+
+            if (DabOLEnBox.Checked)
+            {
+                cmd.PfcOL = 1;
+            }
+
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 2;
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-                Setbuff[1] |= 0x06;
+                SetParaMap(0x02, 0, cmd.all.ToString(), 1, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 136;
-                data[2] = 1;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
-                cmd.ClearErr = 1;
-                cmd.Pfc_ClearErr = 1;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(136, cmd.all.ToString(), 1, false, false);
             }
-
         }
 
         unsafe private void DabOLEnBox_Click(object sender, EventArgs e)
         {
             CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-
+            int index = 0;
             if (BrdctSendBox.Checked == true)
-            {
-
-                SetFlag = 1;
-                setFunccode = 2;
-
-                if (DabOLEnBox.Checked == true)
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        modsetdata[i].REG.u16_CmdWd.PfcOL = 1;
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        modsetdata[i].REG.u16_CmdWd.PfcOL = 0;
-                    }
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
+            {                
+                for (int i = 0; i < SystemSlaverNum; i++)
                 {
                     if (SlaverConnectSta[i] == 1)
                     {
@@ -2110,236 +1923,87 @@ namespace MyDebugApp
                     }
                 }
 
-                for (int i = 0; i < 4; i++)
+                if (modsetdata[index].REG.u16_CmdWd.PowerOnOff == 1)
                 {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
+                    if (DabOLEnBox.Checked)
+                    {
+                        DabOLEnBox.Checked = false;
+                    }
+                    else
+                    {
+                        DabOLEnBox.Checked = true;
+                    }
+                    MessageBox.Show("请点击关机后操作", "警告!");
+                    return;
+                }
+                else
+                {
+                    PowerOffButton_Click(sender,e);
                 }
 
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 136;
-                data[2] = 1;
-                if (DabOLEnBox.Checked == true)
-                {
-                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 1;
+                index = ChoseDevListBox.SelectedIndex;
+                if (modsetdata[index].REG.u16_CmdWd.PowerOnOff == 1)
+                {                   
+                    if (DabOLEnBox.Checked)
+                    {
+                        DabOLEnBox.Checked = false;
+                    }
+                    else
+                    {
+                        DabOLEnBox.Checked = true;
+                    }
+                    MessageBox.Show("请点击关机后操作", "警告!");
+                    return;
                 }
                 else
                 {
-                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.PfcOL = 0;
+                    PowerOffButton_Click(sender, e);
                 }
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
             }
         }
 
         unsafe private void CCButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 1;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_OutputMode = 0;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+                SetParaMap(1, 0, "0", 1, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 132;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 0;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(132, "0", 1, false, false);
             }
         }
 
         unsafe private void CVButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 1;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_OutputMode = 1;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+                SetParaMap(1, 0, "1", 1, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 132;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 1;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(132, "1", 1, false, false);
             }
         }
 
         unsafe private void CPButton_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             if (BrdctSendBox.Checked)
             {
-                SetFlag = 1;
-                setFunccode = 1;
-                for (int i = 0; i < 12; i++)
-                {
-                    modsetdata[i].REG.u16_OutputMode = 2;
-                }
-
-                int index = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    if (SlaverConnectSta[i] == 1)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
-                }
-
+                SetParaMap(1, 0, "2", 1, false);
             }
             else
             {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 132;
-                data[2] = 1;
-                modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode = 2;
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_OutputMode;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
+                SetParaSpe(132, "2", 1, false, false);
             }
         }
 
         unsafe private void DCDcOlEnBox_Click(object sender, EventArgs e)
         {
-            CMD_WD cmd = new CMD_WD() { all = 0 };
-            CanAppId id = new CanAppId() { IdFrame = 0 };
-            uint[] data = new uint[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-            if (BrdctSendBox.Checked)
-            {
-                SetFlag = 1;
-                setFunccode = 1;
-
-                if (DCDcOlEnBox.Checked == true)
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        modsetdata[i].REG.u16_CmdWd.DcOL = 1;
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        modsetdata[i].REG.u16_CmdWd.DcOL = 0;
-                    }
-                }
-
-
-                for (int i = 0; i < 4; i++)
-                {
-                    Setbuff[i * 2] = (uint)(modsetdata[0].buff[4 + i] >> 8);
-                    Setbuff[i * 2 + 1] = (uint)(modsetdata[0].buff[4 + i] & 0xFF);
-                }
-
-            }
-            else
-            {
-                id.DesId = (byte)ChoseDevListBox.SelectedIndex;
-                id.FuncCode = 0x20;
-                id.SlaverFlag = 1;
-                data[0] = id.IdFrame;
-                data[1] = 7;
-                data[2] = 1;
-                if (DCDcOlEnBox.Checked == true)
-                {
-                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.DcOL = 1;
-                }
-                else
-                {
-                    modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.DcOL = 0;
-                }
-                cmd.all = modsetdata[ChoseDevListBox.SelectedIndex - 1].REG.u16_CmdWd.all;
-                data[3] = (uint)(cmd.all >> 8);
-                data[4] = (uint)(cmd.all & 0xFF);
-                AppTxQueue.Add(data);
-
-            }
+            
         }
 
 
@@ -2370,7 +2034,7 @@ namespace MyDebugApp
                                 {
                                     Invoke((Action)(() =>
                                     {
-                                        
+
                                         MessageBox.Show("未找到目标设备", "错误!");
                                         StartUpdateButton.Enabled = true;
                                     }));
@@ -2402,7 +2066,7 @@ namespace MyDebugApp
                                         {
                                             Invoke((Action)(() =>
                                             {
-                                                
+
                                                 MessageBox.Show("擦除失败", "错误!");
                                                 StartUpdateButton.Enabled = true;
                                             }));
@@ -2416,7 +2080,7 @@ namespace MyDebugApp
                                 {
                                     Invoke((Action)(() =>
                                     {
-                                        
+
                                         MessageBox.Show("目标设备已失去连接", "错误!");
                                         StartUpdateButton.Enabled = true;
                                     }));
@@ -2467,7 +2131,7 @@ namespace MyDebugApp
                                     {
                                         Invoke((Action)(() =>
                                         {
-                                            
+
                                             MessageBox.Show("数据发送错误", "错误!");
                                             StartUpdateButton.Enabled = true;
                                             UpdateProgressBar.Value = 0;
@@ -2488,7 +2152,7 @@ namespace MyDebugApp
                                         {
                                             Invoke((Action)(() =>
                                             {
-                                                
+
                                                 MessageBox.Show("烧录失败", "错误!");
                                                 StartUpdateButton.Enabled = true;
                                                 UpdateProgressBar.Value = 0;
@@ -2511,7 +2175,7 @@ namespace MyDebugApp
                                         {
                                             Invoke((Action)(() =>
                                             {
-                                                
+
                                                 MessageBox.Show("目标设备已失去连接", "错误!");
                                                 StartUpdateButton.Enabled = true;
                                                 UpdateProgressBar.Value = 0;
@@ -2544,7 +2208,7 @@ namespace MyDebugApp
                                     {
                                         Invoke((Action)(() =>
                                         {
-                                            
+
                                             MessageBox.Show("数据发送错误", "错误!");
                                             StartUpdateButton.Enabled = true;
                                             UpdateProgressBar.Value = 0;
@@ -2565,7 +2229,7 @@ namespace MyDebugApp
                                         {
                                             Invoke((Action)(() =>
                                             {
-                                                
+
                                                 MessageBox.Show("烧录失败", "错误!");
                                                 StartUpdateButton.Enabled = true;
                                                 UpdateProgressBar.Value = 0;
@@ -2588,7 +2252,7 @@ namespace MyDebugApp
                                         {
                                             Invoke((Action)(() =>
                                             {
-                                                
+
                                                 MessageBox.Show("目标设备已失去连接", "错误!");
                                                 StartUpdateButton.Enabled = true;
                                                 UpdateProgressBar.Value = 0;
@@ -2618,7 +2282,7 @@ namespace MyDebugApp
                                     {
                                         Invoke((Action)(() =>
                                         {
-                                            
+
                                             MessageBox.Show("固件烧录成功", "提示!");
                                             StartUpdateButton.Enabled = true;
                                             UpdateProgressBar.Value = 0;
@@ -2629,7 +2293,7 @@ namespace MyDebugApp
                                     {
                                         Invoke((Action)(() =>
                                         {
-                                            
+
                                             MessageBox.Show("校验失败", "错误!");
                                             StartUpdateButton.Enabled = true;
                                             UpdateProgressBar.Value = 0;
@@ -2642,7 +2306,7 @@ namespace MyDebugApp
                                 {
                                     Invoke((Action)(() =>
                                     {
-                                        
+
                                         MessageBox.Show("目标设备已失去连接", "错误!");
                                         StartUpdateButton.Enabled = true;
                                         UpdateProgressBar.Value = 0;
