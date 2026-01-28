@@ -370,11 +370,11 @@ namespace MyDebugApp
         byte SetFlag = 0, setFunccode = 0;
         uint[] Setbuff = new uint[8];
         byte SendFunccode = 0;
-        U_MOD_STA[] modstadata = new U_MOD_STA[12];
-        U_MOD_SET[] modsetdata = new U_MOD_SET[12];
+        U_MOD_STA[] modstadata = new U_MOD_STA[15];
+        U_MOD_SET[] modsetdata = new U_MOD_SET[15];
         uint ReadSettingFinish = 0;
-        uint[] DevOfflineCheckCnt = new uint[12];
-        uint[] SlaverConnectSta = new uint[12];
+        uint[] DevOfflineCheckCnt = new uint[15];
+        uint[] SlaverConnectSta = new uint[15];
 
         public CanTabUserControl()
         {
@@ -447,7 +447,7 @@ namespace MyDebugApp
                 }
                 else
                 {
-                    for (int i = 0; i < 12; i++)
+                    for (int i = 0; i < 15; i++)
                     {
                         DevOfflineCheckCnt[i]++;
                         if (DevOfflineCheckCnt[i] > 100)
@@ -625,7 +625,7 @@ namespace MyDebugApp
                         else
                         {
                             msgID1.IdFrame = id;
-                            if (msgID1.DesId == 0 && msgID1.SrcId > 0 && msgID1.SrcId < 13)
+                            if (msgID1.DesId == 0 && msgID1.SrcId > 0 && msgID1.SrcId <= 15)
                             {
                                 uint[] msbuffer = new uint[CanRcvBuff[i].DataLen + 1];
                                 msbuffer[0] = id;
@@ -1278,6 +1278,87 @@ namespace MyDebugApp
                 Slaver12ErrBox.Checked = false;
                 Slaver12CurrBox.Text = "0";
             }
+
+
+            if (SlaverConnectSta[12] == 1)
+            {
+                OnlineNum++;
+                Slave13Box.Checked = true;
+                if (modstadata[12].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver13ErrBox.Checked = true;
+
+                }
+                else
+                {
+                    Slaver13ErrBox.Checked = false;
+                }
+                i16value = (short)modstadata[12].REG.u16_Idcout;
+                fvalue = i16value * 0.01f;
+                Slaver13CurrBox.Text = fvalue.ToString("F2");
+                syscurr += fvalue;
+            }
+            else
+            {
+                Slave13Box.Checked = false;
+                Slaver13ErrBox.Checked = false;
+                Slaver13CurrBox.Text = "0";
+            }
+
+            if (SlaverConnectSta[13] == 1)
+            {
+                OnlineNum++;
+                Slave14Box.Checked = true;
+                if (modstadata[13].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver14ErrBox.Checked = true;
+
+                }
+                else
+                {
+                    Slaver14ErrBox.Checked = false;
+                }
+                i16value = (short)modstadata[13].REG.u16_Idcout;
+                fvalue = i16value * 0.01f;
+                Slaver14CurrBox.Text = fvalue.ToString("F2");
+                syscurr += fvalue;
+            }
+            else
+            {
+                Slave14Box.Checked = false;
+                Slaver14ErrBox.Checked = false;
+                Slaver14CurrBox.Text = "0";
+            }
+
+            if (SlaverConnectSta[14] == 1)
+            {
+                OnlineNum++;
+                Slave15Box.Checked = true;
+                if (modstadata[14].REG.u16_WorkMode == 6)
+                {
+                    ErrNum++;
+                    Slaver15ErrBox.Checked = true;
+
+                }
+                else
+                {
+                    Slaver15ErrBox.Checked = false;
+                }
+                i16value = (short)modstadata[14].REG.u16_Idcout;
+                fvalue = i16value * 0.01f;
+                Slaver15CurrBox.Text = fvalue.ToString("F2");
+                syscurr += fvalue;
+            }
+            else
+            {
+                Slave15Box.Checked = false;
+                Slaver15ErrBox.Checked = false;
+                Slaver15CurrBox.Text = "0";
+            }
+
+
 
             SysCurrBox.Text = syscurr.ToString("F2");
             OnlinerNumBox.Text = OnlineNum.ToString();
