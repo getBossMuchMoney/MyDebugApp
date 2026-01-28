@@ -1113,19 +1113,19 @@ namespace MyDebugApp
             VbusBox.Text = fvalue.ToString("F1");
 
             u16value = modstadata[deviceid - 1].REG.u16_Idabpri1;
-            fvalue = 0;
+            fvalue = 0.1f * u16value; ;
             Ipri1Box.Text = fvalue.ToString("F1");
 
             u16value = modstadata[deviceid - 1].REG.u16_Idabpri2;
-            fvalue = 0;
+            fvalue = 0.1f * u16value; ;
             Ipri2Box.Text = fvalue.ToString("F1");
 
             i16value = (short)modstadata[deviceid - 1].REG.u16_Idabout1;
             fvalue = 1.0f * i16value;
             Iout1Box.Text = fvalue.ToString("F1");
 
-            u16value = modstadata[deviceid - 1].REG.u16_Idabout2;
-            fvalue = 1.0f * u16value;
+            i16value = (short)modstadata[deviceid - 1].REG.u16_Idabout2;
+            fvalue = 1.0f * i16value;
             Iout2Box.Text = fvalue.ToString("F1");
 
             u16value = modstadata[deviceid - 1].REG.u16_Vout;
@@ -1319,7 +1319,7 @@ namespace MyDebugApp
                 Setbuff[i * 2 + 1] = (uint)(modsetdata[index].buff[setFunccode * 4 + i] & 0xFF);
             }
 
-            ResetCmdBitUsedOnce();
+            //ResetCmdBitUsedOnce();
 
         }
 
@@ -1404,7 +1404,7 @@ namespace MyDebugApp
             }
             AppTxQueue.Add(data);
 
-            ResetCmdBitUsedOnce();
+            //ResetCmdBitUsedOnce();
         }
 
         private unsafe void PowerOnButton_Click(object sender, EventArgs e)
@@ -1425,6 +1425,7 @@ namespace MyDebugApp
             {
                 SetParaSpe(136, cmd.all.ToString(), 1,false,false);
             }
+            ResetCmdBitUsedOnce();
         }
 
         private unsafe void PowerOffButton_Click(object sender, EventArgs e)
@@ -1439,11 +1440,13 @@ namespace MyDebugApp
             if (BrdctSendBox.Checked)
             {              
                 SetParaMap(0x02, 0, cmd.all.ToString(), 1, false);
+
             }
             else
             {
                 SetParaSpe(136, cmd.all.ToString(), 1, false, false);
             }
+            ResetCmdBitUsedOnce();
         }
 
         private unsafe void SetMaxCurrButton_Click(object sender, EventArgs e)
@@ -1554,47 +1557,30 @@ namespace MyDebugApp
                         index = i;
                         break;
                     }
-                }
-
-                if (modsetdata[index].REG.u16_CmdWd.PowerOnOff == 1)
-                {
-                    if (DabOLEnBox.Checked)
-                    {
-                        DabOLEnBox.Checked = false;
-                    }
-                    else
-                    {
-                        DabOLEnBox.Checked = true;
-                    }
-                    MessageBox.Show("请点击关机后操作", "警告!");
-                    return;
-                }
-                else
-                {
-                    PowerOffButton_Click(sender,e);
-                }
+                }                
 
             }
             else
             {
                 index = ChoseDevListBox.SelectedIndex;
-                if (modsetdata[index].REG.u16_CmdWd.PowerOnOff == 1)
-                {                   
-                    if (DabOLEnBox.Checked)
-                    {
-                        DabOLEnBox.Checked = false;
-                    }
-                    else
-                    {
-                        DabOLEnBox.Checked = true;
-                    }
-                    MessageBox.Show("请点击关机后操作", "警告!");
-                    return;
+                
+            }
+            if (modsetdata[index].REG.u16_CmdWd.PowerOnOff == 1)
+            {
+                if (DabOLEnBox.Checked)
+                {
+                    DabOLEnBox.Checked = false;
                 }
                 else
                 {
-                    PowerOffButton_Click(sender, e);
+                    DabOLEnBox.Checked = true;
                 }
+                MessageBox.Show("请点击关机后操作", "警告!");
+                return;
+            }
+            else
+            {
+                PowerOffButton_Click(sender, e);
             }
         }
 
